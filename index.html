@@ -548,7 +548,7 @@
         }
 
         /* =========================================================
-           10. PRICELIST & PACKAGES
+           10. PRICELIST & PACKAGES (UNIFORM 3-COLUMN STACK)
         ========================================================= */
         .price-tabs {
             display: flex;
@@ -741,9 +741,6 @@
 
         /* =========================================================
            11. TENTANG KAMI (FOUNDER NOTE WITHOUT PHOTO)
-        =========================================================
-           User requested removal of founder photo inside About section.
-           Now streamlined into a clean editorial text container.
         ========================================================= */
         .about-container {
             background: var(--bg-card);
@@ -1335,9 +1332,9 @@
             <button class="price-tab" data-tab="tab-drone">05. Drone</button>
         </div>
 
-        <!-- WEDDING -->
+        <!-- WEDDING (UNIFORM 3-COLUMN STACK) -->
         <div id="tab-wedding" class="price-panel active">
-            <div class="pkg-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="pkg-grid">
                 <div class="pkg-card">
                     <span class="pkg-label">Photography Only</span>
                     <h3>Basic</h3>
@@ -1368,12 +1365,28 @@
                     </ul>
                     <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
                 </div>
+
+                <div class="pkg-card">
+                    <span class="pkg-label">Full Exclusive Coverage</span>
+                    <h3>Pro</h3>
+                    <div class="pkg-price">Rp 4.950.000</div>
+                    <ul class="pkg-features">
+                        <li>4 Fotografer Profesional</li>
+                        <li>Full Color Grading &amp; Editing</li>
+                        <li>2 Videografer &amp; Cinematic Drone</li>
+                        <li>Edit Video Sinematik (max 10 menit)</li>
+                        <li>Revisi Maximal 4 kali</li>
+                        <li>Durasi Full Day di lokasi</li>
+                        <li>Pengiriman Via Google Drive</li>
+                    </ul>
+                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
+                </div>
             </div>
         </div>
 
-        <!-- ENGAGEMENT -->
+        <!-- ENGAGEMENT (UNIFORM 3-COLUMN STACK) -->
         <div id="tab-engagement" class="price-panel">
-            <div class="pkg-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="pkg-grid">
                 <div class="pkg-card">
                     <span class="pkg-label">Photography Only</span>
                     <h3>Basic</h3>
@@ -1401,6 +1414,22 @@
                         <li>Durasi 6 Jam di lokasi</li>
                         <li>Pengiriman Via Google Drive</li>
                         <li>Konsumsi di tanggung client</li>
+                    </ul>
+                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
+                </div>
+
+                <div class="pkg-card">
+                    <span class="pkg-label">Complete Story</span>
+                    <h3>Pro</h3>
+                    <div class="pkg-price">Rp 2.650.000</div>
+                    <ul class="pkg-features">
+                        <li>3 Fotografer Profesional</li>
+                        <li>Full Color Grading &amp; Editing</li>
+                        <li>2 Videografer Profesional</li>
+                        <li>Edit Video Sinematik (max 8 menit)</li>
+                        <li>Revisi Maximal 4 kali</li>
+                        <li>Durasi 8 Jam di lokasi</li>
+                        <li>Pengiriman Via Google Drive</li>
                     </ul>
                     <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
                 </div>
@@ -1457,9 +1486,9 @@
             </div>
         </div>
 
-        <!-- EVENT -->
+        <!-- EVENT (UNIFORM 3-COLUMN STACK) -->
         <div id="tab-event" class="price-panel">
-            <div class="pkg-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="pkg-grid">
                 <div class="pkg-card">
                     <span class="pkg-label">Photography Coverage</span>
                     <h3>Basic</h3>
@@ -1487,6 +1516,22 @@
                         <li>Durasi 6 Jam di lokasi</li>
                         <li>Pengiriman Via Google Drive</li>
                         <li>Konsumsi di tanggung client</li>
+                    </ul>
+                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
+                </div>
+
+                <div class="pkg-card">
+                    <span class="pkg-label">Corporate &amp; Gala Coverage</span>
+                    <h3>Pro</h3>
+                    <div class="pkg-price">Rp 4.500.000</div>
+                    <ul class="pkg-features">
+                        <li>5 Fotografer Profesional</li>
+                        <li>Full Color Grading &amp; Editing</li>
+                        <li>3 Videografer &amp; Drone Operator</li>
+                        <li>Edit Video Highlight (max 10 menit)</li>
+                        <li>Revisi Maximal 4 kali</li>
+                        <li>Durasi Full Day di lokasi</li>
+                        <li>Pengiriman Via Google Drive</li>
                     </ul>
                     <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
                 </div>
@@ -1553,7 +1598,7 @@
     </section>
 
     <!-- =========================
-         04. TENTANG KAMI (FOUNDER NOTE WITHOUT PHOTO)
+         04. TENTANG KAMI
     ========================= -->
     <section id="tentang" class="content-section">
         <div class="sec-header">
@@ -1798,7 +1843,7 @@
         sliderModal.classList.remove("active");
         sliderModal.setAttribute("aria-hidden", "true");
         document.body.classList.remove("no-scroll");
-        sliderImage.src = "";
+        sliderImage.src = "",
         currentImages = [];
     }
 

@@ -1,994 +1,1230 @@
-
+<!DOCTYPE html>
 <html lang="id">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="description" content="Another Visual - Photography & Videography">
-<meta name="theme-color" content="#0a0a0a">
-
-<title>Another Visual — Photography & Videography</title>
-
-<style>
-
-    :root {
-        --bg: #080808;
-        --bg-soft: #111111;
-        --card: #151515;
-        --card-hover: #1b1b1b;
-        --text: #ffffff;
-        --text-muted: #a4a4a4;
-        --border: rgba(255,255,255,.10);
-        --accent: #ffffff;
-        --radius: 18px;
-        --max-width: 1200px;
-    }
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    html {
-        scroll-behavior: smooth;
-        scroll-padding-top: 90px;
-    }
-
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.7;
-        overflow-x: hidden;
-    }
-
-    body.no-scroll {
-        overflow: hidden;
-    }
-
-    img {
-        max-width: 100%;
-        display: block;
-    }
-
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
-
-    button {
-        font: inherit;
-    }
-
-    /* =========================
-       DEVICE INFO
-    ========================= */
-
-    #deviceInfo {
-        display: none;
-    }
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    .navbar {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        width: 100%;
-        background: rgba(8, 8, 8, .88);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-        border-bottom: 1px solid var(--border);
-    }
-
-    .nav-container {
-        max-width: var(--max-width);
-        min-height: 72px;
-        margin: auto;
-        padding: 0 24px;
-
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 30px;
-    }
-
-    .logo {
-        font-size: 20px;
-        font-weight: 800;
-        letter-spacing: -.5px;
-        white-space: nowrap;
-    }
-
-    .logo span {
-        color: var(--text-muted);
-    }
-
-    .nav-menu {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        list-style: none;
-    }
-
-    .nav-menu a {
-        display: block;
-        padding: 9px 13px;
-        border-radius: 10px;
-        color: var(--text-muted);
-        font-size: 14px;
-        transition: .25s ease;
-    }
-
-    .nav-menu a:hover,
-    .nav-menu a.active {
-        color: #fff;
-        background: rgba(255,255,255,.08);
-    }
-
-    .menu-toggle {
-        display: none;
-        width: 42px;
-        height: 42px;
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        background: #111;
-        color: #fff;
-        cursor: pointer;
-    }
-
-    /* =========================
-       HERO - JAKARTA
-    ========================= */
-
-    .hero {
-        position: relative;
-        min-height: 82vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 90px 24px;
-
-        background:
-            linear-gradient(
-                rgba(0,0,0,.68),
-                rgba(0,0,0,.82)
-            ),
-            url("https://drive.google.com/file/d/1L_jBpBIsWyBCy8OATkBAmo1rBCNl6IN9/view?usp=sharing")
-            center center / cover no-repeat;
-
-        overflow: hidden;
-    }
-
-    .hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-            linear-gradient(
-                to bottom,
-                rgba(0,0,0,.15),
-                rgba(0,0,0,.65)
-            );
-        pointer-events: none;
-    }
-
-    .hero-content {
-        position: relative;
-        z-index: 1;
-        max-width: 900px;
-    }
-
-    .hero-tag {
-        display: inline-block;
-        margin-bottom: 20px;
-        padding: 7px 13px;
-        border: 1px solid rgba(255,255,255,.25);
-        border-radius: 100px;
-        color: #ddd;
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        background: rgba(0,0,0,.25);
-        backdrop-filter: blur(8px);
-    }
-
-    .hero h1 {
-        font-size: clamp(42px, 8vw, 92px);
-        line-height: .95;
-        letter-spacing: -4px;
-        margin-bottom: 28px;
-        text-shadow: 0 10px 35px rgba(0,0,0,.5);
-    }
-
-    .hero h1 span {
-        color: #aaa;
-    }
-
-    .hero p {
-        max-width: 680px;
-        margin: auto;
-        color: #ddd;
-        font-size: 17px;
-        text-shadow: 0 3px 15px rgba(0,0,0,.7);
-    }
-
-    .hero-buttons {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 32px;
-    }
-
-    .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 46px;
-        padding: 0 20px;
-        border-radius: 10px;
-        border: 1px solid var(--border);
-        transition: .25s ease;
-        cursor: pointer;
-    }
-
-    .btn-white {
-        color: #000;
-        background: #fff;
-    }
-
-    .btn-dark {
-        color: #fff;
-        background: #151515;
-    }
-
-    .btn:hover {
-        transform: translateY(-2px);
-    }
-
-    /* =========================
-       GENERAL SECTION
-    ========================= */
-
-    section {
-        max-width: var(--max-width);
-        margin: auto;
-        padding: 90px 24px;
-    }
-
-    .section-header {
-        margin-bottom: 35px;
-    }
-
-    .section-tag {
-        display: inline-block;
-        margin-bottom: 12px;
-        color: var(--text-muted);
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-    }
-
-    .section-header h2 {
-        font-size: clamp(32px, 5vw, 55px);
-        line-height: 1.05;
-        letter-spacing: -2px;
-    }
-
-    .section-header p {
-        max-width: 650px;
-        margin-top: 15px;
-        color: var(--text-muted);
-    }
-
-    /* =========================
-       BENTO
-    ========================= */
-
-    .bento-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 18px;
-    }
-
-    .bento-card {
-        padding: 30px;
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        transition: .3s ease;
-    }
-
-    .bento-card:hover {
-        background: var(--card-hover);
-        transform: translateY(-3px);
-    }
-
-    .bento-card h3 {
-        font-size: 26px;
-        margin-bottom: 15px;
-    }
-
-    .bento-card p {
-        color: var(--text-muted);
-    }
-
-    /* =========================
-       PORTFOLIO
-    ========================= */
-
-    .folder-nav {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin-bottom: 25px;
-    }
-
-    .folder-btn {
-        padding: 10px 16px;
-        border-radius: 100px;
-        border: 1px solid var(--border);
-        background: #111;
-        color: var(--text-muted);
-        cursor: pointer;
-        transition: .25s ease;
-    }
-
-    .folder-btn:hover,
-    .folder-btn.active {
-        background: #fff;
-        color: #000;
-        border-color: #fff;
-    }
-
-    .masonry-grid {
-        columns: 3 280px;
-        column-gap: 18px;
-    }
-
-    .port-item {
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 18px;
-        border-radius: var(--radius);
-        background: #111;
-        cursor: pointer;
-        break-inside: avoid;
-        border: 1px solid var(--border);
-    }
-
-    .port-item img {
-        width: 100%;
-        height: auto;
-        transition: transform .5s ease;
-        user-select: none;
-        -webkit-user-drag: none;
-    }
-
-    .port-item:hover img {
-        transform: scale(1.04);
-    }
-
-    .port-overlay {
-        position: absolute;
-        inset: auto 0 0;
-        padding: 50px 20px 20px;
-        background: linear-gradient(
-            transparent,
-            rgba(0,0,0,.9)
-        );
-    }
-
-    .port-cat {
-        color: #bbb;
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .port-title {
-        margin-top: 4px;
-        font-size: 20px;
-        font-weight: 700;
-    }
-
-    .port-item.hidden {
-        display: none;
-    }
-
-    /* =========================
-       PRICE
-    ========================= */
-
-    #pricelist {
-        background: #050505;
-    }
-
-    #pricelist .price-card {
-        background: linear-gradient(145deg, #181818 0%, #0d0d0d 100%);
-        border: 1px solid #2a2a2a;
-        border-radius: 8px;
-        box-shadow: 0 12px 35px rgba(0,0,0,.35);
-        position: relative;
-        overflow: hidden;
-        transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-    }
-
-    #pricelist .price-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: #e50914;
-    }
-
-    #pricelist .price-card:hover {
-        transform: translateY(-5px);
-        border-color: #e50914;
-        box-shadow: 0 18px 45px rgba(229,9,20,.18);
-    }
-
-    #pricelist .price-card h3 {
-        color: #fff;
-    }
-
-    #pricelist .price-amount {
-        color: #fff;
-    }
-
-    #pricelist .price-features {
-        color: #b3b3b3;
-    }
-
-    #pricelist .price-features li::marker {
-        color: #e50914;
-    }
-
-    #pricelist .btn-outline {
-        color: #fff;
-        border-color: #555;
-        background: #181818;
-    }
-
-    #pricelist .btn-outline:hover {
-        background: #e50914;
-        border-color: #e50914;
-        color: #fff;
-    }
-
-    #pricelist .btn-solid {
-        background: #e50914;
-        border-color: #e50914;
-        color: #fff;
-    }
-
-    #pricelist .btn-solid:hover {
-        background: #f40612;
-        border-color: #f40612;
-    }
-
-    #pricelist .price-card.premium {
-        background: linear-gradient(145deg, #202020 0%, #0d0d0d 100%);
-        color: #fff;
-        border-color: #e50914;
-    }
-
-    #pricelist .price-card.premium .price-features {
-        color: #d0d0d0;
-    }
-
-    #pricelist .price-card.premium .btn-solid {
-        background: #e50914;
-    }
-
-    .price-section-title {
-        display: block;
-        margin: 55px 0 20px;
-        color: #fff;
-    }
-
-    .price-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-    }
-
-    .price-card {
-        display: flex;
-        flex-direction: column;
-        padding: 30px;
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-    }
-
-    .price-card.premium {
-        background: #f4f4f4;
-        color: #000;
-    }
-
-    .price-card h3 {
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
-
-    .price-amount {
-        margin-bottom: 25px;
-        font-size: 29px;
-        font-weight: 800;
-    }
-
-    .price-features {
-        flex: 1;
-        padding-left: 20px;
-        color: var(--text-muted);
-    }
-
-    .premium .price-features {
-        color: #555;
-    }
-
-    .price-features li {
-        margin-bottom: 10px;
-    }
-
-    .btn-outline,
-    .btn-solid {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 45px;
-        margin-top: 25px;
-        border-radius: 9px;
-        border: 1px solid var(--border);
-        transition: .25s ease;
-    }
-
-    .btn-outline:hover {
-        background: #fff;
-        color: #000;
-    }
-
-    .btn-solid {
-        background: #000;
-        color: #fff;
-        border-color: #000;
-    }
-
-    /* =========================
-       ABOUT
-    ========================= */
-
-    .about-layout {
-        display: grid;
-        grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr);
-        gap: 35px;
-        align-items: stretch;
-    }
-
-    .founder-text h3 {
-        font-size: 35px;
-        margin-bottom: 12px;
-    }
-
-    .founder-text h4 {
-        margin-bottom: 12px;
-    }
-
-    .founder-text p {
-        margin-bottom: 17px;
-        color: var(--text-muted);
-    }
-
-    .founder-text .signature {
-        margin-top: 30px;
-        color: #fff;
-        font-weight: 600;
-    }
-
-    .signature span {
-        color: var(--text-muted);
-        font-weight: 400;
-    }
-
-    .card-image {
-        min-height: 450px;
-        border-radius: var(--radius);
-        background-size: cover;
-        background-position: center;
-    }
-
-    /* =========================
-       CONTACT
-    ========================= */
-
-    .contact-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-    }
-
-    .contact-card {
-        min-height: 210px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .contact-card h4 {
-        font-size: 24px;
-        margin-bottom: 8px;
-    }
-
-    .contact-card a {
-        color: var(--text-muted);
-        word-break: break-word;
-        transition: .2s ease;
-    }
-
-    .contact-card a:hover {
-        color: #fff;
-    }
-
-    /* =========================
-       SOCIAL MEDIA
-    ========================= */
-
-    .social-links {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 14px;
-        margin: 28px 0 22px;
-    }
-
-    .social-link {
-        width: 48px;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        border: 1px solid var(--border);
-        border-radius: 50%;
-        background: #111;
-        color: #fff;
-
-        transition: .25s ease;
-    }
-
-    .social-link:hover {
-        background: #fff;
-        color: #000;
-        transform: translateY(-3px);
-    }
-
-    .social-link svg {
-        width: 21px;
-        height: 21px;
-        fill: currentColor;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-        padding: 50px 24px;
-        border-top: 1px solid var(--border);
-        text-align: center;
-        color: var(--text-muted);
-        font-size: 13px;
-    }
-
-    /* =========================
-       SLIDER
-    ========================= */
-
-    .slider-modal {
-        position: fixed;
-        inset: 0;
-        z-index: 9999;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        padding: 25px;
-        background: rgba(0,0,0,.96);
-    }
-
-    .slider-modal.active {
-        display: flex;
-    }
-
-    .slider-content {
-        position: relative;
-        width: min(1100px, 100%);
-        height: min(90vh, 800px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .slider-image {
-        max-width: calc(100% - 120px);
-        max-height: 85vh;
-        width: auto;
-        height: auto;
-        object-fit: contain;
-        border-radius: 10px;
-        user-select: none;
-        -webkit-user-drag: none;
-    }
-
-    .slider-close,
-    .slider-prev,
-    .slider-next {
-        position: absolute;
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 48px;
-        height: 48px;
-        border: 1px solid rgba(255,255,255,.2);
-        border-radius: 50%;
-        background: rgba(255,255,255,.08);
-        color: #fff;
-        cursor: pointer;
-        transition: .2s ease;
-    }
-
-    .slider-close:hover,
-    .slider-prev:hover,
-    .slider-next:hover {
-        background: #fff;
-        color: #000;
-    }
-
-    .slider-close {
-        top: 10px;
-        right: 10px;
-    }
-
-    .slider-prev {
-        left: 10px;
-    }
-
-    .slider-next {
-        right: 10px;
-    }
-
-    .slider-counter {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 7px 12px;
-        border-radius: 100px;
-        background: rgba(0,0,0,.6);
-        color: #fff;
-        font-size: 12px;
-    }
-
-    .slider-title {
-        position: absolute;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 70%;
-        text-align: center;
-        color: #fff;
-        font-size: 14px;
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 900px) {
-
-        .nav-container {
-            min-height: 64px;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Another Visual - Photography & Videography">
+    <meta name="theme-color" content="#070709">
+    <title>Another Visual — Photography & Videography</title>
+
+    <!-- Google Fonts untuk tipografi editorial yang fresh & modern -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================
+           VARIABLES & RESET
+        ========================= */
+        :root {
+            --bg: #060608;
+            --bg-elevated: #0d0d12;
+            --card: rgba(20, 20, 26, 0.72);
+            --card-hover: rgba(30, 30, 40, 0.92);
+            --text: #f8f9fa;
+            --text-muted: #9ca3af;
+            --border: rgba(255, 255, 255, 0.09);
+            --border-hover: rgba(255, 255, 255, 0.25);
+            --accent: #ffffff;
+            --accent-crimson: #ff2a3c;
+            --accent-glow: rgba(255, 42, 60, 0.25);
+            --radius: 22px;
+            --radius-sm: 12px;
+            --max-width: 1240px;
+            --font-display: 'Syne', sans-serif;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        .menu-toggle {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 95px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 85% 45%, rgba(255, 42, 60, 0.04) 0%, transparent 45%);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        img {
+            max-width: 100%;
             display: block;
         }
 
-        .nav-menu {
-            position: absolute;
-            top: 64px;
-            left: 12px;
-            right: 12px;
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
+        button {
+            font: inherit;
+        }
+
+        #deviceInfo {
             display: none;
-            flex-direction: column;
-            align-items: stretch;
-
-            padding: 10px;
-            background: rgba(15,15,15,.98);
-            border: 1px solid var(--border);
-            border-radius: 14px;
         }
 
-        .nav-menu.show {
-            display: flex;
+        /* =========================
+           SKELETON SHIMMER EFFECT
+        ========================= */
+        @keyframes shimmerSweep {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
         }
 
-        .nav-menu a {
-            padding: 13px;
+        .skeleton-box {
+            position: relative;
+            background: #121217;
+            background-image: linear-gradient(
+                110deg,
+                #121217 20%,
+                #23232e 45%,
+                #2f2f3d 50%,
+                #23232e 55%,
+                #121217 80%
+            );
+            background-size: 200% 100%;
+            animation: shimmerSweep 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            overflow: hidden;
         }
 
-        .hero {
-            min-height: 75vh;
-            padding: 70px 20px;
+        .skeleton-box.loaded {
+            animation: none;
+            background-image: none;
         }
 
-        .hero h1 {
-            letter-spacing: -2.5px;
+        .skeleton-box img {
+            opacity: 0;
+            transition: opacity 0.6s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .bento-grid,
-        .price-grid,
-        .contact-grid {
-            grid-template-columns: 1fr;
+        .skeleton-box.loaded img {
+            opacity: 1;
         }
 
-        .about-layout {
-            grid-template-columns: 1fr;
+        /* =========================
+           BUTTON ANIMATIONS & RIPPLE
+        ========================= */
+        .btn,
+        .folder-btn,
+        .btn-outline,
+        .btn-solid,
+        .social-link,
+        .menu-toggle,
+        .slider-close,
+        .slider-prev,
+        .slider-next {
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            transition: 
+                transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                background-color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease,
+                color 0.3s ease;
         }
 
-        .card-image {
-            min-height: 350px;
-            order: 2;
+        /* Efek shine sweep saat hover */
+        .btn::after,
+        .btn-outline::after,
+        .btn-solid::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.28),
+                transparent
+            );
+            transform: skewX(-20deg);
+            transition: left 0.6s ease;
+            pointer-events: none;
         }
 
-        .founder-text {
-            order: 1;
+        .btn:hover::after,
+        .btn-outline:hover::after,
+        .btn-solid:hover::after {
+            left: 150%;
         }
 
-        section {
-            padding: 65px 18px;
+        /* Efek tekan (Active / Click) */
+        .btn:active,
+        .folder-btn:active,
+        .btn-outline:active,
+        .btn-solid:active,
+        .social-link:active,
+        .menu-toggle:active,
+        .slider-close:active,
+        .slider-prev:active,
+        .slider-next:active {
+            transform: scale(0.93) !important;
         }
-    }
 
-    @media (max-width: 600px) {
+        /* Ripple Span */
+        .ripple-wave {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: rippleExpand 0.6s linear;
+            background-color: rgba(255, 255, 255, 0.35);
+            pointer-events: none;
+        }
+
+        .btn-white .ripple-wave,
+        .folder-btn.active .ripple-wave {
+            background-color: rgba(0, 0, 0, 0.18);
+        }
+
+        @keyframes rippleExpand {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           NAVBAR (FLOATING GLASS)
+        ========================= */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            background: rgba(6, 6, 8, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
 
         .nav-container {
-            padding: 0 16px;
+            max-width: var(--max-width);
+            min-height: 76px;
+            margin: auto;
+            padding: 0 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
         }
 
         .logo {
-            font-size: 17px;
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.6px;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
+        .logo span {
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            list-style: none;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 5px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 8px 16px;
+            border-radius: 100px;
+            color: var(--text-muted);
+            font-size: 13.5px;
+            font-weight: 500;
+            transition: all 0.25s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-menu a.active {
+            color: #060608;
+            background: #ffffff;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .menu-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* =========================
+           HERO SECTION
+        ========================= */
         .hero {
-            padding: 60px 18px;
+            position: relative;
+            min-height: 88vh;
+            max-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 24px;
+            background:
+                radial-gradient(circle at 50% 35%, rgba(15, 15, 22, 0.45), rgba(6, 6, 8, 0.94)),
+                url("https://lh3.googleusercontent.com/d/1L_jBpBIsWyBCy8OATkBAmo1rBCNl6IN9")
+                center center / cover no-repeat;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(6,6,8,0.2) 0%, rgba(6,6,8,0.98) 100%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 920px;
+            animation: heroFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes heroFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            padding: 8px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 100px;
+            color: #e5e7eb;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .hero h1 {
-            font-size: clamp(42px, 15vw, 70px);
+            font-family: var(--font-display);
+            font-size: clamp(46px, 8.5vw, 98px);
+            font-weight: 800;
+            line-height: 0.94;
+            letter-spacing: -3px;
+            margin-bottom: 28px;
+            background: linear-gradient(180deg, #ffffff 30%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.6));
+        }
+
+        .hero h1 span {
+            background: linear-gradient(180deg, #d4d4d8 0%, #71717a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 15px;
+            max-width: 640px;
+            margin: auto;
+            color: #d1d5db;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.7;
         }
 
         .hero-buttons {
-            flex-direction: column;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 38px;
         }
 
-        .hero-buttons .btn {
-            width: 100%;
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50px;
+            padding: 0 28px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 15px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        .btn-white {
+            color: #060608;
+            background: #ffffff;
+            border-color: #ffffff;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.18);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-dark {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-dark:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.14);
+            border-color: #ffffff;
+        }
+
+        /* =========================
+           SECTIONS GENERAL
+        ========================= */
+        main section:not(.hero) {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 100px 28px;
+        }
+
+        .section-header {
+            margin-bottom: 44px;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+            color: #a1a1aa;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .section-tag::before {
+            content: "";
+            width: 18px;
+            height: 2px;
+            background: var(--accent-crimson);
+            border-radius: 2px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(34px, 5vw, 56px);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -1.8px;
+            color: #ffffff;
+        }
+
+        .section-header p {
+            max-width: 620px;
+            margin-top: 16px;
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        /* =========================
+           CARD HOVER SYSTEM (BENTO & CONTACT)
+        ========================= */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
         }
 
         .bento-card {
-            padding: 23px;
+            position: relative;
+            padding: 36px;
+            background: var(--card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition: 
+                transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.38s ease,
+                box-shadow 0.38s ease,
+                background-color 0.38s ease;
+            overflow: hidden;
+        }
+
+        .bento-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                600px circle at var(--mouse-x, 50%) var(--mouse-y, 0%),
+                rgba(255, 255, 255, 0.06),
+                transparent 45%
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-7px);
+            background: var(--card-hover);
+            border-color: var(--border-hover);
+            box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        .bento-card:hover::before {
+            opacity: 1;
         }
 
         .bento-card h3 {
-            font-size: 23px;
+            font-family: var(--font-display);
+            font-size: 26px;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
         }
 
+        .bento-card p {
+            color: var(--text-muted);
+            font-size: 15.5px;
+        }
+
+        /* =========================
+           PORTFOLIO & GALLERY
+        ========================= */
         .folder-nav {
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            padding-bottom: 5px;
-            scrollbar-width: none;
-        }
-
-        .folder-nav::-webkit-scrollbar {
-            display: none;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
         }
 
         .folder-btn {
-            flex: 0 0 auto;
+            padding: 10px 20px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .folder-btn:hover {
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.09);
+            transform: translateY(-2px);
+        }
+
+        .folder-btn.active {
+            background: #ffffff;
+            color: #060608;
+            border-color: #ffffff;
+            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.22);
         }
 
         .masonry-grid {
-            columns: 1;
+            columns: 3 300px;
+            column-gap: 22px;
+        }
+
+        .port-item {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 22px;
+            border-radius: var(--radius);
+            background: #121217;
+            cursor: pointer;
+            break-inside: avoid;
+            border: 1px solid var(--border);
+            min-height: 240px;
+            transition: 
+                transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.4s ease,
+                box-shadow 0.4s ease;
+        }
+
+        .port-item:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 22px 45px rgba(0, 0, 0, 0.75);
+        }
+
+        .port-item img {
+            width: 100%;
+            height: auto;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .port-item:hover img {
+            transform: scale(1.06);
+        }
+
+        .port-overlay {
+            position: absolute;
+            inset: auto 0 0;
+            padding: 64px 24px 22px;
+            background: linear-gradient(
+                to top,
+                rgba(6, 6, 8, 0.96) 0%,
+                rgba(6, 6, 8, 0.65) 55%,
+                transparent 100%
+            );
+            transition: padding-bottom 0.3s ease;
+        }
+
+        .port-item:hover .port-overlay {
+            padding-bottom: 26px;
+        }
+
+        .port-cat {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            color: #e5e7eb;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .port-title {
+            margin-top: 8px;
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .port-item.hidden {
+            display: none;
+        }
+
+        /* =========================
+           PRICELIST
+        ========================= */
+        #pricelist {
+            position: relative;
+        }
+
+        .price-section-title {
+            display: inline-flex;
+            margin: 60px 0 24px;
+            color: #ffffff;
+            font-size: 13px;
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
         }
 
         .price-card {
-            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            padding: 34px;
+            background: linear-gradient(160deg, rgba(24, 24, 32, 0.85) 0%, rgba(12, 12, 16, 0.95) 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            transition: 
+                transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+        .price-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: background 0.35s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 42, 60, 0.65);
+            box-shadow: 0 24px 55px rgba(255, 42, 60, 0.16);
+        }
+
+        .price-card:hover::before {
+            background: linear-gradient(90deg, #ff2a3c, #ff6b6b, #ff2a3c);
+        }
+
+        .price-card.premium {
+            background: linear-gradient(160deg, rgba(36, 18, 24, 0.9) 0%, rgba(14, 12, 16, 0.98) 100%);
+            border-color: rgba(255, 42, 60, 0.45);
+        }
+
+        .price-card.premium::before {
+            height: 4px;
+            background: linear-gradient(90deg, #ff2a3c, #ff7582);
+        }
+
+        .price-card h3 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .price-amount {
+            margin-bottom: 26px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            font-family: var(--font-display);
+            font-size: 30px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .price-features {
+            flex: 1;
+            padding-left: 20px;
+            color: #b8bec8;
+            font-size: 14.5px;
+        }
+
+        .price-features li {
+            margin-bottom: 11px;
+        }
+
+        .price-features li::marker {
+            color: var(--accent-crimson);
+        }
+
+        .btn-outline,
+        .btn-solid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 48px;
+            margin-top: 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14.5px;
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline {
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-crimson);
+            border-color: var(--accent-crimson);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 42, 60, 0.35);
+        }
+
+        .btn-solid {
+            background: var(--accent-crimson);
+            border-color: var(--accent-crimson);
+            color: #ffffff;
+            box-shadow: 0 8px 22px rgba(255, 42, 60, 0.3);
+        }
+
+        .btn-solid:hover {
+            background: #ff3f50;
+            border-color: #ff3f50;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(255, 42, 60, 0.45);
+        }
+
+        /* =========================
+           ABOUT SECTION
+        ========================= */
+        .about-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+            gap: 40px;
+            align-items: stretch;
         }
 
         .founder-text h3 {
-            font-size: 29px;
+            font-family: var(--font-display);
+            font-size: 34px;
+            margin-bottom: 14px;
+            color: #ffffff;
+        }
+
+        .founder-text h4 {
+            margin-bottom: 12px;
+            color: #e5e7eb;
+            font-weight: 600;
+        }
+
+        .founder-text p {
+            margin-bottom: 16px;
+            color: var(--text-muted);
+        }
+
+        .founder-text .signature {
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .signature span {
+            color: var(--text-muted);
+            font-weight: 400;
         }
 
         .card-image {
-            min-height: 300px;
+            min-height: 460px;
+            border-radius: calc(var(--radius) - 4px);
+            background-size: cover;
+            background-position: center;
+            border: 1px solid var(--border);
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .about-layout:hover .card-image {
+            transform: scale(1.02);
+        }
+
+        /* =========================
+           CONTACT SECTION
+        ========================= */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
         }
 
         .contact-card {
-            min-height: 170px;
+            min-height: 215px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
+        .contact-card h4 {
+            font-family: var(--font-display);
+            font-size: 25px;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .contact-card span:last-child {
+            color: var(--text-muted);
+            word-break: break-word;
+            transition: color 0.25s ease;
+        }
+
+        .contact-card:hover span:last-child {
+            color: #ffffff;
+        }
+
+        /* =========================
+           FOOTER & SOCIAL
+        ========================= */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            margin: 24px 0 20px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            color: #ffffff;
+        }
+
+        .social-link:hover {
+            background: #ffffff;
+            color: #060608;
+            border-color: #ffffff;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.22);
+        }
+
+        .social-link svg {
+            width: 21px;
+            height: 21px;
+            fill: currentColor;
+        }
+
+        footer {
+            padding: 60px 24px;
+            border-top: 1px solid var(--border);
+            background: #040406;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13.5px;
+        }
+
+        /* =========================
+           SLIDER MODAL (LIGHTBOX)
+        ========================= */
         .slider-modal {
-            padding: 10px;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            background: rgba(4, 4, 6, 0.94);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .slider-modal.active {
+            display: flex;
+            animation: modalFadeIn 0.25s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .slider-content {
-            height: 90vh;
+            position: relative;
+            width: min(1140px, 100%);
+            height: min(90vh, 820px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-image-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            min-width: 280px;
+            min-height: 220px;
         }
 
         .slider-image {
-            max-width: 100%;
-            max-height: 75vh;
+            max-width: calc(100vw - 160px);
+            max-height: 82vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 14px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
+        .slider-close,
         .slider-prev,
         .slider-next {
-            width: 42px;
-            height: 42px;
+            position: absolute;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            color: #ffffff;
+            font-size: 22px;
+            cursor: pointer;
         }
 
-        .slider-prev {
-            left: 5px;
-        }
-
-        .slider-next {
-            right: 5px;
+        .slider-close:hover,
+        .slider-prev:hover,
+        .slider-next:hover {
+            background: #ffffff;
+            color: #060608;
+            transform: scale(1.06);
         }
 
         .slider-close {
-            top: 0;
-            right: 0;
+            top: 10px;
+            right: 10px;
+        }
+
+        .slider-prev {
+            left: 10px;
+        }
+
+        .slider-next {
+            right: 10px;
+        }
+
+        .slider-counter {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 7px 16px;
+            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            font-size: 12.5px;
+            font-weight: 600;
         }
 
         .slider-title {
-            top: 5px;
-            width: 60%;
-            font-size: 12px;
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            text-align: center;
+            color: #ffffff;
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 700;
         }
-    }
 
-    /* =========================
-       REDUCE MOTION
-    ========================= */
+        /* =========================
+           RESPONSIVE MOBILE & TABLET
+        ========================= */
+        @media (max-width: 900px) {
+            .nav-container {
+                min-height: 66px;
+                padding: 0 20px;
+            }
 
-    @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-            scroll-behavior: auto !important;
-            transition: none !important;
-            animation: none !important;
+            .menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 72px;
+                left: 16px;
+                right: 16px;
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                padding: 12px;
+                background: rgba(14, 14, 18, 0.96);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--border);
+                border-radius: 20px;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            }
+
+            .nav-menu.show {
+                display: flex;
+            }
+
+            .nav-menu a {
+                padding: 13px 16px;
+                border-radius: 12px;
+            }
+
+            .hero {
+                min-height: 78vh;
+                padding: 80px 20px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .bento-grid,
+            .price-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .card-image {
+                min-height: 360px;
+                order: 2;
+            }
+
+            .founder-text {
+                order: 1;
+            }
+
+            main section:not(.hero) {
+                padding: 70px 20px;
+            }
         }
-    }
 
-</style>
+        @media (max-width: 600px) {
+            .logo {
+                font-size: 18px;
+            }
 
+            .hero h1 {
+                font-size: clamp(42px, 14vw, 68px);
+            }
+
+            .hero p {
+                font-size: 15.5px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+            }
+
+            .bento-card {
+                padding: 26px;
+            }
+
+            .bento-card h3 {
+                font-size: 23px;
+            }
+
+            .folder-nav {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 6px;
+                scrollbar-width: none;
+            }
+
+            .folder-nav::-webkit-scrollbar {
+                display: none;
+            }
+
+            .folder-btn {
+                flex: 0 0 auto;
+            }
+
+            .masonry-grid {
+                columns: 1;
+            }
+
+            .price-card {
+                padding: 26px;
+            }
+
+            .founder-text h3 {
+                font-size: 28px;
+            }
+
+            .card-image {
+                min-height: 300px;
+            }
+
+            .contact-card {
+                min-height: 175px;
+            }
+
+            .slider-modal {
+                padding: 12px;
+            }
+
+            .slider-image {
+                max-width: 92vw;
+                max-height: 72vh;
+            }
+
+            .slider-prev,
+            .slider-next {
+                width: 42px;
+                height: 42px;
+            }
+
+            .slider-prev { left: 4px; }
+            .slider-next { right: 4px; }
+            .slider-close { top: 4px; right: 4px; }
+            .slider-title {
+                top: 14px;
+                width: 62%;
+                font-size: 13px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -996,11 +1232,8 @@
 <!-- =========================
      NAVBAR
 ========================= -->
-
 <header class="navbar">
-
     <div class="nav-container">
-
         <a href="#home" class="logo">
             Another <span>Visual</span>
         </a>
@@ -1014,64 +1247,26 @@
         </button>
 
         <nav>
-
             <ul class="nav-menu" id="navMenu">
-
-                <li>
-                    <a href="#home" class="active">
-                        Home
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#filosofi">
-                        Filosofi
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#portfolio">
-                        Portfolio
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#pricelist">
-                        Pricelist
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#tentang">
-                        Tentang Kami
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#kontak">
-                        Kontak
-                    </a>
-                </li>
-
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#filosofi">Filosofi</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#pricelist">Pricelist</a></li>
+                <li><a href="#tentang">Tentang Kami</a></li>
+                <li><a href="#kontak">Kontak</a></li>
             </ul>
-
         </nav>
-
     </div>
-
 </header>
 
-
 <!-- =========================
-     HOME
+     MAIN CONTENT
 ========================= -->
-
 <main>
 
+    <!-- HOME -->
     <section id="home" class="hero">
-
         <div class="hero-content">
-
             <span class="hero-tag">
                 Photography • Videography • Drone • Visual Production
             </span>
@@ -1087,76 +1282,43 @@
             </p>
 
             <div class="hero-buttons">
-
-                <a
-                    href="#portfolio"
-                    class="btn btn-white">
+                <a href="#portfolio" class="btn btn-white">
                     Lihat Portfolio
                 </a>
-
-                <a
-                    href="#kontak"
-                    class="btn btn-dark">
+                <a href="#kontak" class="btn btn-dark">
                     Hubungi Kami
                 </a>
-
             </div>
-
         </div>
-
     </section>
 
-
-    <!-- =========================
-         FILOSOFI
-    ========================= -->
-
+    <!-- FILOSOFI -->
     <section id="filosofi">
-
         <div class="section-header">
-
             <span class="section-tag">
                 01. Filosofi
             </span>
-
             <h2>
                 Visual yang<br>
                 punya cerita.
             </h2>
-
         </div>
 
         <div class="bento-grid">
-
             <div class="bento-card">
-
-                <span class="section-tag">
-                    Filosofi Kami
-                </span>
-
-                <h3>
-                    Estetika Tanpa Batas
-                </h3>
-
+                <span class="section-tag">Filosofi Kami</span>
+                <h3>Estetika Tanpa Batas</h3>
                 <p>
                     Kami percaya bahwa mahakarya visual tidak ditentukan
                     seberapa mahal alat yang digenggam, melainkan bagaimana
                     ketajaman mata seorang kreator dalam merangkai cerita,
                     komposisi, dan emosi di setiap jepretan.
                 </p>
-
             </div>
 
             <div class="bento-card">
-
-                <span class="section-tag">
-                    Visi Kami
-                </span>
-
-                <h3>
-                    Karya yang Berbicara
-                </h3>
-
+                <span class="section-tag">Visi Kami</span>
+                <h3>Karya yang Berbicara</h3>
                 <p>
                     Visi utama kami adalah menghadirkan standar visual
                     tertinggi yang menyentuh hati. Melalui teknik
@@ -1164,84 +1326,38 @@
                     sentuhan emosional, setiap momen diabadikan bukan
                     sekadar gambar, melainkan sebuah mahakarya abadi.
                 </p>
-
             </div>
-
         </div>
-
     </section>
 
-
-    <!-- =========================
-         PORTFOLIO
-    ========================= -->
-
+    <!-- PORTFOLIO -->
     <section id="portfolio">
-
         <div class="section-header">
-
             <span class="section-tag">
                 02. Portfolio
             </span>
-
             <h2>
                 Selected Works.
             </h2>
-
             <p>
                 Beberapa karya yang telah kami abadikan.
                 Klik foto untuk melihat seluruh dokumentasi.
             </p>
-
         </div>
 
         <div class="folder-nav">
-
-            <button
-                class="folder-btn active"
-                data-filter="all">
-                Semua Folder
-            </button>
-
-            <button
-                class="folder-btn"
-                data-filter="wedding">
-                Wedding
-            </button>
-
-            <button
-                class="folder-btn"
-                data-filter="engagement">
-                Engagement
-            </button>
-
-            <button
-                class="folder-btn"
-                data-filter="wisuda">
-                Wisuda
-            </button>
-
-            <button
-                class="folder-btn"
-                data-filter="event">
-                Event
-            </button>
-
-            <button class="folder-btn" data-filter="drone">
-                Drone
-            </button>
-
+            <button class="folder-btn active" data-filter="all">Semua Folder</button>
+            <button class="folder-btn" data-filter="wedding">Wedding</button>
+            <button class="folder-btn" data-filter="engagement">Engagement</button>
+            <button class="folder-btn" data-filter="wisuda">Wisuda</button>
+            <button class="folder-btn" data-filter="event">Event</button>
+            <button class="folder-btn" data-filter="drone">Drone</button>
         </div>
 
-
         <div class="masonry-grid">
-
-            <!-- =========================
-                 WEDDING
-            ========================= -->
-
+            <!-- WEDDING -->
             <div
-                class="port-item wedding"
+                class="port-item skeleton-box wedding"
                 data-title="Wedding Falaq & Cindy"
                 data-images='[
                     "https://lh3.googleusercontent.com/d/1K5JYuw4FpqSI9NEduRvZNm_8eJRS_Mr2",
@@ -1254,33 +1370,19 @@
                     "https://lh3.googleusercontent.com/d/12_urvrE4195fyQmf1RhEv3-ToTvxv6l5",
                     "https://lh3.googleusercontent.com/d/1ffcvFRZDPaoMzVLIgqm3GgDp83qRak6v"
                 ]'>
-
                 <img
                     src="https://lh3.googleusercontent.com/d/1K5JYuw4FpqSI9NEduRvZNm_8eJRS_Mr2"
                     alt="Wedding Falaq & Cindy"
                     loading="lazy">
-
                 <div class="port-overlay">
-
-                    <div class="port-cat">
-                        Wedding (9 Foto)
-                    </div>
-
-                    <div class="port-title">
-                        Falaq & Cindy
-                    </div>
-
+                    <div class="port-cat">Wedding (9 Foto)</div>
+                    <div class="port-title">Falaq & Cindy</div>
                 </div>
-
             </div>
 
-
-            <!-- =========================
-                 ENGAGEMENT
-            ========================= -->
-
+            <!-- ENGAGEMENT -->
             <div
-                class="port-item engagement"
+                class="port-item skeleton-box engagement"
                 data-title="Engagement Fikry & Reny"
                 data-images='[
                     "https://lh3.googleusercontent.com/d/1CSJdaeY-POpOhoytFeI4PyPvCc6_43Jk",
@@ -1297,33 +1399,19 @@
                     "https://lh3.googleusercontent.com/d/19I127-vR7AFi6OKdj2vFYBLA6DJofGMU",
                     "https://lh3.googleusercontent.com/d/1Ui7W4zjre4TtivvXq2NDbsyw3gTqqIhC"
                 ]'>
-
                 <img
                     src="https://lh3.googleusercontent.com/d/1CSJdaeY-POpOhoytFeI4PyPvCc6_43Jk"
                     alt="Engagement Fikry & Reny"
                     loading="lazy">
-
                 <div class="port-overlay">
-
-                    <div class="port-cat">
-                        Engagement (13 Foto)
-                    </div>
-
-                    <div class="port-title">
-                        Fikry & Reny
-                    </div>
-
+                    <div class="port-cat">Engagement (13 Foto)</div>
+                    <div class="port-title">Fikry & Reny</div>
                 </div>
-
             </div>
 
-
-            <!-- =========================
-                 WISUDA
-            ========================= -->
-
+            <!-- WISUDA -->
             <div
-                class="port-item wisuda"
+                class="port-item skeleton-box wisuda"
                 data-title="Wisuda Reny Riani"
                 data-images='[
                     "https://lh3.googleusercontent.com/d/1tdANeaA_DLSrfHtAXZQQEDzNckCwCl_u",
@@ -1333,33 +1421,19 @@
                     "https://lh3.googleusercontent.com/d/1CTqP6v3eLVrPBklcaRW7sttGg4_QwgCx",
                     "https://lh3.googleusercontent.com/d/1sPew-WXRoUgqJr-7rJXoqHli882oFJi1"
                 ]'>
-
                 <img
                     src="https://lh3.googleusercontent.com/d/1tdANeaA_DLSrfHtAXZQQEDzNckCwCl_u"
                     alt="Wisuda Reny Riani"
                     loading="lazy">
-
                 <div class="port-overlay">
-
-                    <div class="port-cat">
-                        Wisuda (6 Foto)
-                    </div>
-
-                    <div class="port-title">
-                        Reny Riani
-                    </div>
-
+                    <div class="port-cat">Wisuda (6 Foto)</div>
+                    <div class="port-title">Reny Riani</div>
                 </div>
-
             </div>
 
-
-            <!-- =========================
-                 EVENT - JALAN SANTAI
-            ========================= -->
-
+            <!-- EVENT - JALAN SANTAI -->
             <div
-                class="port-item event"
+                class="port-item skeleton-box event"
                 data-title="Jalan Santai Kemerdekaan 2025"
                 data-images='[
                     "https://lh3.googleusercontent.com/d/1_axQ1oATs8QwUrEDC56LEWqSs5cwa5LA",
@@ -1368,33 +1442,19 @@
                     "https://lh3.googleusercontent.com/d/1cWtB847VpSlCIG_KqRce9I6_5ql_TU5O",
                     "https://lh3.googleusercontent.com/d/1fT-R800YeD44qZNZnl-KKq6qPQkgs39p"
                 ]'>
-
                 <img
                     src="https://lh3.googleusercontent.com/d/1_axQ1oATs8QwUrEDC56LEWqSs5cwa5LA"
                     alt="Jalan Santai Kemerdekaan 2025"
                     loading="lazy">
-
                 <div class="port-overlay">
-
-                    <div class="port-cat">
-                        Event (5 Foto)
-                    </div>
-
-                    <div class="port-title">
-                        Jalan Santai 2025
-                    </div>
-
+                    <div class="port-cat">Event (5 Foto)</div>
+                    <div class="port-title">Jalan Santai 2025</div>
                 </div>
-
             </div>
 
-
-            <!-- =========================
-                 EVENT - BIRTHDAY SHIFA
-            ========================= -->
-
+            <!-- EVENT - BIRTHDAY SHIFA -->
             <div
-                class="port-item event"
+                class="port-item skeleton-box event"
                 data-title="Birthday Party Shifa Derma Hapsari"
                 data-images='[
                     "https://lh3.googleusercontent.com/d/1N8-sIvxr8eRICT9wMClRGXyJ9yg-WUTP",
@@ -1413,569 +1473,263 @@
                     "https://lh3.googleusercontent.com/d/1PderuDJmq8xsbk5KGGMb2py8fI9In3hh",
                     "https://lh3.googleusercontent.com/d/1Dzu4O2B-zh0_cyMr6Pot89eJ0zsdD22A"
                 ]'>
-
                 <img
                     src="https://lh3.googleusercontent.com/d/1N8-sIvxr8eRICT9wMClRGXyJ9yg-WUTP"
                     alt="Birthday Party Shifa Derma Hapsari"
                     loading="lazy">
-
                 <div class="port-overlay">
-
-                    <div class="port-cat">
-                        Event (15 Foto)
-                    </div>
-
-                    <div class="port-title">
-                        Birthday Party Shifa Derma Hapsari
-                    </div>
-
+                    <div class="port-cat">Event (15 Foto)</div>
+                    <div class="port-title">Birthday Party Shifa Derma Hapsari</div>
                 </div>
-
             </div>
 
-        
             <!-- DRONE -->
-            <div class="port-item drone" data-title="Drone Portfolio" data-images='["https://lh3.googleusercontent.com/d/1ix8PFZabGoFm6jlFE6ojmVL-CM3pgeEH", "https://lh3.googleusercontent.com/d/1DA5nIEIucf04vGHfx0tulcfGPTxba1rA", "https://lh3.googleusercontent.com/d/1rptKV3QXFI4ivoSDlGcue6A-YG4M8ZFg", "https://lh3.googleusercontent.com/d/1BZUI3wBkROLpuujC9WbnqFkjcXgZCHyx", "https://lh3.googleusercontent.com/d/18fX3-8EpSx6pHSK3HglSNqQWFkrcgxym", "https://lh3.googleusercontent.com/d/1nkNbXOcnK91JFPeLrj4s9rbYHPTwctpA", "https://lh3.googleusercontent.com/d/1uDb989skMqhKJxKe3WUG8dOWGfI9M3Ro", "https://lh3.googleusercontent.com/d/1V8U8Xz4F0EWZrQHc1_oIZexAqlO7Wv7J", "https://lh3.googleusercontent.com/d/1tL7R-NdUXeTr_brEQcx6RieGy1siq8-c", "https://lh3.googleusercontent.com/d/1jcXWF6V6TW5_BTiLvkvfNrFFXnKxMrsS", "https://lh3.googleusercontent.com/d/1uc5bZLwcv3xaDhv9bQaYRXG1b_Vj3aNX", "https://lh3.googleusercontent.com/d/1KyaegWZ2jmyZbj7QqebsZ6bXHarKQURY", "https://lh3.googleusercontent.com/d/1UJVuBhofZ49Q1SnZPvoCFa9wdGbRfzkE", "https://lh3.googleusercontent.com/d/1YTy75Q_xl0z_jSRMYjB1DGodz5x-JiPg", "https://lh3.googleusercontent.com/d/1-E-TOnhc8zQKeUwjAn9Xfo27Ogb6iNtJ", "https://lh3.googleusercontent.com/d/1jk0a_cJ36NWV450UdQlMTzDM1l8SFvB8", "https://lh3.googleusercontent.com/d/13nG30v3eKsSObL0bkoPQQvJcT_0l1kg8", "https://lh3.googleusercontent.com/d/1URQ2bNLbEXmRpXV6AStfcCr63FKa6iW9", "https://lh3.googleusercontent.com/d/107JWD_wCg0JjZ8GHCHxH1Y4WhY3lG204", "https://lh3.googleusercontent.com/d/1AubquDuZbKcLFXZvAWcJ9qJ5ut3U76Z1", "https://lh3.googleusercontent.com/d/1o8lJ9ABIoTN03y5ajnCPmhdPOfHRgMTS", "https://lh3.googleusercontent.com/d/1kA4H12H3ZmJrt0--vBBMxcP0MMyEmG0Q", "https://lh3.googleusercontent.com/d/1nYWTXD7VRvaywNhuQWNgFsdCkzo4T5x8", "https://lh3.googleusercontent.com/d/1_eUaPx43He4cxL2JQhJEXbgy0zX3xwp1", "https://lh3.googleusercontent.com/d/1P0ppEpBJdRfZkSftgHoLRHH6sX-VxYH2", "https://lh3.googleusercontent.com/d/13LTC63ylIBnyT0lwhX68Sb6H475bAOoe", "https://lh3.googleusercontent.com/d/1Q7VfRni3TzXbpfgQrmS8CLIWtxU4BI9d", "https://lh3.googleusercontent.com/d/1CDAEkMvJRR-DrDW2yt_ISEFAjL0zYj4n", "https://lh3.googleusercontent.com/d/1hJ6vy0Vq7aY4gWX6Q1e0whMS0_c5OpFB", "https://lh3.googleusercontent.com/d/1ZtbGdXsrJD0rzLq5pwJlWY73kLZ5U1bB", "https://lh3.googleusercontent.com/d/1vlyfoNQuS_AcDjv7tfDWAmjCuMt3mL0K", "https://lh3.googleusercontent.com/d/1ts0QxFqlDXVWBDcfrSQOX6QKB-xJ9pRH", "https://lh3.googleusercontent.com/d/1ix8PFZabGoFm6jlFE6ojmVL-CM3pgeEH", "https://lh3.googleusercontent.com/d/1tytlEMmFJfGrZ08L9WcpYI3OuI5AOw-W", "https://lh3.googleusercontent.com/d/13qe_JkelSYOx70cmAgJ0QglhZbap-DCa", "https://lh3.googleusercontent.com/d/1bOGveg932eYCJWyrlBNC34YP13Yt2Y9t", "https://lh3.googleusercontent.com/d/1FMHECBnwX4nc9iJncd9s-CRv5OrlSo8A", "https://lh3.googleusercontent.com/d/1MSCx4oimL6_2QiSWMqrTDAXvXs-5X_25", "https://lh3.googleusercontent.com/d/1F8Cf_-L01kvJHhgP76_r_y-tu1IjKiYs", "https://lh3.googleusercontent.com/d/1EYizaC9o4kVmFbEdy7CLde-fHt9P7LIs", "https://lh3.googleusercontent.com/d/1rS0sMoqxYEkqj3n152_gY2FgE8rNqOYr", "https://lh3.googleusercontent.com/d/1L_jBpBIsWyBCy8OATkBAmo1rBCNl6IN9", "https://lh3.googleusercontent.com/d/1MbQ_Xe9N6NFRnIE4DDBGgksVsbsB2AwJ", "https://lh3.googleusercontent.com/d/1KAzACZnwLrbKge35dj4IHkAcAaTdlBGE", "https://lh3.googleusercontent.com/d/1YFkM18nekB2NQKHNgUG-Vtrdib1SEbsO", "https://lh3.googleusercontent.com/d/1kIUIP7KqXeAZ-Kl598Sj3WToNB5bIGsj", "https://lh3.googleusercontent.com/d/1NJHVePpy-C9ZY7ZIQ8M-Q_5PqEiOh7av"]'>
+            <div
+                class="port-item skeleton-box drone"
+                data-title="Drone Portfolio"
+                data-images='["https://lh3.googleusercontent.com/d/1ix8PFZabGoFm6jlFE6ojmVL-CM3pgeEH", "https://lh3.googleusercontent.com/d/1DA5nIEIucf04vGHfx0tulcfGPTxba1rA", "https://lh3.googleusercontent.com/d/1rptKV3QXFI4ivoSDlGcue6A-YG4M8ZFg", "https://lh3.googleusercontent.com/d/1BZUI3wBkROLpuujC9WbnqFkjcXgZCHyx", "https://lh3.googleusercontent.com/d/18fX3-8EpSx6pHSK3HglSNqQWFkrcgxym", "https://lh3.googleusercontent.com/d/1nkNbXOcnK91JFPeLrj4s9rbYHPTwctpA", "https://lh3.googleusercontent.com/d/1uDb989skMqhKJxKe3WUG8dOWGfI9M3Ro", "https://lh3.googleusercontent.com/d/1V8U8Xz4F0EWZrQHc1_oIZexAqlO7Wv7J", "https://lh3.googleusercontent.com/d/1tL7R-NdUXeTr_brEQcx6RieGy1siq8-c", "https://lh3.googleusercontent.com/d/1jcXWF6V6TW5_BTiLvkvfNrFFXnKxMrsS", "https://lh3.googleusercontent.com/d/1uc5bZLwcv3xaDhv9bQaYRXG1b_Vj3aNX", "https://lh3.googleusercontent.com/d/1KyaegWZ2jmyZbj7QqebsZ6bXHarKQURY", "https://lh3.googleusercontent.com/d/1UJVuBhofZ49Q1SnZPvoCFa9wdGbRfzkE", "https://lh3.googleusercontent.com/d/1YTy75Q_xl0z_jSRMYjB1DGodz5x-JiPg", "https://lh3.googleusercontent.com/d/1-E-TOnhc8zQKeUwjAn9Xfo27Ogb6iNtJ", "https://lh3.googleusercontent.com/d/1jk0a_cJ36NWV450UdQlMTzDM1l8SFvB8", "https://lh3.googleusercontent.com/d/13nG30v3eKsSObL0bkoPQQvJcT_0l1kg8", "https://lh3.googleusercontent.com/d/1URQ2bNLbEXmRpXV6AStfcCr63FKa6iW9", "https://lh3.googleusercontent.com/d/107JWD_wCg0JjZ8GHCHxH1Y4WhY3lG204", "https://lh3.googleusercontent.com/d/1AubquDuZbKcLFXZvAWcJ9qJ5ut3U76Z1", "https://lh3.googleusercontent.com/d/1o8lJ9ABIoTN03y5ajnCPmhdPOfHRgMTS", "https://lh3.googleusercontent.com/d/1kA4H12H3ZmJrt0--vBBMxcP0MMyEmG0Q", "https://lh3.googleusercontent.com/d/1nYWTXD7VRvaywNhuQWNgFsdCkzo4T5x8", "https://lh3.googleusercontent.com/d/1_eUaPx43He4cxL2JQhJEXbgy0zX3xwp1", "https://lh3.googleusercontent.com/d/1P0ppEpBJdRfZkSftgHoLRHH6sX-VxYH2", "https://lh3.googleusercontent.com/d/13LTC63ylIBnyT0lwhX68Sb6H475bAOoe", "https://lh3.googleusercontent.com/d/1Q7VfRni3TzXbpfgQrmS8CLIWtxU4BI9d", "https://lh3.googleusercontent.com/d/1CDAEkMvJRR-DrDW2yt_ISEFAjL0zYj4n", "https://lh3.googleusercontent.com/d/1hJ6vy0Vq7aY4gWX6Q1e0whMS0_c5OpFB", "https://lh3.googleusercontent.com/d/1ZtbGdXsrJD0rzLq5pwJlWY73kLZ5U1bB", "https://lh3.googleusercontent.com/d/1vlyfoNQuS_AcDjv7tfDWAmjCuMt3mL0K", "https://lh3.googleusercontent.com/d/1ts0QxFqlDXVWBDcfrSQOX6QKB-xJ9pRH", "https://lh3.googleusercontent.com/d/1ix8PFZabGoFm6jlFE6ojmVL-CM3pgeEH", "https://lh3.googleusercontent.com/d/1tytlEMmFJfGrZ08L9WcpYI3OuI5AOw-W", "https://lh3.googleusercontent.com/d/13qe_JkelSYOx70cmAgJ0QglhZbap-DCa", "https://lh3.googleusercontent.com/d/1bOGveg932eYCJWyrlBNC34YP13Yt2Y9t", "https://lh3.googleusercontent.com/d/1FMHECBnwX4nc9iJncd9s-CRv5OrlSo8A", "https://lh3.googleusercontent.com/d/1MSCx4oimL6_2QiSWMqrTDAXvXs-5X_25", "https://lh3.googleusercontent.com/d/1F8Cf_-L01kvJHhgP76_r_y-tu1IjKiYs", "https://lh3.googleusercontent.com/d/1EYizaC9o4kVmFbEdy7CLde-fHt9P7LIs", "https://lh3.googleusercontent.com/d/1rS0sMoqxYEkqj3n152_gY2FgE8rNqOYr", "https://lh3.googleusercontent.com/d/1L_jBpBIsWyBCy8OATkBAmo1rBCNl6IN9", "https://lh3.googleusercontent.com/d/1MbQ_Xe9N6NFRnIE4DDBGgksVsbsB2AwJ", "https://lh3.googleusercontent.com/d/1KAzACZnwLrbKge35dj4IHkAcAaTdlBGE", "https://lh3.googleusercontent.com/d/1YFkM18nekB2NQKHNgUG-Vtrdib1SEbsO", "https://lh3.googleusercontent.com/d/1kIUIP7KqXeAZ-Kl598Sj3WToNB5bIGsj", "https://lh3.googleusercontent.com/d/1NJHVePpy-C9ZY7ZIQ8M-Q_5PqEiOh7av"]'>
                 <img src="https://lh3.googleusercontent.com/d/16b7b32nKjhcsnp1XKrlGKrWcXQ83fT7p" alt="Drone" loading="lazy">
-                <div class="port-overlay"><div class="port-cat">Drone Aerial (47 Foto)</div><div class="port-title">Drone Portfolio</div></div>
+                <div class="port-overlay">
+                    <div class="port-cat">Drone Aerial (47 Foto)</div>
+                    <div class="port-title">Drone Portfolio</div>
+                </div>
             </div>
-</div>
-
+        </div>
     </section>
 
-
-    <!-- =========================
-         PRICELIST
-    ========================= -->
-
+    <!-- PRICELIST -->
     <section id="pricelist">
-
         <div class="section-header">
-
             <span class="section-tag">
                 05. Pricelist
             </span>
-
             <h2>
                 Pilih paket<br>
                 yang sesuai.
             </h2>
-
         </div>
-
 
         <span class="section-tag price-section-title">
             01. Paket Wedding
         </span>
 
         <div class="price-grid">
-
             <div class="price-card">
-
-                <h3>
-                    Basic
-                </h3>
-
-                <div class="price-amount">
-                    Rp 1.850.000
-                </div>
-
+                <h3>Basic</h3>
+                <div class="price-amount">Rp 1.850.000</div>
                 <ul class="price-features">
-
-                    <li>
-                        3 Fotografer Profesional
-                    </li>
-
-                    <li>
-                        Full Color Grading & Editing
-                    </li>
-
-                    <li>
-                        Durasi 8 Jam di lokasi
-                    </li>
-
-                    <li>
-                        Pengiriman Via Google Drive
-                    </li>
-
-                    <li>
-                        Konsumsi di tanggung client
-                    </li>
-
-               </ul>
-
-                <a
-                    href="https://wa.me/6287765829615"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-outline">
+                    <li>3 Fotografer Profesional</li>
+                    <li>Full Color Grading & Editing</li>
+                    <li>Durasi 8 Jam di lokasi</li>
+                    <li>Pengiriman Via Google Drive</li>
+                    <li>Konsumsi di tanggung client</li>
+                </ul>
+                <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="btn-outline">
                     Pilih Paket
                 </a>
-
             </div>
-
 
             <div class="price-card premium">
-
-                <h3>
-                    Premium
-                </h3>
-
-                <div class="price-amount">
-                    Rp 3.450.000
-                </div>
-
+                <h3>Premium</h3>
+                <div class="price-amount">Rp 3.450.000</div>
                 <ul class="price-features">
-
-                    <li>
-                        3 Fotografer Profesional
-                    </li>
-
-                    <li>
-                        Full Color Grading & Editing
-                    </li>
-
-                    <li>
-                        1 Videografer
-                    </li>
-
-                    <li>
-                        Edit Video Sinematik (max 5 menit)
-                    </li>
-
-                    <li>
-                        Revisi Maximal 4 kali
-                    </li>
-
-                    <li>
-                        Revisi berlaku maksimal 7 hari di kalender setelah di kirimkan, jika tidak ada komunikasi maka proyek di anggap selesai
-                    </li>
-
-                    <li>
-                        Durasi 8 Jam di lokasi
-                    </li>
-
-                    <li>
-                        Pengiriman Via Google Drive
-                    </li>
-
-                    <li>
-                        Konsumsi di tanggung client
-                    </li>
-
+                    <li>3 Fotografer Profesional</li>
+                    <li>Full Color Grading & Editing</li>
+                    <li>1 Videografer</li>
+                    <li>Edit Video Sinematik (max 5 menit)</li>
+                    <li>Revisi Maximal 4 kali</li>
+                    <li>Revisi berlaku maksimal 7 hari di kalender setelah di kirimkan, jika tidak ada komunikasi maka proyek di anggap selesai</li>
+                    <li>Durasi 8 Jam di lokasi</li>
+                    <li>Pengiriman Via Google Drive</li>
+                    <li>Konsumsi di tanggung client</li>
                 </ul>
-
-                <a
-                    href="https://wa.me/6287765829615"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-solid">
+                <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="btn-solid">
                     Pilih Paket
                 </a>
-
             </div>
-
         </div>
-
 
         <span class="section-tag price-section-title">
             02. Paket Engagement
         </span>
 
         <div class="price-grid">
-
             <div class="price-card">
-
-                <h3>
-                    Basic
-                </h3>
-
-                <div class="price-amount">
-                    Rp 850.000
-                </div>
-
+                <h3>Basic</h3>
+                <div class="price-amount">Rp 850.000</div>
                 <ul class="price-features">
-
-                    <li>
-                        2 Fotografer Profesional
-                    </li>
-
-                    <li>
-                        Full Color Grading & Editing
-                    </li>
-
-                    <li>
-                        Durasi 4 Jam di lokasi
-                    </li>
-
-                    <li>
-                        Pengiriman Via Google Drive
-                    </li>
-
-                    <li>
-                        Konsumsi di tanggung client
-                    </li>
-
+                    <li>2 Fotografer Profesional</li>
+                    <li>Full Color Grading & Editing</li>
+                    <li>Durasi 4 Jam di lokasi</li>
+                    <li>Pengiriman Via Google Drive</li>
+                    <li>Konsumsi di tanggung client</li>
                 </ul>
-
-                <a
-                    href="https://wa.me/6287765829615"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-outline">
+                <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="btn-outline">
                     Pilih Paket
                 </a>
-
             </div>
-
 
             <div class="price-card premium">
-
-                <h3>
-                    Premium
-                </h3>
-
-                <div class="price-amount">
-                    Rp 1.850.000
-                </div>
-
+                <h3>Premium</h3>
+                <div class="price-amount">Rp 1.850.000</div>
                 <ul class="price-features">
-
-                    <li>
-                        3 Fotografer Profesional
-                    </li>
-
-                    <li>
-                        Full Color Grading & Editing
-                    </li>
-
-                    <li>
-                        1 Videografer
-                    </li>
-
-                    <li>
-                        Edit Video Sinematik (max 5 menit)
-                    </li>
-
-                    <li>
-                        Revisi Maximal 4 kali
-                    </li>
-
-                    <li>
-                        Revisi berlaku maksimal 7 hari di kalender setelah di kirimkan, jika tidak ada komunikasi maka proyek di anggap selesai
-                    </li>
-
-                    <li>
-                        Durasi 6 Jam di lokasi
-                    </li>
-
-                    <li>
-                        Pengiriman Via Google Drive
-                    </li>
-
-                    <li>
-                        Konsumsi di tanggung client
-                    </li>
-
+                    <li>3 Fotografer Profesional</li>
+                    <li>Full Color Grading & Editing</li>
+                    <li>1 Videografer</li>
+                    <li>Edit Video Sinematik (max 5 menit)</li>
+                    <li>Revisi Maximal 4 kali</li>
+                    <li>Revisi berlaku maksimal 7 hari di kalender setelah di kirimkan, jika tidak ada komunikasi maka proyek di anggap selesai</li>
+                    <li>Durasi 6 Jam di lokasi</li>
+                    <li>Pengiriman Via Google Drive</li>
+                    <li>Konsumsi di tanggung client</li>
                 </ul>
-
-                <a
-                    href="https://wa.me/6287765829615"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-solid">
+                <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="btn-solid">
                     Pilih Paket
                 </a>
-
             </div>
-
         </div>
-
 
         <span class="section-tag price-section-title">
             03. Paket Graduation
         </span>
 
         <div class="price-grid">
-
             <div class="price-card">
-
-                <h3>
-                    Basic
-                </h3>
-
-                <div class="price-amount">
-                    Rp 250.000
-                </div>
-
+                <h3>Basic</h3>
+                <div class="price-amount">Rp 250.000</div>
                 <ul class="price-features">
-
-                    <li>
-                        1 Fotografer Profesional
-                    </li>
-
-                    <li>
-                        Full Color Grading & Editing
-                    </li>
-
-                    <li>
-                        Durasi 2 Jam di lokasi
-                    </li>
-
-                    <li>
-                        Pengiriman Via Google Drive
-                    </li>
-
-                    <li>
-                        Konsumsi di luar harga paket
-                    </li>
-
+                    <li>1 Fotografer Profesional</li>
+                    <li>Full Color Grading & Editing</li>
+                    <li>Durasi 2 Jam di lokasi</li>
+                    <li>Pengiriman Via Google Drive</li>
+                    <li>Konsumsi di luar harga paket</li>
                 </ul>
-
-                <a
-                    href="https://wa.me/6287765829615"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-outline">
+                <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="btn-outline">
                     Pilih Paket
                 </a>
-
             </div>
-
 
             <div class="price-card">
-
-                <h3>
-                    Premium
-                </h3>
-
-                <div class="price-amount">
-                    Rp 550.000
-                </div>
-
+                <h3>Premium</h3>
+                <div class="price-amount">Rp 550.000</div>
                 <ul class="price-features">
-
-                    <li>
-                        1-2 Fotografer Profesional
-                    </li>
-
-                    <li>
-                        Full Color Grading & Editing
-                    </li>
-
-                    <li>
-                        Durasi 5 Jam di lokasi
-                    </li>
-
-                    <li>
-                        Pengiriman Via Google Drive
-                    </li>
-
-                    <li>
-                        Konsumsi di luar harga paket
-                    </li>
-
+                    <li>1-2 Fotografer Profesional</li>
+                    <li>Full Color Grading & Editing</li>
+                    <li>Durasi 5 Jam di lokasi</li>
+                    <li>Pengiriman Via Google Drive</li>
+                    <li>Konsumsi di luar harga paket</li>
                 </ul>
-
-                <a
-                    href="https://wa.me/6287765829615"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-outline">
+                <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="btn-outline">
                     Pilih Paket
                 </a>
-
             </div>
-
 
             <div class="price-card premium">
-
-                <h3>
-                    Pro
-                </h3>
-
-                <div class="price-amount">
-                    Rp 1.850.000
-                </div>
-
+                <h3>Pro</h3>
+                <div class="price-amount">Rp 1.850.000</div>
                 <ul class="price-features">
-
-                    <li>
-                        2 Fotografer Profesional
-                    </li>
-
-                    <li>
-                        Full Color Grading & Editing
-                    </li>
-
-                    <li>
-                        1 Videografer
-                    </li>
-
-                    <li>
-                        Edit Video Sinematik (max 5 menit)
-                    </li>
-
-                    <li>
-                        Revisi Maximal 4 kali
-                    </li>
-
-                    <li>
-                        Revisi berlaku maksimal 7 hari di kalender setelah di kirimkan, jika tidak ada komunikasi maka proyek di anggap selesai
-                    </li>
-
-                    <li>
-                        Durasi 6 Jam di lokasi
-                    </li>
-
-                    <li>
-                        Pengiriman Via Google Drive
-                    </li>
-
-                    <li>
-                        Konsumsi di luar harga paket
-                    </li>
-
+                    <li>2 Fotografer Profesional</li>
+                    <li>Full Color Grading & Editing</li>
+                    <li>1 Videografer</li>
+                    <li>Edit Video Sinematik (max 5 menit)</li>
+                    <li>Revisi Maximal 4 kali</li>
+                    <li>Revisi berlaku maksimal 7 hari di kalender setelah di kirimkan, jika tidak ada komunikasi maka proyek di anggap selesai</li>
+                    <li>Durasi 6 Jam di lokasi</li>
+                    <li>Pengiriman Via Google Drive</li>
+                    <li>Konsumsi di luar harga paket</li>
                 </ul>
-
-                <a
-                    href="https://wa.me/6287765829615"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-solid">
+                <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="btn-solid">
                     Pilih Paket
                 </a>
-
             </div>
-
         </div>
-        
 
         <span class="section-tag price-section-title">
             04. Paket Event
         </span>
 
         <div class="price-grid">
-
             <div class="price-card">
-
-                <h3>
-                    Basic
-                </h3>
-
-                <div class="price-amount">
-                    Rp 1.500.000
-                </div>
-
+                <h3>Basic</h3>
+                <div class="price-amount">Rp 1.500.000</div>
                 <ul class="price-features">
-
-                    <li>
-                        3 Fotografer Profesional
-                    </li>
-
-                    <li>
-                        Full Color Grading & Editing
-                    </li>
-
-                    <li>
-                        Durasi 5 Jam di lokasi
-                    </li>
-
-                    <li>
-                        Pengiriman Via Google Drive
-                    </li>
-
-                    <li>
-                        Konsumsi di tanggung client
-                    </li>
-
+                    <li>3 Fotografer Profesional</li>
+                    <li>Full Color Grading & Editing</li>
+                    <li>Durasi 5 Jam di lokasi</li>
+                    <li>Pengiriman Via Google Drive</li>
+                    <li>Konsumsi di tanggung client</li>
                 </ul>
-
-                <a
-                    href="https://wa.me/6287765829615"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-outline">
+                <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="btn-outline">
                     Pilih Paket
                 </a>
-
             </div>
-
 
             <div class="price-card premium">
-
-                <h3>
-                    Premium
-                </h3>
-
-                <div class="price-amount">
-                    Rp 2.950.000
-                </div>
-
+                <h3>Premium</h3>
+                <div class="price-amount">Rp 2.950.000</div>
                 <ul class="price-features">
-
-                    <li>
-                        4 Fotografer Profesional
-                    </li>
-
-                    <li>
-                        Full Color Grading & Editing
-                    </li>
-
-                    <li>
-                        2 Videografer
-                    </li>
-
-                    <li>
-                        Edit Video Sinematik (max 5 menit)
-                    </li>
-
-                    <li>
-                        Revisi Maximal 4 kali
-                    </li>
-
-                    <li>
-                        Revisi berlaku maksimal 7 hari di kalender setelah di kirimkan, jika tidak ada komunikasi maka proyek di anggap selesai
-                    </li>
-
-                    <li>
-                        Durasi 6 Jam di lokasi
-                    </li>
-
-                    <li>
-                        Pengiriman Via Google Drive
-                    </li>
-
-                    <li>
-                        Konsumsi di tanggung client
-                    </li>
-
+                    <li>4 Fotografer Profesional</li>
+                    <li>Full Color Grading & Editing</li>
+                    <li>2 Videografer</li>
+                    <li>Edit Video Sinematik (max 5 menit)</li>
+                    <li>Revisi Maximal 4 kali</li>
+                    <li>Revisi berlaku maksimal 7 hari di kalender setelah di kirimkan, jika tidak ada komunikasi maka proyek di anggap selesai</li>
+                    <li>Durasi 6 Jam di lokasi</li>
+                    <li>Pengiriman Via Google Drive</li>
+                    <li>Konsumsi di tanggung client</li>
                 </ul>
-
-                <a
-                    href="https://wa.me/6287765829615"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-solid">
+                <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="btn-solid">
                     Pilih Paket
                 </a>
-
             </div>
-
         </div>
-    
+
         <span class="section-tag price-section-title">05. Paket Drone</span>
         <div class="price-grid">
-            <div class="price-card"><h3>Basic</h3><div class="price-amount">Rp 450.000</div><ul class="price-features"><li>Dokumentasi aerial menggunakan drone</li><li>Durasi operasional menyesuaikan kondisi dan kebutuhan</li><li>Termasuk pengambilan gambar dan file hasil dokumentasi</li><li>Pengiriman file melalui Google Drive</li><li>Transportasi dan konsumsi di luar harga paket</li></ul><a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="btn-outline">Pilih Paket</a></div>
-            <div class="price-card"><h3>Standard</h3><div class="price-amount">Rp 900.000</div><ul class="price-features"><li>2 baterai dengan durasi operasional hingga ±60 menit</li><li>Durasi menyesuaikan kondisi lapangan</li><li>Termasuk proses editing video</li><li>Maksimal 1 kali revisi</li><li>File dikirim melalui Google Drive</li><li>Transportasi dan konsumsi di luar harga paket</li></ul><a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="btn-outline">Pilih Paket</a></div>
-            <div class="price-card premium"><h3>Premium</h3><div class="price-amount">Rp 1.300.000</div><ul class="price-features"><li>3 baterai dengan durasi operasional hingga ±90 menit</li><li>Durasi menyesuaikan kondisi lapangan</li><li>Termasuk proses editing video</li><li>Maksimal 2 kali revisi</li><li>File dikirim melalui Google Drive</li><li>Transportasi dan konsumsi di luar harga paket</li></ul><a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="btn-solid">Pilih Paket</a></div>
+            <div class="price-card">
+                <h3>Basic</h3>
+                <div class="price-amount">Rp 450.000</div>
+                <ul class="price-features">
+                    <li>Dokumentasi aerial menggunakan drone</li>
+                    <li>Durasi operasional menyesuaikan kondisi dan kebutuhan</li>
+                    <li>Termasuk pengambilan gambar dan file hasil dokumentasi</li>
+                    <li>Pengiriman file melalui Google Drive</li>
+                    <li>Transportasi dan konsumsi di luar harga paket</li>
+                </ul>
+                <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="btn-outline">Pilih Paket</a>
+            </div>
+            <div class="price-card">
+                <h3>Standard</h3>
+                <div class="price-amount">Rp 900.000</div>
+                <ul class="price-features">
+                    <li>2 baterai dengan durasi operasional hingga ±60 menit</li>
+                    <li>Durasi menyesuaikan kondisi lapangan</li>
+                    <li>Termasuk proses editing video</li>
+                    <li>Maksimal 1 kali revisi</li>
+                    <li>File dikirim melalui Google Drive</li>
+                    <li>Transportasi dan konsumsi di luar harga paket</li>
+                </ul>
+                <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="btn-outline">Pilih Paket</a>
+            </div>
+            <div class="price-card premium">
+                <h3>Premium</h3>
+                <div class="price-amount">Rp 1.300.000</div>
+                <ul class="price-features">
+                    <li>3 baterai dengan durasi operasional hingga ±90 menit</li>
+                    <li>Durasi menyesuaikan kondisi lapangan</li>
+                    <li>Termasuk proses editing video</li>
+                    <li>Maksimal 2 kali revisi</li>
+                    <li>File dikirim melalui Google Drive</li>
+                    <li>Transportasi dan konsumsi di luar harga paket</li>
+                </ul>
+                <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="btn-solid">Pilih Paket</a>
+            </div>
         </div>
-        <p style="margin-top:22px;color:var(--text-muted);max-width:850px;">Layanan drone tersedia untuk acara keluarga, dokumentasi event, kebutuhan marketing, automotive, dan berbagai kebutuhan aerial lainnya selama lokasi dan kondisi penerbangan memungkinkan untuk dijangkau dengan aman.</p>
-        
-        <!-- =========================
-             SYARAT & KETENTUAN
-        ========================= -->
-        <div style="margin-top: 60px; padding: 30px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);">
+
+        <p style="margin-top:24px;color:var(--text-muted);max-width:850px;">Layanan drone tersedia untuk acara keluarga, dokumentasi event, kebutuhan marketing, automotive, dan berbagai kebutuhan aerial lainnya selama lokasi dan kondisi penerbangan memungkinkan untuk dijangkau dengan aman.</p>
+
+        <!-- SYARAT & KETENTUAN -->
+        <div class="bento-card" style="margin-top: 60px;">
             <h3 style="font-size: 24px; margin-bottom: 20px; color: #fff;">Syarat & Ketentuan yang berlaku</h3>
             <ol style="padding-left: 20px; color: var(--text-muted); display: flex; flex-direction: column; gap: 12px;">
                 <li><strong style="color: #fff;">Booking & DP:</strong> Tanggal acara baru akan dikunci setelah pembayaran DP minimal 30% dari total paket.</li>
@@ -1984,53 +1738,34 @@
                 <li><strong style="color: #fff;">Kebijakan Revisi:</strong> Paket yang menyertakan video mendapatkan jatah maksimal 4 kali revisi minor dalam kurun waktu 7 hari setelah video draf dikirimkan pertama kali.</li>
             </ol>
         </div>
-</section>
+    </section>
 
-
-    <!-- =========================
-         TENTANG KAMI
-    ========================= -->
-
+    <!-- TENTANG KAMI -->
     <section id="tentang">
-
         <div class="section-header">
-
             <span class="section-tag">
                 06. Tentang Kami
             </span>
-
             <h2>
                 Mengenal<br>
                 Another Visual.
             </h2>
-
         </div>
 
-
         <div class="bento-card about-layout">
-
             <div class="founder-text">
-
-                <h3>
-                    PT Another Visual
-                </h3>
-
-                <h4>
-                    Halo semuanya
-                </h4>
-
+                <h3>PT Another Visual</h3>
+                <h4>Halo semuanya</h4>
                 <h4>
                     Perkenalkan saya Alif Nur Hidayat
                     selaku Founder dari PT Another Visual
                 </h4>
-
                 <p>
                     Saya mewakili tim dan pendiri PT Another Visual
                     ingin mengucapkan terima kasih sebesar-besarnya
                     kepada seluruh klien, mitra, kru, dan semua pihak
                     yang telah mempercayakan momen berharganya kepada kami.
                 </p>
-
                 <p>
                     Bagi kami, PT Another Visual bukan hanya tentang
                     foto, video, atau produksi visual. Kami percaya
@@ -2038,7 +1773,6 @@
                     dan tugas kami adalah mengabadikannya dengan cara
                     terbaik agar bisa terus dikenang.
                 </p>
-
                 <p>
                     Perjalanan kami sampai hari ini tentunya tidak mudah.
                     Namun berkat dukungan dan kepercayaan dari kalian semua,
@@ -2046,171 +1780,95 @@
                     yang selalu ingin memberikan hasil terbaik, profesional,
                     dan penuh dedikasi.
                 </p>
-
                 <p>
                     Dari tahap pra-produksi hingga hasil akhir yang dapat
                     dinikmati bersama, setiap proses dikerjakan dengan
                     dedikasi penuh. Tanpa kerja sama, konsistensi, dan
                     semangat solid dari tim, pencapaian ini mustahil terwujud.
                 </p>
-
                 <p>
                     Semoga ke depannya PT Another Visual bisa terus hadir,
                     berkarya, dan menjadi bagian dari lebih banyak cerita
                     luar biasa lainnya. Terima kasih sudah menjadi bagian
                     dari perjalanan kami.
                 </p>
-
                 <p class="signature">
                     Salam hangat,<br>
-                    <span>
-                        Alif Nur Hidayat — Founder PT Another Visual
-                    </span>
+                    <span>Alif Nur Hidayat — Founder PT Another Visual</span>
                 </p>
-
             </div>
 
-
             <div
-                class="card-image"
-                style="
-                    background-image:
-                    url('https://lh3.googleusercontent.com/d/1XCVRVaa9RkMXH04tVXUSDGJZN92wRSL9');
-                "
+                class="card-image skeleton-box"
+                style="background-image: url('https://lh3.googleusercontent.com/d/1XCVRVaa9RkMXH04tVXUSDGJZN92wRSL9');"
                 role="img"
                 aria-label="Founder PT Another Visual">
             </div>
-
         </div>
-
     </section>
 
-
-    <!-- =========================
-         KONTAK
-    ========================= -->
-
+    <!-- KONTAK -->
     <section id="kontak">
-
         <div class="section-header">
-
             <span class="section-tag">
                 07. Kontak
             </span>
-
             <h2>
                 Mari buat<br>
                 sesuatu bersama.
             </h2>
-
         </div>
 
-
         <div class="contact-grid">
-
             <a
                 href="https://wa.me/6287765829615"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="bento-card contact-card">
-
-                <span class="section-tag">
-                    Pesan Langsung
-                </span>
-
-                <h4>
-                    WhatsApp
-                </h4>
-
-                <span>
-                    +62 877 6582 9615
-                </span>
-
+                <span class="section-tag">Pesan Langsung</span>
+                <h4>WhatsApp</h4>
+                <span>+62 877 6582 9615</span>
             </a>
-
 
             <a
                 href="mailto:anothervisualjakarta@gmail.com"
                 class="bento-card contact-card">
-
-                <span class="section-tag">
-                    Keperluan Bisnis
-                </span>
-
-                <h4>
-                    Email
-                </h4>
-
-                <span>
-                    anothervisualjakarta@gmail.com
-                </span>
-
+                <span class="section-tag">Keperluan Bisnis</span>
+                <h4>Email</h4>
+                <span>anothervisualjakarta@gmail.com</span>
             </a>
-
 
             <a
                 href="https://instagram.com/anothervisual_creative"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="bento-card contact-card">
-
-                <span class="section-tag">
-                    Sosial Media
-                </span>
-
-                <h4>
-                    Instagram
-                </h4>
-
-                <span>
-                    @anothervisual_creative
-                </span>
-
+                <span class="section-tag">Sosial Media</span>
+                <h4>Instagram</h4>
+                <span>@anothervisual_creative</span>
             </a>
-
         </div>
-
     </section>
 
 </main>
 
-
 <!-- =========================
      FOOTER
 ========================= -->
-
 <footer>
-
-    <p>
-        Ikuti Another Visual
-    </p>
-
-
-    <!-- SOCIAL MEDIA ICONS -->
+    <p>Ikuti Another Visual</p>
 
     <div class="social-links">
-
-        <!-- INSTAGRAM -->
-
         <a
             href="https://instagram.com/anothervisual_creative"
             target="_blank"
             rel="noopener noreferrer"
             class="social-link"
             aria-label="Instagram Another Visual">
-
-            <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true">
-
+            <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-3.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/>
-
             </svg>
-
         </a>
-
-
-        <!-- WHATSAPP -->
 
         <a
             href="https://wa.me/6287765829615"
@@ -2218,19 +1876,11 @@
             rel="noopener noreferrer"
             class="social-link"
             aria-label="WhatsApp Another Visual">
-
-            <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true">
-
+            <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M12 2a9.9 9.9 0 0 0-8.55 14.9L2 22l5.27-1.38A10 10 0 1 0 12 2Zm0 2a8 8 0 0 1 6.93 12L18.1 17.3l-3.12.82-.18.03a8 8 0 0 1-4.03-1.08l-.27-.16-2.95.77.79-2.82-.18-.28A8 8 0 1 1 12 4Zm-3.3 3.7c-.2 0-.5.08-.7.32-.2.23-.76.75-.76 1.82s.78 2.11.89 2.26c.11.14 1.53 2.46 3.75 3.34.52.2.93.32 1.25.41.53.17 1.01.14 1.39.08.42-.06 1.3-.53 1.48-1.04.18-.51.18-.95.13-1.04-.05-.09-.2-.14-.42-.25-.22-.11-1.3-.64-1.5-.71-.2-.08-.35-.11-.5.11-.15.23-.58.71-.71.86-.13.15-.26.17-.48.06-.22-.11-.93-.34-1.77-1.09-.65-.58-1.09-1.3-1.22-1.52-.13-.23-.01-.35.1-.46.1-.1.22-.26.33-.39.11-.13.15-.23.22-.38.07-.15.04-.28-.02-.39-.06-.11-.5-1.2-.69-1.64-.18-.43-.36-.37-.5-.38Z"/>
-
             </svg>
-
         </a>
-
     </div>
-
 
     <p>
         © <span id="currentYear"></span>
@@ -2238,689 +1888,292 @@
     </p>
 
     <span id="deviceInfo"></span>
-
 </footer>
-
 
 <!-- =========================
      SLIDER MODAL
 ========================= -->
-
-<div
-    class="slider-modal"
-    id="sliderModal"
-    aria-hidden="true">
-
+<div class="slider-modal" id="sliderModal" aria-hidden="true">
     <div class="slider-content">
+        <div class="slider-title" id="sliderTitle"></div>
 
-        <div
-            class="slider-title"
-            id="sliderTitle">
+        <button class="slider-close" id="sliderClose" aria-label="Tutup">×</button>
+        <button class="slider-prev" id="sliderPrev" aria-label="Foto sebelumnya">‹</button>
+
+        <div class="slider-image-wrapper skeleton-box" id="sliderWrapper">
+            <img id="sliderImage" class="slider-image" src="" alt="Portfolio">
         </div>
 
-        <button
-            class="slider-close"
-            id="sliderClose"
-            aria-label="Tutup">
-            ×
-        </button>
+        <button class="slider-next" id="sliderNext" aria-label="Foto berikutnya">›</button>
 
-        <button
-            class="slider-prev"
-            id="sliderPrev"
-            aria-label="Foto sebelumnya">
-            ‹
-        </button>
-
-        <img
-            id="sliderImage"
-            class="slider-image"
-            src=""
-            alt="Portfolio">
-
-        <button
-            class="slider-next"
-            id="sliderNext"
-            aria-label="Foto berikutnya">
-            ›
-        </button>
-
-        <div
-            class="slider-counter"
-            id="sliderCounter">
-            1 / 1
-        </div>
-
+        <div class="slider-counter" id="sliderCounter">1 / 1</div>
     </div>
-
 </div>
-
 
 <!-- =========================
      JAVASCRIPT
 ========================= -->
-
 <script>
-
     /* =========================
-       CURRENT YEAR
+       CURRENT YEAR & DEVICE
     ========================= */
-
-    document.getElementById("currentYear").textContent =
-        new Date().getFullYear();
-
-
-    /* =========================
-       DEVICE DETECTION
-    ========================= */
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
 
     function detectDevice() {
-
         const width = window.innerWidth;
-
         let device = "Desktop";
-
-        if (width <= 600) {
-            device = "Mobile";
-        } else if (width <= 1024) {
-            device = "Tablet";
-        }
-
-        document.body.dataset.device =
-            device.toLowerCase();
-
+        if (width <= 600) device = "Mobile";
+        else if (width <= 1024) device = "Tablet";
+        document.body.dataset.device = device.toLowerCase();
         return device;
     }
-
     detectDevice();
+    window.addEventListener("resize", detectDevice);
 
-    window.addEventListener(
-        "resize",
-        detectDevice
+    /* =========================
+       SKELETON SHIMMER HANDLER
+    ========================= */
+    document.querySelectorAll(".port-item").forEach(box => {
+        const img = box.querySelector("img");
+        if (!img) return;
+        const markLoaded = () => box.classList.add("loaded");
+        if (img.complete && img.naturalHeight !== 0) {
+            markLoaded();
+        } else {
+            img.addEventListener("load", markLoaded);
+            img.addEventListener("error", markLoaded);
+        }
+    });
+
+    // Hilangkan shimmer pada background-image Founder setelah selesai dimuat
+    const founderImgBox = document.querySelector(".card-image.skeleton-box");
+    if (founderImgBox) {
+        const bgImg = new Image();
+        bgImg.src = "https://lh3.googleusercontent.com/d/1XCVRVaa9RkMXH04tVXUSDGJZN92wRSL9";
+        bgImg.onload = () => founderImgBox.classList.add("loaded");
+        bgImg.onerror = () => founderImgBox.classList.add("loaded");
+    }
+
+    /* =========================
+       BUTTON RIPPLE & CARD GLOW
+    ========================= */
+    const rippleTargets = document.querySelectorAll(
+        ".btn, .folder-btn, .btn-outline, .btn-solid, .social-link, .menu-toggle, .slider-close, .slider-prev, .slider-next"
     );
 
+    rippleTargets.forEach(btn => {
+        btn.addEventListener("click", function (e) {
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+
+            const wave = document.createElement("span");
+            wave.className = "ripple-wave";
+            wave.style.width = wave.style.height = `${size}px`;
+            wave.style.left = `${x}px`;
+            wave.style.top = `${y}px`;
+
+            this.appendChild(wave);
+            wave.addEventListener("animationend", () => wave.remove());
+        });
+    });
+
+    // Efek spotlight mengikuti kursor pada bento-card
+    document.querySelectorAll(".bento-card").forEach(card => {
+        card.addEventListener("mousemove", e => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+            card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+        });
+    });
 
     /* =========================
        MOBILE MENU
     ========================= */
+    const menuToggle = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
 
-    const menuToggle =
-        document.getElementById("menuToggle");
+    menuToggle.addEventListener("click", function () {
+        const isOpen = navMenu.classList.toggle("show");
+        menuToggle.setAttribute("aria-expanded", isOpen);
+    });
 
-    const navMenu =
-        document.getElementById("navMenu");
-
-    menuToggle.addEventListener(
-        "click",
-        function () {
-
-            const isOpen =
-                navMenu.classList.toggle("show");
-
-            menuToggle.setAttribute(
-                "aria-expanded",
-                isOpen
-            );
-
-        }
-    );
-
-
-    /* Tutup menu setelah klik */
-
-    document.querySelectorAll(".nav-menu a")
-        .forEach(function(link) {
-
-            link.addEventListener(
-                "click",
-                function() {
-
-                    navMenu.classList.remove(
-                        "show"
-                    );
-
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                }
-            );
-
+    document.querySelectorAll(".nav-menu a").forEach(link => {
+        link.addEventListener("click", () => {
+            navMenu.classList.remove("show");
+            menuToggle.setAttribute("aria-expanded", "false");
         });
-
+    });
 
     /* =========================
        ACTIVE NAVIGATION
     ========================= */
+    const sections = document.querySelectorAll("main section");
+    const navLinks = document.querySelectorAll(".nav-menu a");
 
-    const sections =
-        document.querySelectorAll(
-            "main section"
-        );
-
-    const navLinks =
-        document.querySelectorAll(
-            ".nav-menu a"
-        );
-
-    const observer =
-        new IntersectionObserver(
-            function(entries) {
-
-                entries.forEach(
-                    function(entry) {
-
-                        if (
-                            entry.isIntersecting
-                        ) {
-
-                            navLinks.forEach(
-                                function(link) {
-
-                                    link.classList.remove(
-                                        "active"
-                                    );
-
-                                }
-                            );
-
-                            const activeLink =
-                                document.querySelector(
-                                    '.nav-menu a[href="#' +
-                                    entry.target.id +
-                                    '"]'
-                                );
-
-                            if (activeLink) {
-
-                                activeLink.classList.add(
-                                    "active"
-                                );
-
-                            }
-
-                        }
-
-                    }
-                );
-
-            },
-            {
-                rootMargin:
-                    "-35% 0px -55% 0px"
-            }
-        );
-
-    sections.forEach(
-        function(section) {
-            observer.observe(section);
-        }
+    const observer = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => link.classList.remove("active"));
+                    const activeLink = document.querySelector(`.nav-menu a[href="#${entry.target.id}"]`);
+                    if (activeLink) activeLink.classList.add("active");
+                }
+            });
+        },
+        { rootMargin: "-35% 0px -55% 0px" }
     );
 
+    sections.forEach(section => observer.observe(section));
 
     /* =========================
        PORTFOLIO FILTER
     ========================= */
+    const filterButtons = document.querySelectorAll(".folder-btn");
+    const portfolioItems = document.querySelectorAll(".port-item");
 
-    const filterButtons =
-        document.querySelectorAll(
-            ".folder-btn"
-        );
+    filterButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const filter = button.dataset.filter;
+            filterButtons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
 
-    const portfolioItems =
-        document.querySelectorAll(
-            ".port-item"
-        );
-
-
-    filterButtons.forEach(
-        function(button) {
-
-            button.addEventListener(
-                "click",
-                function() {
-
-                    const filter =
-                        button.dataset.filter;
-
-                    filterButtons.forEach(
-                        function(btn) {
-
-                            btn.classList.remove(
-                                "active"
-                            );
-
-                        }
-                    );
-
-                    button.classList.add(
-                        "active"
-                    );
-
-                    portfolioItems.forEach(
-                        function(item) {
-
-                            if (
-                                filter === "all" ||
-                                item.classList.contains(
-                                    filter
-                                )
-                            ) {
-
-                                item.classList.remove(
-                                    "hidden"
-                                );
-
-                            } else {
-
-                                item.classList.add(
-                                    "hidden"
-                                );
-
-                            }
-
-                        }
-                    );
-
+            portfolioItems.forEach(item => {
+                if (filter === "all" || item.classList.contains(filter)) {
+                    item.classList.remove("hidden");
+                } else {
+                    item.classList.add("hidden");
                 }
-            );
-
-        }
-    );
-
+            });
+        });
+    });
 
     /* =========================
-       SLIDER
+       SLIDER MODAL + SHIMMER
     ========================= */
-
-    const sliderModal =
-        document.getElementById(
-            "sliderModal"
-        );
-
-    const sliderImage =
-        document.getElementById(
-            "sliderImage"
-        );
-
-    const sliderTitle =
-        document.getElementById(
-            "sliderTitle"
-        );
-
-    const sliderCounter =
-        document.getElementById(
-            "sliderCounter"
-        );
-
-    const sliderClose =
-        document.getElementById(
-            "sliderClose"
-        );
-
-    const sliderPrev =
-        document.getElementById(
-            "sliderPrev"
-        );
-
-    const sliderNext =
-        document.getElementById(
-            "sliderNext"
-        );
-
+    const sliderModal = document.getElementById("sliderModal");
+    const sliderWrapper = document.getElementById("sliderWrapper");
+    const sliderImage = document.getElementById("sliderImage");
+    const sliderTitle = document.getElementById("sliderTitle");
+    const sliderCounter = document.getElementById("sliderCounter");
+    const sliderClose = document.getElementById("sliderClose");
+    const sliderPrev = document.getElementById("sliderPrev");
+    const sliderNext = document.getElementById("sliderNext");
 
     let currentImages = [];
     let currentIndex = 0;
 
+    sliderImage.addEventListener("load", () => {
+        sliderWrapper.classList.add("loaded");
+    });
 
-    function openSlider(
-        images,
-        title
-    ) {
+    sliderImage.addEventListener("error", () => {
+        sliderWrapper.classList.add("loaded");
+    });
 
-        if (
-            !Array.isArray(images) ||
-            images.length === 0
-        ) {
-            return;
-        }
-
+    function openSlider(images, title) {
+        if (!Array.isArray(images) || images.length === 0) return;
         currentImages = images;
         currentIndex = 0;
-
-        sliderTitle.textContent =
-            title || "";
-
-        sliderModal.classList.add(
-            "active"
-        );
-
-        sliderModal.setAttribute(
-            "aria-hidden",
-            "false"
-        );
-
-        document.body.classList.add(
-            "no-scroll"
-        );
-
+        sliderTitle.textContent = title || "";
+        sliderModal.classList.add("active");
+        sliderModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("no-scroll");
         updateSlider();
-
     }
-
 
     function updateSlider() {
-
-        if (!currentImages.length) {
-            return;
-        }
-
-        sliderImage.src =
-            currentImages[currentIndex];
-
-        sliderCounter.textContent =
-            (currentIndex + 1) +
-            " / " +
-            currentImages.length;
-
+        if (!currentImages.length) return;
+        sliderWrapper.classList.remove("loaded");
+        sliderImage.src = currentImages[currentIndex];
+        sliderCounter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
     }
-
 
     function nextSlide() {
-
-        if (!currentImages.length) {
-            return;
-        }
-
-        currentIndex =
-            (currentIndex + 1) %
-            currentImages.length;
-
+        if (!currentImages.length) return;
+        currentIndex = (currentIndex + 1) % currentImages.length;
         updateSlider();
-
     }
-
 
     function prevSlide() {
-
-        if (!currentImages.length) {
-            return;
-        }
-
-        currentIndex =
-            (currentIndex - 1 +
-            currentImages.length) %
-            currentImages.length;
-
+        if (!currentImages.length) return;
+        currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
         updateSlider();
-
     }
-
 
     function closeSlider() {
-
-        sliderModal.classList.remove(
-            "active"
-        );
-
-        sliderModal.setAttribute(
-            "aria-hidden",
-            "true"
-        );
-
-        document.body.classList.remove(
-            "no-scroll"
-        );
-
+        sliderModal.classList.remove("active");
+        sliderModal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("no-scroll");
         sliderImage.src = "";
-
         currentImages = [];
         currentIndex = 0;
-
     }
 
+    sliderNext.addEventListener("click", nextSlide);
+    sliderPrev.addEventListener("click", prevSlide);
+    sliderClose.addEventListener("click", closeSlider);
 
-    sliderNext.addEventListener(
-        "click",
-        nextSlide
-    );
+    sliderModal.addEventListener("click", event => {
+        if (event.target === sliderModal) closeSlider();
+    });
 
-    sliderPrev.addEventListener(
-        "click",
-        prevSlide
-    );
-
-    sliderClose.addEventListener(
-        "click",
-        closeSlider
-    );
-
-
-    /* Klik area gelap untuk menutup */
-
-    sliderModal.addEventListener(
-        "click",
-        function(event) {
-
-            if (
-                event.target === sliderModal
-            ) {
-
-                closeSlider();
-
+    portfolioItems.forEach(item => {
+        item.addEventListener("click", () => {
+            try {
+                const images = JSON.parse(item.dataset.images);
+                openSlider(images, item.dataset.title);
+            } catch (error) {
+                console.error("Portfolio error:", error);
             }
+        });
+    });
 
-        }
-    );
-
-
-    /* =========================
-       PORTFOLIO CLICK
-    ========================= */
-
-    portfolioItems.forEach(
-        function(item) {
-
-            item.addEventListener(
-                "click",
-                function() {
-
-                    try {
-
-                        const images =
-                            JSON.parse(
-                                item.dataset.images
-                            );
-
-                        openSlider(
-                            images,
-                            item.dataset.title
-                        );
-
-                    } catch (error) {
-
-                        console.error(
-                            "Portfolio error:",
-                            error
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-    /* =========================
-       KEYBOARD SLIDER
-    ========================= */
-
-    document.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (
-                !sliderModal.classList.contains(
-                    "active"
-                )
-            ) {
-                return;
-            }
-
-            if (
-                event.key === "ArrowRight"
-            ) {
-
-                nextSlide();
-
-            }
-
-            if (
-                event.key === "ArrowLeft"
-            ) {
-
-                prevSlide();
-
-            }
-
-            if (
-                event.key === "Escape"
-            ) {
-
-                closeSlider();
-
-            }
-
-        }
-    );
-
+    document.addEventListener("keydown", event => {
+        if (!sliderModal.classList.contains("active")) return;
+        if (event.key === "ArrowRight") nextSlide();
+        if (event.key === "ArrowLeft") prevSlide();
+        if (event.key === "Escape") closeSlider();
+    });
 
     /* =========================
        SWIPE SLIDER MOBILE
     ========================= */
-
     let touchStartX = 0;
     let touchEndX = 0;
 
+    sliderModal.addEventListener("touchstart", e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
 
-    sliderModal.addEventListener(
-        "touchstart",
-        function(event) {
-
-            touchStartX =
-                event.changedTouches[0]
-                .screenX;
-
-        },
-        {
-            passive: true
-        }
-    );
-
-
-    sliderModal.addEventListener(
-        "touchend",
-        function(event) {
-
-            touchEndX =
-                event.changedTouches[0]
-                .screenX;
-
-            handleSwipe();
-
-        },
-        {
-            passive: true
-        }
-    );
-
-
-    function handleSwipe() {
-
-        const difference =
-            touchEndX - touchStartX;
-
-        if (
-            Math.abs(difference) < 50
-        ) {
-            return;
-        }
-
-        if (difference < 0) {
-
-            nextSlide();
-
-        } else {
-
-            prevSlide();
-
-        }
-
-    }
-
+    sliderModal.addEventListener("touchend", e => {
+        touchEndX = e.changedTouches[0].screenX;
+        const difference = touchEndX - touchStartX;
+        if (Math.abs(difference) < 50) return;
+        if (difference < 0) nextSlide();
+        else prevSlide();
+    }, { passive: true });
 
     /* =========================
        IMAGE PROTECTION
     ========================= */
-
-    document.addEventListener(
-        "contextmenu",
-        function(event) {
-
-            if (
-                event.target.tagName === "IMG" ||
-                event.target.classList.contains(
-                    "card-image"
-                )
-            ) {
-
-                event.preventDefault();
-
-            }
-
+    document.addEventListener("contextmenu", e => {
+        if (e.target.tagName === "IMG" || e.target.classList.contains("card-image")) {
+            e.preventDefault();
         }
-    );
+    });
 
+    document.addEventListener("dragstart", e => {
+        if (e.target.tagName === "IMG") e.preventDefault();
+    });
 
-    document.addEventListener(
-        "dragstart",
-        function(event) {
-
-            if (
-                event.target.tagName === "IMG"
-            ) {
-
-                event.preventDefault();
-
-            }
-
+    document.addEventListener("keydown", e => {
+        const key = e.key.toLowerCase();
+        if ((e.ctrlKey || e.metaKey) && ["s", "u", "c"].includes(key)) {
+            e.preventDefault();
         }
-    );
-
-
-    document.addEventListener(
-        "keydown",
-        function(event) {
-
-            const key =
-                event.key.toLowerCase();
-
-            if (
-                (event.ctrlKey ||
-                 event.metaKey) &&
-                ["s", "u", "c"].includes(key)
-            ) {
-
-                event.preventDefault();
-
-            }
-
-        }
-    );
-
+    });
 </script>
 
 <audio id="backgroundMusic" loop>
@@ -2928,15 +2181,13 @@
 </audio>
 
 <script>
-const music = document.getElementById("backgroundMusic");
-
-music.volume = 0.5;
-
-window.addEventListener("load", () => {
-    music.play().catch(() => {
-        console.log("Autoplay diblokir browser.");
+    const music = document.getElementById("backgroundMusic");
+    music.volume = 0.5;
+    window.addEventListener("load", () => {
+        music.play().catch(() => {
+            console.log("Autoplay diblokir browser.");
+        });
     });
-});
 </script>
 
 </body>

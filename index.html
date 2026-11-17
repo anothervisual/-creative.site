@@ -4,43 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Another Visual — Photography, Videography & Drone Production">
-    <meta name="theme-color" content="#F8F7F4">
+    <meta name="theme-color" content="#FAFAF8">
     <title>Another Visual — Photography & Videography Studio</title>
 
-    <!-- Editorial Minimalist Typography: Syne + Plus Jakarta Sans -->
+    <!-- Preconnect Fonts: Plus Jakarta Sans & Space Grotesk -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
         /* =========================================================
-           1. HARMONIOUS COLOR PALETTE (WARM ALABASTER & CHARCOAL)
+           1. DESIGN SYSTEM & HARMONIOUS COLOR PALETTE
         ========================================================= */
         :root {
-            --bg-main: #F8F7F4;          /* Warm Alabaster Gallery White */
-            --bg-card: #FFFFFF;          /* Pure Crisp Paper */
-            --bg-subtle: #EFECE6;        /* Soft Sand Stone */
-            --bg-dark: #141413;          /* Deep Espresso Charcoal */
-            --text-primary: #141413;     /* High-Contrast Ink */
-            --text-secondary: #575550;   /* Warm Slate */
-            --text-muted: #8C8982;       /* Muted Taupe */
-            --accent: #B8864B;           /* Warm Editorial Bronze/Gold */
-            --accent-soft: #F3ECE1;      /* Soft Champagne Tint */
-            --border: rgba(20, 20, 19, 0.09);
-            --border-strong: rgba(20, 20, 19, 0.22);
-            --radius-xl: 28px;
-            --radius-lg: 20px;
+            --bg-main: #FAFAF8;          /* Ultra clean warm alabaster */
+            --bg-card: #FFFFFF;          /* Pure paper white */
+            --bg-subtle: #F2EFE9;        /* Soft neutral sand */
+            --bg-dark: #111110;          /* Deep rich charcoal ink */
+            --text-main: #161615;        /* Crisp primary ink */
+            --text-muted: #66645F;       /* Readable secondary gray */
+            --accent: #C59B62;           /* Refined warm champagne gold */
+            --accent-soft: #F9F3EC;      /* Soft accent tint */
+            --border-light: rgba(22, 22, 21, 0.08);
+            --border-strong: rgba(22, 22, 21, 0.18);
+            --radius-xl: 24px;
+            --radius-lg: 16px;
             --radius-md: 12px;
-            --radius-pill: 999px;
-            --container: 1240px;
-            --font-display: 'Syne', sans-serif;
+            --radius-pill: 9999px;
+            --container: 1140px;
+            --font-display: 'Space Grotesk', -apple-system, sans-serif;
             --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
             --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         /* =========================================================
-           2. RESET & BASE PERFORMANCE
+           2. UNIVERSAL RESET & PERFORMANCE BASE
         ========================================================= */
         *, *::before, *::after {
             margin: 0;
@@ -50,15 +49,16 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 96px;
+            scroll-padding-top: 90px;
             -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
 
         body {
             font-family: var(--font-body);
             background-color: var(--bg-main);
-            color: var(--text-primary);
-            line-height: 1.65;
+            color: var(--text-main);
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
@@ -69,6 +69,7 @@
         img {
             max-width: 100%;
             display: block;
+            height: auto;
         }
 
         a {
@@ -85,23 +86,23 @@
         #deviceInfo { display: none; }
 
         /* =========================================================
-           3. INSTANT SKELETON SHIMMER
+           3. INSTANT SKELETON SHIMMER (FAST LOADING FEEL)
         ========================================================= */
-        @keyframes shimmer {
+        @keyframes shimmerAnim {
             0% { background-position: -200% 0; }
             100% { background-position: 200% 0; }
         }
 
         .skeleton-box {
-            background-color: #E8E5DE;
+            background-color: #EAE5DD;
             background-image: linear-gradient(
                 90deg,
-                #E8E5DE 20%,
-                #F4F2ED 50%,
-                #E8E5DE 80%
+                #EAE5DD 25%,
+                #F5F2EC 50%,
+                #EAE5DD 75%
             );
             background-size: 200% 100%;
-            animation: shimmer 1.3s ease-in-out infinite;
+            animation: shimmerAnim 1.2s ease-in-out infinite;
         }
 
         .skeleton-box.loaded {
@@ -111,7 +112,7 @@
 
         .skeleton-box img {
             opacity: 0;
-            transition: opacity 0.4s ease, transform 0.7s var(--ease-expo);
+            transition: opacity 0.35s ease, transform 0.5s var(--ease-smooth);
         }
 
         .skeleton-box.loaded img {
@@ -119,48 +120,48 @@
         }
 
         /* =========================================================
-           4. MICRO-INTERACTIONS & BUTTON RIPPLE
+           4. MICRO-INTERACTIONS (TOUCH & CLICK FEEDBACK)
         ========================================================= */
         .btn-pill,
         .filter-chip,
         .pkg-btn,
-        .social-pill,
-        .menu-btn,
-        .modal-btn {
+        .social-circle,
+        .menu-toggle,
+        .modal-action {
             position: relative;
             overflow: hidden;
             cursor: pointer;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
             transition:
-                transform 0.25s var(--ease-spring),
-                background-color 0.25s ease,
-                color 0.25s ease,
-                border-color 0.25s ease,
-                box-shadow 0.25s ease;
+                transform 0.2s var(--ease-spring),
+                background-color 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
         }
 
         .btn-pill:active,
         .filter-chip:active,
         .pkg-btn:active,
-        .social-pill:active,
-        .menu-btn:active,
-        .modal-btn:active {
-            transform: scale(0.94) !important;
+        .social-circle:active,
+        .menu-toggle:active,
+        .modal-action:active {
+            transform: scale(0.95) !important;
         }
 
-        .ripple-wave {
+        .ripple-effect {
             position: absolute;
             border-radius: 50%;
             transform: scale(0);
-            animation: rippleAnim 0.55s ease-out;
-            background: rgba(255, 255, 255, 0.35);
+            animation: rippleAnim 0.5s ease-out;
+            background: rgba(255, 255, 255, 0.4);
             pointer-events: none;
         }
 
-        .btn-light .ripple-wave,
-        .filter-chip:not(.active) .ripple-wave {
-            background: rgba(20, 20, 19, 0.12);
+        .btn-light .ripple-effect,
+        .filter-chip:not(.active) .ripple-effect {
+            background: rgba(22, 22, 21, 0.15);
         }
 
         @keyframes rippleAnim {
@@ -168,13 +169,13 @@
         }
 
         /* =========================================================
-           5. FLOATING PILL NAVBAR (COMPLETELY NEW HEADER)
+           5. UNIFIED RESPONSIVE NAVIGATION (MOBILE & PC IDENTICAL)
         ========================================================= */
-        .navbar-wrap {
+        .nav-wrapper {
             position: sticky;
             top: 16px;
             z-index: 1000;
-            padding: 0 20px;
+            padding: 0 16px;
             pointer-events: none;
         }
 
@@ -184,166 +185,166 @@
             margin: 0 auto;
             height: 68px;
             padding: 0 24px;
-            background: rgba(255, 255, 255, 0.84);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-light);
             border-radius: var(--radius-pill);
-            box-shadow: 0 10px 30px -10px rgba(20, 20, 19, 0.08);
+            box-shadow: 0 8px 30px rgba(22, 22, 21, 0.06);
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .brand {
+        .brand-logo {
             font-family: var(--font-display);
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: -0.03em;
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
         .brand-dot {
-            width: 9px;
-            height: 9px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: var(--accent);
         }
 
-        .nav-links {
+        .nav-list {
             display: flex;
             align-items: center;
             gap: 4px;
             list-style: none;
         }
 
-        .nav-links a {
-            padding: 8px 15px;
+        .nav-list a {
+            padding: 8px 14px;
             border-radius: var(--radius-pill);
             font-size: 13.5px;
-            font-weight: 500;
-            color: var(--text-secondary);
+            font-weight: 600;
+            color: var(--text-muted);
             transition: all 0.2s ease;
         }
 
-        .nav-links a:hover {
-            color: var(--text-primary);
+        .nav-list a:hover {
+            color: var(--text-main);
             background: var(--bg-subtle);
         }
 
-        .nav-links a.active {
+        .nav-list a.active {
             background: var(--bg-dark);
             color: #FFFFFF;
-            font-weight: 600;
         }
 
-        .nav-cta {
+        .nav-btn-action {
             padding: 9px 18px;
             border-radius: var(--radius-pill);
             background: var(--accent);
             color: #FFFFFF;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
-        .nav-cta:hover {
-            background: #9E703B;
+        .nav-btn-action:hover {
+            background: #B2874E;
         }
 
-        .menu-btn {
+        .menu-toggle {
             display: none;
             width: 40px;
             height: 40px;
             border-radius: 50%;
             background: var(--bg-subtle);
-            color: var(--text-primary);
+            color: var(--text-main);
             font-size: 18px;
+            align-items: center;
+            justify-content: center;
         }
 
         /* =========================================================
-           6. EDITORIAL SPLIT HERO (ASYMMETRIC GALLERY LAYOUT)
+           6. UNIFIED HERO SECTION (CLEAN & SYMMETRIC)
         ========================================================= */
         .hero-section {
             max-width: var(--container);
             margin: 0 auto;
-            padding: 56px 24px 96px;
-            display: grid;
-            grid-template-columns: 1.05fr 0.95fr;
-            gap: 48px;
+            padding: 64px 20px 80px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
             align-items: center;
         }
 
-        .hero-badge {
+        .hero-tag {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 7px 14px;
+            padding: 6px 16px;
             border-radius: var(--radius-pill);
             background: var(--accent-soft);
             color: var(--accent);
-            font-size: 11.5px;
+            font-size: 12px;
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             margin-bottom: 24px;
         }
 
-        .hero-left h1 {
+        .hero-section h1 {
             font-family: var(--font-display);
-            font-size: clamp(46px, 6.2vw, 82px);
-            font-weight: 800;
-            line-height: 0.98;
-            letter-spacing: -0.04em;
-            color: var(--text-primary);
-            margin-bottom: 24px;
+            font-size: clamp(40px, 7vw, 76px);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            max-width: 850px;
         }
 
-        .hero-left h1 span {
+        .hero-section h1 span {
             color: var(--accent);
-            font-style: italic;
         }
 
-        .hero-left p {
-            max-width: 490px;
-            font-size: 17px;
-            color: var(--text-secondary);
+        .hero-section p {
+            max-width: 540px;
+            font-size: 16.5px;
+            color: var(--text-muted);
             margin-bottom: 36px;
         }
 
         .hero-actions {
             display: flex;
-            flex-wrap: wrap;
             gap: 12px;
-            margin-bottom: 48px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .btn-pill {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            height: 50px;
+            height: 48px;
             padding: 0 28px;
             border-radius: var(--radius-pill);
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .btn-dark {
             background: var(--bg-dark);
             color: #FFFFFF;
-            box-shadow: 0 12px 24px -8px rgba(20, 20, 19, 0.35);
+            box-shadow: 0 10px 24px rgba(17, 17, 16, 0.2);
         }
 
         .btn-dark:hover {
             transform: translateY(-2px);
-            box-shadow: 0 16px 30px -8px rgba(20, 20, 19, 0.45);
         }
 
         .btn-light {
             background: var(--bg-card);
-            color: var(--text-primary);
+            color: var(--text-main);
             border: 1px solid var(--border-strong);
         }
 
@@ -352,202 +353,118 @@
             transform: translateY(-2px);
         }
 
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            padding-top: 28px;
-            border-top: 1px solid var(--border);
-        }
-
-        .stat-item strong {
-            display: block;
-            font-family: var(--font-display);
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            color: var(--text-primary);
-        }
-
-        .stat-item span {
-            font-size: 12.5px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        /* Hero Visual Frame */
-        .hero-right {
-            position: relative;
-        }
-
-        .hero-frame {
-            position: relative;
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            aspect-ratio: 4 / 4.7;
-            box-shadow: 0 30px 60px -20px rgba(20, 20, 19, 0.25);
-        }
-
-        .hero-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-floating-card {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            padding: 18px 22px;
-            border-radius: var(--radius-lg);
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-        }
-
-        .hero-floating-card small {
-            display: block;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--accent);
-        }
-
-        .hero-floating-card strong {
-            font-size: 14px;
-            color: var(--text-primary);
-        }
-
         /* =========================================================
-           7. SECTION STRUCTURE & EDITORIAL HEADERS
+           7. SECTION STRUCTURE & CLEAR TYPOGRAPHY
         ========================================================= */
-        .section-block {
+        .content-section {
             max-width: var(--container);
             margin: 0 auto;
-            padding: 96px 24px;
-            border-top: 1px solid var(--border);
+            padding: 80px 20px;
+            border-top: 1px solid var(--border-light);
         }
 
-        .section-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            flex-wrap: wrap;
-            gap: 24px;
-            margin-bottom: 52px;
+        .sec-header {
+            margin-bottom: 40px;
         }
 
-        .eyebrow {
+        .sec-eyebrow {
             display: inline-block;
             font-size: 11.5px;
             font-weight: 700;
             letter-spacing: 0.14em;
             text-transform: uppercase;
             color: var(--accent);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        .section-top h2 {
+        .sec-header h2 {
             font-family: var(--font-display);
-            font-size: clamp(32px, 4.5vw, 52px);
-            font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -0.035em;
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            line-height: 1.15;
+            color: var(--text-main);
         }
 
-        .section-top p {
-            max-width: 420px;
-            color: var(--text-secondary);
-            font-size: 15.5px;
+        .sec-header p {
+            max-width: 500px;
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-top: 10px;
         }
 
         /* =========================================================
-           8. FILOSOFI (ARCHITECTURAL NUMBERED CARDS)
+           8. FILOSOFI (CLEAN GRID CARDS)
         ========================================================= */
         .filosofi-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
+            gap: 20px;
         }
 
-        .filosofi-card {
+        .filosofi-box {
             background: var(--bg-card);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-light);
             border-radius: var(--radius-xl);
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition:
-                transform 0.35s var(--ease-expo),
-                box-shadow 0.35s ease,
-                border-color 0.3s ease;
+            padding: 36px;
+            transition: transform 0.3s var(--ease-smooth), box-shadow 0.3s ease;
         }
 
-        .filosofi-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--border-strong);
-            box-shadow: 0 24px 48px -18px rgba(20, 20, 19, 0.12);
+        .filosofi-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 36px rgba(22, 22, 21, 0.08);
         }
 
-        .card-num {
-            width: 44px;
-            height: 44px;
+        .filosofi-num {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: var(--accent-soft);
             color: var(--accent);
             font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 15px;
+            font-weight: 700;
+            font-size: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
 
-        .filosofi-card h3 {
+        .filosofi-box h3 {
             font-family: var(--font-display);
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
-        .filosofi-card p {
-            color: var(--text-secondary);
-            font-size: 15.5px;
+        .filosofi-box p {
+            color: var(--text-muted);
+            font-size: 15px;
         }
 
         /* =========================================================
-           9. PORTFOLIO (EDITORIAL MASONRY / FEATURED GRID)
+           9. PORTFOLIO (ALL PHOTOS UNLOCKED & FAST STREAM)
         ========================================================= */
-        .filter-bar {
+        .filter-nav {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
-            margin-bottom: 36px;
+            margin-bottom: 32px;
         }
 
         .filter-chip {
-            padding: 10px 20px;
+            padding: 9px 18px;
             border-radius: var(--radius-pill);
             background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
+            border: 1px solid var(--border-light);
+            color: var(--text-muted);
             font-size: 13.5px;
             font-weight: 600;
         }
 
         .filter-chip:hover {
+            color: var(--text-main);
             border-color: var(--border-strong);
-            color: var(--text-primary);
-            transform: translateY(-1px);
         }
 
         .filter-chip.active {
@@ -556,38 +473,34 @@
             border-color: var(--bg-dark);
         }
 
-        .gallery-grid {
+        .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            gap: 20px;
         }
 
-        .work-card {
+        .portfolio-card {
             background: var(--bg-card);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 14px;
+            padding: 12px;
             cursor: pointer;
-            transition:
-                transform 0.4s var(--ease-expo),
-                box-shadow 0.4s ease,
-                border-color 0.3s ease;
+            transition: transform 0.3s var(--ease-smooth), box-shadow 0.3s ease;
         }
 
-        .work-card:hover {
-            transform: translateY(-7px);
-            border-color: var(--border-strong);
-            box-shadow: 0 26px 50px -16px rgba(20, 20, 19, 0.16);
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(22, 22, 21, 0.1);
         }
 
-        .work-thumb {
+        .portfolio-thumb {
             position: relative;
             border-radius: var(--radius-md);
             overflow: hidden;
-            aspect-ratio: 4 / 4.6;
+            aspect-ratio: 4 / 4.5;
         }
 
-        .work-thumb img {
+        .portfolio-thumb img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -595,206 +508,180 @@
             -webkit-user-drag: none;
         }
 
-        .work-card:hover .work-thumb img {
-            transform: scale(1.06);
+        .portfolio-card:hover .portfolio-thumb img {
+            transform: scale(1.04);
         }
 
-        .work-badge {
+        .portfolio-badge {
             position: absolute;
-            top: 12px;
-            right: 12px;
-            padding: 5px 12px;
+            top: 10px;
+            right: 10px;
+            padding: 4px 10px;
             border-radius: var(--radius-pill);
-            background: rgba(20, 20, 19, 0.78);
-            backdrop-filter: blur(8px);
+            background: rgba(17, 17, 16, 0.75);
+            backdrop-filter: blur(6px);
             color: #FFFFFF;
             font-size: 11px;
             font-weight: 600;
         }
 
-        .work-meta {
-            padding: 16px 6px 6px;
+        .portfolio-info {
+            padding: 14px 6px 4px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
         }
 
-        .work-meta h3 {
+        .portfolio-info h3 {
             font-family: var(--font-display);
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
-            letter-spacing: -0.02em;
         }
 
-        .work-meta span {
+        .portfolio-info span {
             font-size: 12.5px;
             color: var(--text-muted);
-            font-weight: 500;
         }
 
-        .work-arrow {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            background: var(--bg-subtle);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            flex-shrink: 0;
-            transition: background 0.25s ease, color 0.25s ease;
-        }
-
-        .work-card:hover .work-arrow {
-            background: var(--bg-dark);
-            color: #FFFFFF;
-        }
-
-        .work-card.hidden {
+        .portfolio-card.hidden {
             display: none;
         }
 
         /* =========================================================
-           10. PRICELIST (INTERACTIVE CATEGORY TABS + CLEAN CARDS)
+           10. PRICELIST & PACKAGES
         ========================================================= */
         .price-tabs {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
-            margin-bottom: 36px;
-            padding: 6px;
+            margin-bottom: 32px;
             background: var(--bg-subtle);
+            padding: 6px;
             border-radius: var(--radius-pill);
             width: fit-content;
             max-width: 100%;
         }
 
         .price-tab {
-            padding: 10px 20px;
+            padding: 9px 18px;
             border-radius: var(--radius-pill);
             font-size: 13.5px;
             font-weight: 600;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             cursor: pointer;
-            transition: all 0.25s ease;
         }
 
         .price-tab:hover {
-            color: var(--text-primary);
+            color: var(--text-main);
         }
 
         .price-tab.active {
             background: var(--bg-card);
-            color: var(--text-primary);
-            box-shadow: 0 4px 12px rgba(20, 20, 19, 0.08);
+            color: var(--text-main);
+            box-shadow: 0 2px 8px rgba(22, 22, 21, 0.06);
         }
 
         .price-panel {
             display: none;
-            animation: fadeUp 0.35s var(--ease-expo);
+            animation: fadeIn 0.3s ease;
         }
 
         .price-panel.active {
             display: block;
         }
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .pkg-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            gap: 20px;
         }
 
         .pkg-card {
             background: var(--bg-card);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-light);
             border-radius: var(--radius-xl);
-            padding: 36px;
+            padding: 32px;
             display: flex;
             flex-direction: column;
-            transition:
-                transform 0.35s var(--ease-expo),
-                box-shadow 0.35s ease;
+            transition: transform 0.3s var(--ease-smooth), box-shadow 0.3s ease;
         }
 
         .pkg-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 24px 48px -16px rgba(20, 20, 19, 0.14);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(22, 22, 21, 0.08);
         }
 
-        /* Featured Dark Contrast Card */
         .pkg-card.featured {
             background: var(--bg-dark);
             color: #FFFFFF;
             border-color: var(--bg-dark);
-            box-shadow: 0 28px 56px -18px rgba(20, 20, 19, 0.35);
         }
 
-        .pkg-tag {
+        .pkg-label {
             display: inline-block;
             width: fit-content;
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: var(--radius-pill);
             background: var(--bg-subtle);
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
-        .pkg-card.featured .pkg-tag {
-            background: rgba(184, 134, 75, 0.22);
-            color: #E6BC85;
+        .pkg-card.featured .pkg-label {
+            background: rgba(197, 155, 98, 0.22);
+            color: #E2BC8B;
         }
 
         .pkg-card h3 {
             font-family: var(--font-display);
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 6px;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 4px;
         }
 
         .pkg-price {
             font-family: var(--font-display);
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 24px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid var(--border);
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .pkg-card.featured .pkg-price {
-            border-bottom-color: rgba(255, 255, 255, 0.14);
+            border-bottom-color: rgba(255, 255, 255, 0.12);
         }
 
-        .pkg-list {
+        .pkg-features {
             flex: 1;
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 11px;
+            gap: 10px;
             font-size: 14px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
         }
 
-        .pkg-card.featured .pkg-list {
+        .pkg-card.featured .pkg-features {
             color: rgba(255, 255, 255, 0.8);
         }
 
-        .pkg-list li {
+        .pkg-features li {
             position: relative;
-            padding-left: 22px;
+            padding-left: 20px;
         }
 
-        .pkg-list li::before {
+        .pkg-features li::before {
             content: "✓";
             position: absolute;
             left: 0;
@@ -806,13 +693,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 48px;
-            margin-top: 28px;
+            height: 46px;
+            margin-top: 24px;
             border-radius: var(--radius-pill);
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 13.5px;
+            font-weight: 700;
             background: var(--bg-subtle);
-            color: var(--text-primary);
+            color: var(--text-main);
         }
 
         .pkg-btn:hover {
@@ -826,192 +713,185 @@
         }
 
         .pkg-card.featured .pkg-btn:hover {
-            background: #9E703B;
+            background: #B2874E;
         }
 
-        .terms-box {
-            margin-top: 48px;
-            padding: 36px;
+        .terms-card {
+            margin-top: 40px;
+            padding: 32px;
             background: var(--bg-subtle);
             border-radius: var(--radius-xl);
         }
 
-        .terms-box h3 {
+        .terms-card h3 {
             font-family: var(--font-display);
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .terms-box ol {
-            padding-left: 20px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px 32px;
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        /* =========================================================
-           11. TENTANG KAMI (EDITORIAL STORY LAYOUT)
-        ========================================================= */
-        .about-wrap {
-            display: grid;
-            grid-template-columns: 0.85fr 1.15fr;
-            gap: 48px;
-            align-items: center;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            padding: 44px;
-        }
-
-        .founder-photo {
-            min-height: 480px;
-            border-radius: var(--radius-lg);
-            background-size: cover;
-            background-position: center;
-        }
-
-        .founder-copy h3 {
-            font-family: var(--font-display);
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 8px;
-        }
-
-        .founder-role {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--accent);
-            margin-bottom: 20px;
-        }
-
-        .founder-copy p {
-            color: var(--text-secondary);
-            font-size: 15px;
             margin-bottom: 14px;
         }
 
-        .founder-sign {
-            margin-top: 24px;
+        .terms-card ol {
+            padding-left: 18px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px 24px;
+            font-size: 13.5px;
+            color: var(--text-muted);
+        }
+
+        /* =========================================================
+           11. TENTANG KAMI (FOUNDER NOTE WITHOUT PHOTO)
+        =========================================================
+           User requested removal of founder photo inside About section.
+           Now streamlined into a clean editorial text container.
+        ========================================================= */
+        .about-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-xl);
+            padding: 48px;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .about-container h3 {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
+        }
+
+        .about-role {
+            font-size: 14.5px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .about-container p {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 16px;
+        }
+
+        .about-sign {
+            margin-top: 32px;
             padding-top: 20px;
-            border-top: 1px solid var(--border);
+            border-top: 1px solid var(--border-light);
             font-weight: 700;
             font-size: 15px;
         }
 
-        .founder-sign span {
+        .about-sign span {
             display: block;
             font-weight: 400;
             color: var(--text-muted);
-            font-size: 13.5px;
+            font-size: 13px;
         }
 
         /* =========================================================
-           12. KONTAK & FOOTER (HIGH-CONTRAST EDITORIAL CTA)
+           12. KONTAK & FOOTER
         ========================================================= */
-        .contact-banner {
+        .contact-box {
             background: var(--bg-dark);
             color: #FFFFFF;
             border-radius: var(--radius-xl);
-            padding: 64px 48px;
+            padding: 56px 40px;
         }
 
-        .contact-banner h2 {
+        .contact-box h2 {
             font-family: var(--font-display);
-            font-size: clamp(32px, 4.5vw, 52px);
-            font-weight: 800;
-            line-height: 1.06;
-            letter-spacing: -0.03em;
-            margin-bottom: 40px;
+            font-size: clamp(30px, 4.5vw, 48px);
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin-bottom: 36px;
         }
 
-        .contact-cards {
+        .contact-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 16px;
         }
 
-        .c-card {
-            padding: 28px;
+        .contact-item {
+            padding: 24px;
             border-radius: var(--radius-lg);
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            transition: transform 0.3s var(--ease-expo), background 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.25s ease, background 0.25s ease;
         }
 
-        .c-card:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.12);
+        .contact-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.1);
         }
 
-        .c-card small {
+        .contact-item small {
             display: block;
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: #E6BC85;
-            margin-bottom: 8px;
+            color: #E2BC8B;
+            margin-bottom: 6px;
             font-weight: 700;
         }
 
-        .c-card h4 {
+        .contact-item h4 {
             font-family: var(--font-display);
-            font-size: 20px;
+            font-size: 18px;
             margin-bottom: 4px;
         }
 
-        .c-card span {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.72);
+        .contact-item span {
+            font-size: 13.5px;
+            color: rgba(255, 255, 255, 0.7);
             word-break: break-word;
         }
 
         footer {
             max-width: var(--container);
             margin: 0 auto;
-            padding: 48px 24px 64px;
+            padding: 40px 20px 60px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 16px;
             color: var(--text-muted);
             font-size: 13.5px;
         }
 
         .social-row {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
-        .social-pill {
-            width: 42px;
-            height: 42px;
+        .social-circle {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: var(--bg-card);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-light);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-primary);
+            color: var(--text-main);
         }
 
-        .social-pill:hover {
+        .social-circle:hover {
             background: var(--bg-dark);
             color: #FFFFFF;
         }
 
-        .social-pill svg {
-            width: 18px;
-            height: 18px;
+        .social-circle svg {
+            width: 17px;
+            height: 17px;
             fill: currentColor;
         }
 
         /* =========================================================
-           13. LIGHTBOX MODAL
+           13. LIGHTBOX MODAL (ALL PHOTOS UNLOCKED & INSTANT)
         ========================================================= */
         .slider-modal {
             position: fixed;
@@ -1020,9 +900,9 @@
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 24px;
-            background: rgba(20, 20, 19, 0.94);
-            backdrop-filter: blur(16px);
+            padding: 20px;
+            background: rgba(17, 17, 16, 0.95);
+            backdrop-filter: blur(14px);
         }
 
         .slider-modal.active {
@@ -1031,25 +911,25 @@
 
         .slider-content {
             position: relative;
-            width: min(1120px, 100%);
-            height: min(90vh, 800px);
+            width: min(1080px, 100%);
+            height: min(88vh, 780px);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .slider-image-wrapper {
+        .slider-img-wrap {
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: var(--radius-md);
-            min-width: 260px;
-            min-height: 200px;
+            min-width: 240px;
+            min-height: 180px;
         }
 
-        .slider-image {
-            max-width: calc(100vw - 150px);
-            max-height: 82vh;
+        .slider-img {
+            max-width: calc(100vw - 120px);
+            max-height: 80vh;
             width: auto;
             height: auto;
             object-fit: contain;
@@ -1058,33 +938,33 @@
             -webkit-user-drag: none;
         }
 
-        .modal-btn {
+        .modal-action {
             position: absolute;
             z-index: 5;
-            width: 46px;
-            height: 46px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.25);
             color: #FFFFFF;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 18px;
         }
 
-        .modal-btn:hover {
+        .modal-action:hover {
             background: #FFFFFF;
             color: var(--bg-dark);
         }
 
-        .slider-close { top: 8px; right: 8px; }
-        .slider-prev { left: 8px; }
-        .slider-next { right: 8px; }
+        .slider-close { top: 4px; right: 4px; }
+        .slider-prev { left: 4px; }
+        .slider-next { right: 4px; }
 
         .slider-title {
             position: absolute;
-            top: 14px;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
             width: 70%;
@@ -1092,77 +972,76 @@
             color: #FFFFFF;
             font-family: var(--font-display);
             font-weight: 700;
-            font-size: 15px;
+            font-size: 14.5px;
         }
 
         .slider-counter {
             position: absolute;
-            bottom: 8px;
+            bottom: 4px;
             left: 50%;
             transform: translateX(-50%);
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: var(--radius-pill);
-            background: rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.15);
             color: #FFFFFF;
             font-size: 12px;
             font-weight: 600;
         }
 
         /* =========================================================
-           14. RESPONSIVE BREAKPOINTS
+           14. UNIFIED MOBILE & DESKTOP HARMONY (RESPONSIVE)
         ========================================================= */
-        @media (max-width: 980px) {
-            .nav-cta { display: none; }
-            .menu-btn { display: flex; align-items: center; justify-content: center; }
+        @media (max-width: 900px) {
+            .nav-btn-action { display: none; }
+            .menu-toggle { display: flex; }
 
-            .nav-links {
+            .nav-list {
                 position: absolute;
-                top: 80px;
-                left: 20px;
-                right: 20px;
+                top: 76px;
+                left: 16px;
+                right: 16px;
                 display: none;
                 flex-direction: column;
                 align-items: stretch;
                 padding: 12px;
                 background: var(--bg-card);
-                border: 1px solid var(--border);
+                border: 1px solid var(--border-light);
                 border-radius: var(--radius-lg);
-                box-shadow: 0 24px 48px rgba(20, 20, 19, 0.15);
+                box-shadow: 0 20px 40px rgba(22, 22, 21, 0.12);
             }
 
-            .nav-links.show { display: flex; }
+            .nav-list.show { display: flex; }
 
-            .hero-section,
             .filosofi-grid,
-            .gallery-grid,
+            .portfolio-grid,
             .pkg-grid,
-            .about-wrap,
-            .contact-cards,
-            .terms-box ol {
+            .contact-grid,
+            .terms-card ol {
                 grid-template-columns: 1fr;
             }
 
             .hero-section {
-                padding-top: 36px;
-                gap: 36px;
+                padding: 40px 16px 60px;
             }
 
-            .founder-photo {
-                min-height: 340px;
+            .content-section {
+                padding: 60px 16px;
             }
 
-            .contact-banner {
-                padding: 40px 24px;
+            .contact-box {
+                padding: 40px 20px;
+            }
+
+            .about-container {
+                padding: 28px;
             }
         }
 
         @media (max-width: 600px) {
-            .navbar-wrap { top: 10px; padding: 0 14px; }
-            .navbar { height: 60px; padding: 0 18px; }
-            .hero-actions { flex-direction: column; }
+            .nav-wrapper { top: 10px; padding: 0 10px; }
+            .navbar { height: 60px; padding: 0 16px; }
+            .hero-actions { flex-direction: column; width: 100%; }
             .hero-actions .btn-pill { width: 100%; }
-            .section-block { padding: 68px 20px; }
-            .about-wrap { padding: 24px; }
 
             .price-tabs {
                 width: 100%;
@@ -1173,25 +1052,25 @@
             .price-tabs::-webkit-scrollbar { display: none; }
             .price-tab { flex: 0 0 auto; }
 
-            .slider-image { max-width: 92vw; max-height: 72vh; }
-            .modal-btn { width: 40px; height: 40px; }
+            .slider-img { max-width: 94vw; max-height: 74vh; }
+            .modal-action { width: 38px; height: 38px; }
         }
     </style>
 </head>
 <body>
 
 <!-- =========================
-     FLOATING PILL NAVBAR
+     NAVIGATION BAR
 ========================= -->
-<div class="navbar-wrap">
+<div class="nav-wrapper">
     <header class="navbar">
-        <a href="#home" class="brand">
+        <a href="#home" class="brand-logo">
             <span class="brand-dot"></span>
             Another Visual
         </a>
 
         <nav>
-            <ul class="nav-links" id="navMenu">
+            <ul class="nav-list" id="navMenu">
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#filosofi">Filosofi</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
@@ -1201,135 +1080,78 @@
             </ul>
         </nav>
 
-        <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="nav-cta btn-pill">
+        <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="nav-btn-action btn-pill">
             Booking Jadwal
         </a>
 
-        <button class="menu-btn" id="menuToggle" aria-label="Buka menu" aria-expanded="false">☰</button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Buka Menu" aria-expanded="false">☰</button>
     </header>
 </div>
 
 <main>
 
     <!-- =========================
-         EDITORIAL SPLIT HERO
+         HERO SECTION (CLEAN & SYMMETRIC)
     ========================= -->
     <section id="home" class="hero-section">
-        <div class="hero-left">
-            <span class="hero-badge">
-                Photography • Videography • Drone
-            </span>
-
-            <h1>
-                Another<br>
-                <span>Visual.</span>
-            </h1>
-
-            <p>
-                Mengabadikan cerita, emosi, dan momen melalui karya visual
-                yang memiliki karakter.
-            </p>
-
-            <div class="hero-actions">
-                <a href="#portfolio" class="btn-pill btn-dark">Lihat Portfolio</a>
-                <a href="#pricelist" class="btn-pill btn-light">Cek Paket Harga</a>
-            </div>
-
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <strong>95+</strong>
-                    <span>Karya Terkurasi</span>
-                </div>
-                <div class="stat-item">
-                    <strong>5</strong>
-                    <span>Layanan Spesialis</span>
-                </div>
-                <div class="stat-item">
-                    <strong>4K</strong>
-                    <span>Cinematic Standard</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="hero-right">
-            <div class="hero-frame skeleton-box">
-                <img
-                    src="https://lh3.googleusercontent.com/d/1L_jBpBIsWyBCy8OATkBAmo1rBCNl6IN9"
-                    alt="Another Visual Featured Aerial & Studio"
-                    decoding="async">
-                <div class="hero-floating-card">
-                    <div>
-                        <small>Visual Production House</small>
-                        <strong>Jakarta &amp; Sekitarnya</strong>
-                    </div>
-                    <a href="#kontak" class="btn-pill btn-dark" style="height: 38px; padding: 0 18px; font-size: 12.5px;">
-                        Konsultasi
-                    </a>
-                </div>
-            </div>
+        <span class="hero-tag">Photography • Videography • Drone</span>
+        <h1>
+            Mengabadikan Momen<br>
+            <span>Penuh Karakter.</span>
+        </h1>
+        <p>
+            Studio produksi visual profesional yang merangkai setiap detik cerita
+            berharga Anda menjadi mahakarya sinematik abadi.
+        </p>
+        <div class="hero-actions">
+            <a href="#portfolio" class="btn-pill btn-dark">Jelajahi Portfolio</a>
+            <a href="#pricelist" class="btn-pill btn-light">Lihat Pricelist</a>
         </div>
     </section>
 
     <!-- =========================
          01. FILOSOFI
     ========================= -->
-    <section id="filosofi" class="section-block">
-        <div class="section-top">
-            <div>
-                <span class="eyebrow">01 • Filosofi &amp; Visi</span>
-                <h2>Visual yang<br>punya cerita.</h2>
-            </div>
-            <p>
-                Pendekatan artistik dengan komposisi matang, pencahayaan presisi,
-                dan sentuhan emosional di setiap frame.
-            </p>
+    <section id="filosofi" class="content-section">
+        <div class="sec-header">
+            <span class="sec-eyebrow">01 • Filosofi &amp; Visi</span>
+            <h2>Visual yang<br>punya cerita.</h2>
         </div>
 
         <div class="filosofi-grid">
-            <article class="filosofi-card">
-                <div class="card-num">01</div>
-                <div>
-                    <h3>Estetika Tanpa Batas</h3>
-                    <p>
-                        Kami percaya bahwa mahakarya visual tidak ditentukan seberapa
-                        mahal alat yang digenggam, melainkan bagaimana ketajaman mata
-                        seorang kreator dalam merangkai cerita, komposisi, dan emosi
-                        di setiap jepretan.
-                    </p>
-                </div>
+            <article class="filosofi-box">
+                <div class="filosofi-num">01</div>
+                <h3>Estetika Tanpa Batas</h3>
+                <p>
+                    Kami percaya bahwa mahakarya visual tidak ditentukan seberapa
+                    mahal alat yang digenggam, melainkan ketajaman mata seorang
+                    kreator dalam merangkai komposisi dan emosi di setiap jepretan.
+                </p>
             </article>
 
-            <article class="filosofi-card">
-                <div class="card-num">02</div>
-                <div>
-                    <h3>Karya yang Berbicara</h3>
-                    <p>
-                        Visi utama kami adalah menghadirkan standar visual tertinggi
-                        yang menyentuh hati. Melalui teknik pencahayaan matang, sudut
-                        pandang sinematik, dan sentuhan emosional, setiap momen
-                        diabadikan bukan sekadar gambar, melainkan sebuah mahakarya abadi.
-                    </p>
-                </div>
+            <article class="filosofi-box">
+                <div class="filosofi-num">02</div>
+                <h3>Karya yang Berbicara</h3>
+                <p>
+                    Visi utama kami adalah menghadirkan standar visual tertinggi yang
+                    menyentuh hati. Melalui teknik pencahayaan matang dan sudut
+                    pandang sinematik, setiap momen diabadikan dengan makna mendalam.
+                </p>
             </article>
         </div>
     </section>
 
     <!-- =========================
-         02. PORTFOLIO
+         02. PORTFOLIO (ALL 95+ PHOTOS FULLY UNLOCKED)
     ========================= -->
-    <section id="portfolio" class="section-block">
-        <div class="section-top">
-            <div>
-                <span class="eyebrow">02 • Selected Works</span>
-                <h2>Arsip Karya.</h2>
-            </div>
-            <p>
-                Beberapa karya yang telah kami abadikan. Klik kartu untuk membuka
-                seluruh galeri dokumentasi.
-            </p>
+    <section id="portfolio" class="content-section">
+        <div class="sec-header">
+            <span class="sec-eyebrow">02 • Selected Works</span>
+            <h2>Arsip Karya Terbuka.</h2>
+            <p>Seluruh foto dari setiap kategori dapat diakses langsung secara instan.</p>
         </div>
 
-        <div class="filter-bar">
+        <div class="filter-nav">
             <button class="filter-chip active" data-filter="all">Semua Folder</button>
             <button class="filter-chip" data-filter="wedding">Wedding</button>
             <button class="filter-chip" data-filter="engagement">Engagement</button>
@@ -1338,9 +1160,9 @@
             <button class="filter-chip" data-filter="drone">Drone</button>
         </div>
 
-        <div class="gallery-grid">
+        <div class="portfolio-grid">
             <!-- WEDDING -->
-            <div class="work-card wedding"
+            <div class="portfolio-card wedding"
                 data-title="Wedding Falaq & Cindy"
                 data-images='[
                     "https://lh3.googleusercontent.com/d/1K5JYuw4FpqSI9NEduRvZNm_8eJRS_Mr2",
@@ -1353,21 +1175,21 @@
                     "https://lh3.googleusercontent.com/d/12_urvrE4195fyQmf1RhEv3-ToTvxv6l5",
                     "https://lh3.googleusercontent.com/d/1ffcvFRZDPaoMzVLIgqm3GgDp83qRak6v"
                 ]'>
-                <div class="work-thumb skeleton-box">
+                <div class="portfolio-thumb skeleton-box">
                     <img src="https://lh3.googleusercontent.com/d/1K5JYuw4FpqSI9NEduRvZNm_8eJRS_Mr2" alt="Wedding Falaq & Cindy" loading="lazy" decoding="async">
-                    <span class="work-badge">9 Foto</span>
+                    <span class="portfolio-badge">9 Foto</span>
                 </div>
-                <div class="work-meta">
+                <div class="portfolio-info">
                     <div>
-                        <span>Wedding</span>
                         <h3>Falaq &amp; Cindy</h3>
+                        <span>Wedding</span>
                     </div>
-                    <div class="work-arrow">↗</div>
+                    <span>↗</span>
                 </div>
             </div>
 
             <!-- ENGAGEMENT -->
-            <div class="work-card engagement"
+            <div class="portfolio-card engagement"
                 data-title="Engagement Fikry & Reny"
                 data-images='[
                     "https://lh3.googleusercontent.com/d/1CSJdaeY-POpOhoytFeI4PyPvCc6_43Jk",
@@ -1384,21 +1206,21 @@
                     "https://lh3.googleusercontent.com/d/19I127-vR7AFi6OKdj2vFYBLA6DJofGMU",
                     "https://lh3.googleusercontent.com/d/1Ui7W4zjre4TtivvXq2NDbsyw3gTqqIhC"
                 ]'>
-                <div class="work-thumb skeleton-box">
+                <div class="portfolio-thumb skeleton-box">
                     <img src="https://lh3.googleusercontent.com/d/1CSJdaeY-POpOhoytFeI4PyPvCc6_43Jk" alt="Engagement Fikry & Reny" loading="lazy" decoding="async">
-                    <span class="work-badge">13 Foto</span>
+                    <span class="portfolio-badge">13 Foto</span>
                 </div>
-                <div class="work-meta">
+                <div class="portfolio-info">
                     <div>
-                        <span>Engagement</span>
                         <h3>Fikry &amp; Reny</h3>
+                        <span>Engagement</span>
                     </div>
-                    <div class="work-arrow">↗</div>
+                    <span>↗</span>
                 </div>
             </div>
 
             <!-- WISUDA -->
-            <div class="work-card wisuda"
+            <div class="portfolio-card wisuda"
                 data-title="Wisuda Reny Riani"
                 data-images='[
                     "https://lh3.googleusercontent.com/d/1tdANeaA_DLSrfHtAXZQQEDzNckCwCl_u",
@@ -1408,21 +1230,21 @@
                     "https://lh3.googleusercontent.com/d/1CTqP6v3eLVrPBklcaRW7sttGg4_QwgCx",
                     "https://lh3.googleusercontent.com/d/1sPew-WXRoUgqJr-7rJXoqHli882oFJi1"
                 ]'>
-                <div class="work-thumb skeleton-box">
+                <div class="portfolio-thumb skeleton-box">
                     <img src="https://lh3.googleusercontent.com/d/1tdANeaA_DLSrfHtAXZQQEDzNckCwCl_u" alt="Wisuda Reny Riani" loading="lazy" decoding="async">
-                    <span class="work-badge">6 Foto</span>
+                    <span class="portfolio-badge">6 Foto</span>
                 </div>
-                <div class="work-meta">
+                <div class="portfolio-info">
                     <div>
-                        <span>Wisuda</span>
                         <h3>Reny Riani</h3>
+                        <span>Wisuda</span>
                     </div>
-                    <div class="work-arrow">↗</div>
+                    <span>↗</span>
                 </div>
             </div>
 
             <!-- EVENT 1 -->
-            <div class="work-card event"
+            <div class="portfolio-card event"
                 data-title="Jalan Santai Kemerdekaan 2025"
                 data-images='[
                     "https://lh3.googleusercontent.com/d/1_axQ1oATs8QwUrEDC56LEWqSs5cwa5LA",
@@ -1431,21 +1253,21 @@
                     "https://lh3.googleusercontent.com/d/1cWtB847VpSlCIG_KqRce9I6_5ql_TU5O",
                     "https://lh3.googleusercontent.com/d/1fT-R800YeD44qZNZnl-KKq6qPQkgs39p"
                 ]'>
-                <div class="work-thumb skeleton-box">
-                    <img src="https://lh3.googleusercontent.com/d/1_axQ1oATs8QwUrEDC56LEWqSs5cwa5LA" alt="Jalan Santai Kemerdekaan 2025" loading="lazy" decoding="async">
-                    <span class="work-badge">5 Foto</span>
+                <div class="portfolio-thumb skeleton-box">
+                    <img src="https://lh3.googleusercontent.com/d/1_axQ1oATs8QwUrEDC56LEWqSs5cwa5LA" alt="Jalan Santai 2025" loading="lazy" decoding="async">
+                    <span class="portfolio-badge">5 Foto</span>
                 </div>
-                <div class="work-meta">
+                <div class="portfolio-info">
                     <div>
-                        <span>Event</span>
                         <h3>Jalan Santai 2025</h3>
+                        <span>Event</span>
                     </div>
-                    <div class="work-arrow">↗</div>
+                    <span>↗</span>
                 </div>
             </div>
 
             <!-- EVENT 2 -->
-            <div class="work-card event"
+            <div class="portfolio-card event"
                 data-title="Birthday Party Shifa Derma Hapsari"
                 data-images='[
                     "https://lh3.googleusercontent.com/d/1N8-sIvxr8eRICT9wMClRGXyJ9yg-WUTP",
@@ -1464,51 +1286,45 @@
                     "https://lh3.googleusercontent.com/d/1PderuDJmq8xsbk5KGGMb2py8fI9In3hh",
                     "https://lh3.googleusercontent.com/d/1Dzu4O2B-zh0_cyMr6Pot89eJ0zsdD22A"
                 ]'>
-                <div class="work-thumb skeleton-box">
-                    <img src="https://lh3.googleusercontent.com/d/1N8-sIvxr8eRICT9wMClRGXyJ9yg-WUTP" alt="Birthday Party Shifa Derma Hapsari" loading="lazy" decoding="async">
-                    <span class="work-badge">15 Foto</span>
+                <div class="portfolio-thumb skeleton-box">
+                    <img src="https://lh3.googleusercontent.com/d/1N8-sIvxr8eRICT9wMClRGXyJ9yg-WUTP" alt="Birthday Party Shifa" loading="lazy" decoding="async">
+                    <span class="portfolio-badge">15 Foto</span>
                 </div>
-                <div class="work-meta">
+                <div class="portfolio-info">
                     <div>
+                        <h3>Birthday Shifa</h3>
                         <span>Event</span>
-                        <h3>Birthday Party Shifa</h3>
                     </div>
-                    <div class="work-arrow">↗</div>
+                    <span>↗</span>
                 </div>
             </div>
 
             <!-- DRONE -->
-            <div class="work-card drone"
+            <div class="portfolio-card drone"
                 data-title="Drone Portfolio"
                 data-images='["https://lh3.googleusercontent.com/d/1ix8PFZabGoFm6jlFE6ojmVL-CM3pgeEH", "https://lh3.googleusercontent.com/d/1DA5nIEIucf04vGHfx0tulcfGPTxba1rA", "https://lh3.googleusercontent.com/d/1rptKV3QXFI4ivoSDlGcue6A-YG4M8ZFg", "https://lh3.googleusercontent.com/d/1BZUI3wBkROLpuujC9WbnqFkjcXgZCHyx", "https://lh3.googleusercontent.com/d/18fX3-8EpSx6pHSK3HglSNqQWFkrcgxym", "https://lh3.googleusercontent.com/d/1nkNbXOcnK91JFPeLrj4s9rbYHPTwctpA", "https://lh3.googleusercontent.com/d/1uDb989skMqhKJxKe3WUG8dOWGfI9M3Ro", "https://lh3.googleusercontent.com/d/1V8U8Xz4F0EWZrQHc1_oIZexAqlO7Wv7J", "https://lh3.googleusercontent.com/d/1tL7R-NdUXeTr_brEQcx6RieGy1siq8-c", "https://lh3.googleusercontent.com/d/1jcXWF6V6TW5_BTiLvkvfNrFFXnKxMrsS", "https://lh3.googleusercontent.com/d/1uc5bZLwcv3xaDhv9bQaYRXG1b_Vj3aNX", "https://lh3.googleusercontent.com/d/1KyaegWZ2jmyZbj7QqebsZ6bXHarKQURY", "https://lh3.googleusercontent.com/d/1UJVuBhofZ49Q1SnZPvoCFa9wdGbRfzkE", "https://lh3.googleusercontent.com/d/1YTy75Q_xl0z_jSRMYjB1DGodz5x-JiPg", "https://lh3.googleusercontent.com/d/1-E-TOnhc8zQKeUwjAn9Xfo27Ogb6iNtJ", "https://lh3.googleusercontent.com/d/1jk0a_cJ36NWV450UdQlMTzDM1l8SFvB8", "https://lh3.googleusercontent.com/d/13nG30v3eKsSObL0bkoPQQvJcT_0l1kg8", "https://lh3.googleusercontent.com/d/1URQ2bNLbEXmRpXV6AStfcCr63FKa6iW9", "https://lh3.googleusercontent.com/d/107JWD_wCg0JjZ8GHCHxH1Y4WhY3lG204", "https://lh3.googleusercontent.com/d/1AubquDuZbKcLFXZvAWcJ9qJ5ut3U76Z1", "https://lh3.googleusercontent.com/d/1o8lJ9ABIoTN03y5ajnCPmhdPOfHRgMTS", "https://lh3.googleusercontent.com/d/1kA4H12H3ZmJrt0--vBBMxcP0MMyEmG0Q", "https://lh3.googleusercontent.com/d/1nYWTXD7VRvaywNhuQWNgFsdCkzo4T5x8", "https://lh3.googleusercontent.com/d/1_eUaPx43He4cxL2JQhJEXbgy0zX3xwp1", "https://lh3.googleusercontent.com/d/1P0ppEpBJdRfZkSftgHoLRHH6sX-VxYH2", "https://lh3.googleusercontent.com/d/13LTC63ylIBnyT0lwhX68Sb6H475bAOoe", "https://lh3.googleusercontent.com/d/1Q7VfRni3TzXbpfgQrmS8CLIWtxU4BI9d", "https://lh3.googleusercontent.com/d/1CDAEkMvJRR-DrDW2yt_ISEFAjL0zYj4n", "https://lh3.googleusercontent.com/d/1hJ6vy0Vq7aY4gWX6Q1e0whMS0_c5OpFB", "https://lh3.googleusercontent.com/d/1ZtbGdXsrJD0rzLq5pwJlWY73kLZ5U1bB", "https://lh3.googleusercontent.com/d/1vlyfoNQuS_AcDjv7tfDWAmjCuMt3mL0K", "https://lh3.googleusercontent.com/d/1ts0QxFqlDXVWBDcfrSQOX6QKB-xJ9pRH", "https://lh3.googleusercontent.com/d/1ix8PFZabGoFm6jlFE6ojmVL-CM3pgeEH", "https://lh3.googleusercontent.com/d/1tytlEMmFJfGrZ08L9WcpYI3OuI5AOw-W", "https://lh3.googleusercontent.com/d/13qe_JkelSYOx70cmAgJ0QglhZbap-DCa", "https://lh3.googleusercontent.com/d/1bOGveg932eYCJWyrlBNC34YP13Yt2Y9t", "https://lh3.googleusercontent.com/d/1FMHECBnwX4nc9iJncd9s-CRv5OrlSo8A", "https://lh3.googleusercontent.com/d/1MSCx4oimL6_2QiSWMqrTDAXvXs-5X_25", "https://lh3.googleusercontent.com/d/1F8Cf_-L01kvJHhgP76_r_y-tu1IjKiYs", "https://lh3.googleusercontent.com/d/1EYizaC9o4kVmFbEdy7CLde-fHt9P7LIs", "https://lh3.googleusercontent.com/d/1rS0sMoqxYEkqj3n152_gY2FgE8rNqOYr", "https://lh3.googleusercontent.com/d/1L_jBpBIsWyBCy8OATkBAmo1rBCNl6IN9", "https://lh3.googleusercontent.com/d/1MbQ_Xe9N6NFRnIE4DDBGgksVsbsB2AwJ", "https://lh3.googleusercontent.com/d/1KAzACZnwLrbKge35dj4IHkAcAaTdlBGE", "https://lh3.googleusercontent.com/d/1YFkM18nekB2NQKHNgUG-Vtrdib1SEbsO", "https://lh3.googleusercontent.com/d/1kIUIP7KqXeAZ-Kl598Sj3WToNB5bIGsj", "https://lh3.googleusercontent.com/d/1NJHVePpy-C9ZY7ZIQ8M-Q_5PqEiOh7av"]'>
-                <div class="work-thumb skeleton-box">
+                <div class="portfolio-thumb skeleton-box">
                     <img src="https://lh3.googleusercontent.com/d/16b7b32nKjhcsnp1XKrlGKrWcXQ83fT7p" alt="Drone Portfolio" loading="lazy" decoding="async">
-                    <span class="work-badge">47 Foto</span>
+                    <span class="portfolio-badge">47 Foto</span>
                 </div>
-                <div class="work-meta">
+                <div class="portfolio-info">
                     <div>
-                        <span>Drone Aerial</span>
                         <h3>Drone Portfolio</h3>
+                        <span>Aerial</span>
                     </div>
-                    <div class="work-arrow">↗</div>
+                    <span>↗</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- =========================
-         03. PRICELIST (INTERACTIVE TABS)
+         03. PRICELIST
     ========================= -->
-    <section id="pricelist" class="section-block">
-        <div class="section-top">
-            <div>
-                <span class="eyebrow">03 • Investment &amp; Packages</span>
-                <h2>Pilih paket<br>yang sesuai.</h2>
-            </div>
-            <p>
-                Pilih kategori layanan di bawah untuk membandingkan detail fasilitas
-                dan durasi dokumentasi secara instan.
-            </p>
+    <section id="pricelist" class="content-section">
+        <div class="sec-header">
+            <span class="sec-eyebrow">03 • Investment &amp; Packages</span>
+            <h2>Pilih paket<br>yang sesuai.</h2>
         </div>
 
         <div class="price-tabs" role="tablist">
@@ -1519,289 +1335,255 @@
             <button class="price-tab" data-tab="tab-drone">05. Drone</button>
         </div>
 
-        <!-- TAB 1: WEDDING -->
+        <!-- WEDDING -->
         <div id="tab-wedding" class="price-panel active">
             <div class="pkg-grid" style="grid-template-columns: repeat(2, 1fr);">
                 <div class="pkg-card">
-                    <span class="pkg-tag">Photography Only</span>
+                    <span class="pkg-label">Photography Only</span>
                     <h3>Basic</h3>
                     <div class="pkg-price">Rp 1.850.000</div>
-                    <ul class="pkg-list">
+                    <ul class="pkg-features">
                         <li>3 Fotografer Profesional</li>
                         <li>Full Color Grading &amp; Editing</li>
                         <li>Durasi 8 Jam di lokasi</li>
                         <li>Pengiriman Via Google Drive</li>
                         <li>Konsumsi di tanggung client</li>
                     </ul>
-                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket Basic</a>
+                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
                 </div>
 
                 <div class="pkg-card featured">
-                    <span class="pkg-tag">Best Value • Photo + Video</span>
+                    <span class="pkg-label">Best Value • Photo + Video</span>
                     <h3>Premium</h3>
                     <div class="pkg-price">Rp 3.450.000</div>
-                    <ul class="pkg-list">
+                    <ul class="pkg-features">
                         <li>3 Fotografer Profesional</li>
                         <li>Full Color Grading &amp; Editing</li>
                         <li>1 Videografer</li>
                         <li>Edit Video Sinematik (max 5 menit)</li>
                         <li>Revisi Maximal 4 kali</li>
-                        <li>Revisi berlaku maksimal 7 hari di kalender setelah di kirimkan, jika tidak ada komunikasi maka proyek di anggap selesai</li>
                         <li>Durasi 8 Jam di lokasi</li>
                         <li>Pengiriman Via Google Drive</li>
                         <li>Konsumsi di tanggung client</li>
                     </ul>
-                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket Premium</a>
+                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
                 </div>
             </div>
         </div>
 
-        <!-- TAB 2: ENGAGEMENT -->
+        <!-- ENGAGEMENT -->
         <div id="tab-engagement" class="price-panel">
             <div class="pkg-grid" style="grid-template-columns: repeat(2, 1fr);">
                 <div class="pkg-card">
-                    <span class="pkg-tag">Photography Only</span>
+                    <span class="pkg-label">Photography Only</span>
                     <h3>Basic</h3>
                     <div class="pkg-price">Rp 850.000</div>
-                    <ul class="pkg-list">
+                    <ul class="pkg-features">
                         <li>2 Fotografer Profesional</li>
                         <li>Full Color Grading &amp; Editing</li>
                         <li>Durasi 4 Jam di lokasi</li>
                         <li>Pengiriman Via Google Drive</li>
                         <li>Konsumsi di tanggung client</li>
                     </ul>
-                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket Basic</a>
+                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
                 </div>
 
                 <div class="pkg-card featured">
-                    <span class="pkg-tag">Recommended • Photo + Video</span>
+                    <span class="pkg-label">Recommended • Photo + Video</span>
                     <h3>Premium</h3>
                     <div class="pkg-price">Rp 1.850.000</div>
-                    <ul class="pkg-list">
+                    <ul class="pkg-features">
                         <li>3 Fotografer Profesional</li>
                         <li>Full Color Grading &amp; Editing</li>
                         <li>1 Videografer</li>
                         <li>Edit Video Sinematik (max 5 menit)</li>
                         <li>Revisi Maximal 4 kali</li>
-                        <li>Revisi berlaku maksimal 7 hari di kalender setelah di kirimkan, jika tidak ada komunikasi maka proyek di anggap selesai</li>
                         <li>Durasi 6 Jam di lokasi</li>
                         <li>Pengiriman Via Google Drive</li>
                         <li>Konsumsi di tanggung client</li>
                     </ul>
-                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket Premium</a>
+                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
                 </div>
             </div>
         </div>
 
-        <!-- TAB 3: GRADUATION -->
+        <!-- GRADUATION -->
         <div id="tab-graduation" class="price-panel">
             <div class="pkg-grid">
                 <div class="pkg-card">
-                    <span class="pkg-tag">Quick Session</span>
+                    <span class="pkg-label">Quick Session</span>
                     <h3>Basic</h3>
                     <div class="pkg-price">Rp 250.000</div>
-                    <ul class="pkg-list">
+                    <ul class="pkg-features">
                         <li>1 Fotografer Profesional</li>
                         <li>Full Color Grading &amp; Editing</li>
                         <li>Durasi 2 Jam di lokasi</li>
                         <li>Pengiriman Via Google Drive</li>
                         <li>Konsumsi di luar harga paket</li>
                     </ul>
-                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket Basic</a>
+                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
                 </div>
 
                 <div class="pkg-card">
-                    <span class="pkg-tag">Extended Session</span>
+                    <span class="pkg-label">Extended Session</span>
                     <h3>Premium</h3>
                     <div class="pkg-price">Rp 550.000</div>
-                    <ul class="pkg-list">
+                    <ul class="pkg-features">
                         <li>1-2 Fotografer Profesional</li>
                         <li>Full Color Grading &amp; Editing</li>
                         <li>Durasi 5 Jam di lokasi</li>
                         <li>Pengiriman Via Google Drive</li>
                         <li>Konsumsi di luar harga paket</li>
                     </ul>
-                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket Premium</a>
+                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
                 </div>
 
                 <div class="pkg-card featured">
-                    <span class="pkg-tag">Complete Photo + Video</span>
+                    <span class="pkg-label">Complete Photo + Video</span>
                     <h3>Pro</h3>
                     <div class="pkg-price">Rp 1.850.000</div>
-                    <ul class="pkg-list">
+                    <ul class="pkg-features">
                         <li>2 Fotografer Profesional</li>
                         <li>Full Color Grading &amp; Editing</li>
                         <li>1 Videografer</li>
                         <li>Edit Video Sinematik (max 5 menit)</li>
                         <li>Revisi Maximal 4 kali</li>
-                        <li>Revisi berlaku maksimal 7 hari di kalender setelah di kirimkan, jika tidak ada komunikasi maka proyek di anggap selesai</li>
                         <li>Durasi 6 Jam di lokasi</li>
                         <li>Pengiriman Via Google Drive</li>
                         <li>Konsumsi di luar harga paket</li>
                     </ul>
-                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket Pro</a>
+                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
                 </div>
             </div>
         </div>
 
-        <!-- TAB 4: EVENT -->
+        <!-- EVENT -->
         <div id="tab-event" class="price-panel">
             <div class="pkg-grid" style="grid-template-columns: repeat(2, 1fr);">
                 <div class="pkg-card">
-                    <span class="pkg-tag">Photography Coverage</span>
+                    <span class="pkg-label">Photography Coverage</span>
                     <h3>Basic</h3>
                     <div class="pkg-price">Rp 1.500.000</div>
-                    <ul class="pkg-list">
+                    <ul class="pkg-features">
                         <li>3 Fotografer Profesional</li>
                         <li>Full Color Grading &amp; Editing</li>
                         <li>Durasi 5 Jam di lokasi</li>
                         <li>Pengiriman Via Google Drive</li>
                         <li>Konsumsi di tanggung client</li>
                     </ul>
-                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket Basic</a>
+                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
                 </div>
 
                 <div class="pkg-card featured">
-                    <span class="pkg-tag">Full Production Team</span>
+                    <span class="pkg-label">Full Production Team</span>
                     <h3>Premium</h3>
                     <div class="pkg-price">Rp 2.950.000</div>
-                    <ul class="pkg-list">
+                    <ul class="pkg-features">
                         <li>4 Fotografer Profesional</li>
                         <li>Full Color Grading &amp; Editing</li>
                         <li>2 Videografer</li>
                         <li>Edit Video Sinematik (max 5 menit)</li>
                         <li>Revisi Maximal 4 kali</li>
-                        <li>Revisi berlaku maksimal 7 hari di kalender setelah di kirimkan, jika tidak ada komunikasi maka proyek di anggap selesai</li>
                         <li>Durasi 6 Jam di lokasi</li>
                         <li>Pengiriman Via Google Drive</li>
                         <li>Konsumsi di tanggung client</li>
                     </ul>
-                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket Premium</a>
+                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
                 </div>
             </div>
         </div>
 
-        <!-- TAB 5: DRONE -->
+        <!-- DRONE -->
         <div id="tab-drone" class="price-panel">
             <div class="pkg-grid">
                 <div class="pkg-card">
-                    <span class="pkg-tag">Raw Aerial Files</span>
+                    <span class="pkg-label">Raw Aerial Files</span>
                     <h3>Basic</h3>
                     <div class="pkg-price">Rp 450.000</div>
-                    <ul class="pkg-list">
+                    <ul class="pkg-features">
                         <li>Dokumentasi aerial menggunakan drone</li>
-                        <li>Durasi operasional menyesuaikan kondisi dan kebutuhan</li>
-                        <li>Termasuk pengambilan gambar dan file hasil dokumentasi</li>
-                        <li>Pengiriman file melalui Google Drive</li>
-                        <li>Transportasi dan konsumsi di luar harga paket</li>
+                        <li>Durasi operasional menyesuaikan kebutuhan</li>
+                        <li>Termasuk pengambilan gambar &amp; file</li>
+                        <li>Pengiriman file via Google Drive</li>
+                        <li>Transportasi di luar harga paket</li>
                     </ul>
-                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket Basic</a>
+                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
                 </div>
 
                 <div class="pkg-card">
-                    <span class="pkg-tag">2 Batteries + Editing</span>
+                    <span class="pkg-label">2 Batteries + Editing</span>
                     <h3>Standard</h3>
                     <div class="pkg-price">Rp 900.000</div>
-                    <ul class="pkg-list">
-                        <li>2 baterai dengan durasi operasional hingga ±60 menit</li>
+                    <ul class="pkg-features">
+                        <li>2 baterai operasional hingga ±60 menit</li>
                         <li>Durasi menyesuaikan kondisi lapangan</li>
                         <li>Termasuk proses editing video</li>
                         <li>Maksimal 1 kali revisi</li>
-                        <li>File dikirim melalui Google Drive</li>
-                        <li>Transportasi dan konsumsi di luar harga paket</li>
+                        <li>Pengiriman file via Google Drive</li>
                     </ul>
-                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket Standard</a>
+                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
                 </div>
 
                 <div class="pkg-card featured">
-                    <span class="pkg-tag">3 Batteries + Full Edit</span>
+                    <span class="pkg-label">3 Batteries + Full Edit</span>
                     <h3>Premium</h3>
                     <div class="pkg-price">Rp 1.300.000</div>
-                    <ul class="pkg-list">
-                        <li>3 baterai dengan durasi operasional hingga ±90 menit</li>
+                    <ul class="pkg-features">
+                        <li>3 baterai operasional hingga ±90 menit</li>
                         <li>Durasi menyesuaikan kondisi lapangan</li>
                         <li>Termasuk proses editing video</li>
                         <li>Maksimal 2 kali revisi</li>
-                        <li>File dikirim melalui Google Drive</li>
-                        <li>Transportasi dan konsumsi di luar harga paket</li>
+                        <li>Pengiriman file via Google Drive</li>
                     </ul>
-                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket Premium</a>
+                    <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="pkg-btn">Pilih Paket</a>
                 </div>
             </div>
-            <p style="margin-top:20px;color:var(--text-secondary);font-size:14.5px;">
-                Layanan drone tersedia untuk acara keluarga, dokumentasi event, kebutuhan marketing, automotive, dan berbagai kebutuhan aerial lainnya selama lokasi dan kondisi penerbangan memungkinkan untuk dijangkau dengan aman.
-            </p>
         </div>
 
         <!-- SYARAT & KETENTUAN -->
-        <div class="terms-box">
+        <div class="terms-card">
             <h3>Syarat &amp; Ketentuan yang Berlaku</h3>
             <ol>
-                <li><strong>Booking &amp; DP:</strong> Tanggal acara baru akan dikunci setelah pembayaran DP minimal 30% dari total paket.</li>
-                <li><strong>Overtime:</strong> Apabila acara melebihi durasi jam kerja paket yang dipilih, akan dikenakan biaya tambahan sebesar Rp200.000 / jam (untuk kompensasi kru dan masa sewa alat).</li>
-                <li><strong>Transportasi &amp; Akomodasi:</strong> Harga di atas berlaku untuk area operasional DKI Jakarta. Lokasi di luar batas kota DKI Jakarta akan dikenakan biaya transport tambahan yang disepakati di awal.</li>
-                <li><strong>Kebijakan Revisi:</strong> Paket yang menyertakan video mendapatkan jatah maksimal 4 kali revisi minor dalam kurun waktu 7 hari setelah video draf dikirimkan pertama kali.</li>
+                <li><strong>Booking &amp; DP:</strong> Tanggal dikunci setelah DP minimal 30%.</li>
+                <li><strong>Overtime:</strong> Rp200.000 / jam jika melebihi durasi paket.</li>
+                <li><strong>Transportasi:</strong> Harga berlaku untuk DKI Jakarta &amp; sekitarnya.</li>
+                <li><strong>Kebijakan Revisi:</strong> Maksimal 4 kali revisi video dalam 7 hari.</li>
             </ol>
         </div>
     </section>
 
     <!-- =========================
-         04. TENTANG KAMI
+         04. TENTANG KAMI (FOUNDER NOTE WITHOUT PHOTO)
     ========================= -->
-    <section id="tentang" class="section-block">
-        <div class="section-top">
-            <div>
-                <span class="eyebrow">04 • The Studio</span>
-                <h2>Mengenal<br>Another Visual.</h2>
-            </div>
-            <p>
-                Dedikasi penuh dari tahap pra-produksi hingga karya akhir
-                yang abadi untuk dikenang.
-            </p>
+    <section id="tentang" class="content-section">
+        <div class="sec-header">
+            <span class="sec-eyebrow">04 • The Studio</span>
+            <h2>Mengenal<br>Another Visual.</h2>
         </div>
 
-        <div class="about-wrap">
-            <div
-                class="founder-photo skeleton-box"
-                style="background-image: url('https://lh3.googleusercontent.com/d/1XCVRVaa9RkMXH04tVXUSDGJZN92wRSL9');"
-                role="img"
-                aria-label="Founder PT Another Visual">
-            </div>
-
-            <div class="founder-copy">
-                <h3>PT Another Visual</h3>
-                <div class="founder-role">Alif Nur Hidayat — Founder PT Another Visual</div>
-                <p>
-                    Halo semuanya. Perkenalkan saya Alif Nur Hidayat selaku Founder
-                    dari PT Another Visual. Saya mewakili tim dan pendiri PT Another
-                    Visual ingin mengucapkan terima kasih sebesar-besarnya kepada
-                    seluruh klien, mitra, kru, dan semua pihak yang telah
-                    mempercayakan momen berharganya kepada kami.
-                </p>
-                <p>
-                    Bagi kami, PT Another Visual bukan hanya tentang foto, video,
-                    atau produksi visual. Kami percaya setiap event punya cerita,
-                    setiap momen punya makna, dan tugas kami adalah mengabadikannya
-                    dengan cara terbaik agar bisa terus dikenang.
-                </p>
-                <p>
-                    Perjalanan kami sampai hari ini tentunya tidak mudah. Namun
-                    berkat dukungan dan kepercayaan dari kalian semua, PT Another
-                    Visual terus berkembang menjadi tim kreatif yang selalu ingin
-                    memberikan hasil terbaik, profesional, dan penuh dedikasi.
-                </p>
-                <p>
-                    Dari tahap pra-produksi hingga hasil akhir yang dapat dinikmati
-                    bersama, setiap proses dikerjakan dengan dedikasi penuh. Tanpa
-                    kerja sama, konsistensi, dan semangat solid dari tim, pencapaian
-                    ini mustahil terwujud. Semoga ke depannya PT Another Visual bisa
-                    terus hadir, berkarya, dan menjadi bagian dari lebih banyak cerita
-                    luar biasa lainnya.
-                </p>
-                <div class="founder-sign">
-                    Salam hangat, Alif Nur Hidayat
-                    <span>Founder PT Another Visual</span>
-                </div>
+        <div class="about-container">
+            <h3>PT Another Visual</h3>
+            <div class="about-role">Alif Nur Hidayat — Founder PT Another Visual</div>
+            <p>
+                Halo semuanya. Perkenalkan saya Alif Nur Hidayat selaku Founder dari
+                PT Another Visual. Saya mewakili tim mengucapkan terima kasih
+                sebesar-besarnya kepada seluruh klien, mitra, dan kru yang telah
+                mempercayakan momen berharganya kepada kami.
+            </p>
+            <p>
+                Bagi kami, PT Another Visual bukan hanya tentang foto atau video.
+                Kami percaya setiap event punya cerita, setiap momen punya makna,
+                dan tugas kami adalah mengabadikannya dengan cara terbaik agar bisa
+                terus dikenang abadi.
+            </p>
+            <p>
+                Dari tahap pra-produksi hingga hasil akhir, setiap proses dikerjakan
+                dengan dedikasi penuh. Tanpa kerja sama dan semangat solid dari tim
+                serta dukungan Anda, pencapaian ini mustahil terwujud.
+            </p>
+            <div class="about-sign">
+                Salam hangat, Alif Nur Hidayat
+                <span>Founder PT Another Visual</span>
             </div>
         </div>
     </section>
@@ -1809,25 +1591,25 @@
     <!-- =========================
          05. KONTAK
     ========================= -->
-    <section id="kontak" class="section-block" style="border-bottom: none;">
-        <div class="contact-banner">
-            <span class="eyebrow" style="color: #E6BC85;">05 • Start a Project</span>
+    <section id="kontak" class="content-section" style="border-bottom: none;">
+        <div class="contact-box">
+            <span class="sec-eyebrow" style="color: #E2BC8B;">05 • Start a Project</span>
             <h2>Mari buat sesuatu<br>yang berkesan bersama.</h2>
 
-            <div class="contact-cards">
-                <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="c-card">
+            <div class="contact-grid">
+                <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="contact-item">
                     <small>Pesan Langsung</small>
                     <h4>WhatsApp</h4>
                     <span>+62 877 6582 9615</span>
                 </a>
 
-                <a href="mailto:anothervisualjakarta@gmail.com" class="c-card">
+                <a href="mailto:anothervisualjakarta@gmail.com" class="contact-item">
                     <small>Keperluan Bisnis</small>
                     <h4>Email</h4>
                     <span>anothervisualjakarta@gmail.com</span>
                 </a>
 
-                <a href="https://instagram.com/anothervisual_creative" target="_blank" rel="noopener noreferrer" class="c-card">
+                <a href="https://instagram.com/anothervisual_creative" target="_blank" rel="noopener noreferrer" class="contact-item">
                     <small>Sosial Media</small>
                     <h4>Instagram</h4>
                     <span>@anothervisual_creative</span>
@@ -1845,10 +1627,10 @@
     <div>© <span id="currentYear"></span> PT Another Visual. All rights reserved.</div>
 
     <div class="social-row">
-        <a href="https://instagram.com/anothervisual_creative" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="Instagram Another Visual">
+        <a href="https://instagram.com/anothervisual_creative" target="_blank" rel="noopener noreferrer" class="social-circle" aria-label="Instagram">
             <svg viewBox="0 0 24 24"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-3.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></svg>
         </a>
-        <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="WhatsApp Another Visual">
+        <a href="https://wa.me/6287765829615" target="_blank" rel="noopener noreferrer" class="social-circle" aria-label="WhatsApp">
             <svg viewBox="0 0 24 24"><path d="M12 2a9.9 9.9 0 0 0-8.55 14.9L2 22l5.27-1.38A10 10 0 1 0 12 2Zm0 2a8 8 0 0 1 6.93 12L18.1 17.3l-3.12.82-.18.03a8 8 0 0 1-4.03-1.08l-.27-.16-2.95.77.79-2.82-.18-.28A8 8 0 1 1 12 4Zm-3.3 3.7c-.2 0-.5.08-.7.32-.2.23-.76.75-.76 1.82s.78 2.11.89 2.26c.11.14 1.53 2.46 3.75 3.34.52.2.93.32 1.25.41.53.17 1.01.14 1.39.08.42-.06 1.3-.53 1.48-1.04.18-.51.18-.95.13-1.04-.05-.09-.2-.14-.42-.25-.22-.11-1.3-.64-1.5-.71-.2-.08-.35-.11-.5.11-.15.23-.58.71-.71.86-.13.15-.26.17-.48.06-.22-.11-.93-.34-1.77-1.09-.65-.58-1.09-1.3-1.22-1.52-.13-.23-.01-.35.1-.46.1-.1.22-.26.33-.39.11-.13.15-.23.22-.38.07-.15.04-.28-.02-.39-.06-.11-.5-1.2-.69-1.64-.18-.43-.36-.37-.5-.38Z"/></svg>
         </a>
     </div>
@@ -1857,19 +1639,19 @@
 </footer>
 
 <!-- =========================
-     LIGHTBOX SLIDER MODAL
+     LIGHTBOX SLIDER MODAL (ALL PHOTOS UNLOCKED)
 ========================= -->
 <div class="slider-modal" id="sliderModal" aria-hidden="true">
     <div class="slider-content">
         <div class="slider-title" id="sliderTitle"></div>
-        <button class="modal-btn slider-close" id="sliderClose" aria-label="Tutup">×</button>
-        <button class="modal-btn slider-prev" id="sliderPrev" aria-label="Foto sebelumnya">‹</button>
+        <button class="modal-action slider-close" id="sliderClose" aria-label="Tutup">×</button>
+        <button class="modal-action slider-prev" id="sliderPrev" aria-label="Sebelumnya">‹</button>
 
-        <div class="slider-image-wrapper skeleton-box" id="sliderWrapper">
-            <img id="sliderImage" class="slider-image" src="" alt="Portfolio">
+        <div class="slider-img-wrap skeleton-box" id="sliderWrapper">
+            <img id="sliderImage" class="slider-img" src="" alt="Portfolio">
         </div>
 
-        <button class="modal-btn slider-next" id="sliderNext" aria-label="Foto berikutnya">›</button>
+        <button class="modal-action slider-next" id="sliderNext" aria-label="Berikutnya">›</button>
         <div class="slider-counter" id="sliderCounter">1 / 1</div>
     </div>
 </div>
@@ -1881,13 +1663,13 @@
         const width = window.innerWidth;
         let device = "Desktop";
         if (width <= 600) device = "Mobile";
-        else if (width <= 980) device = "Tablet";
+        else if (width <= 900) device = "Tablet";
         document.body.dataset.device = device.toLowerCase();
     }
     detectDevice();
     window.addEventListener("resize", detectDevice, { passive: true });
 
-    /* SKELETON SHIMMER */
+    /* SKELETON SHIMMER HANDLER */
     document.querySelectorAll(".skeleton-box").forEach(box => {
         const img = box.querySelector("img");
         if (!img) return;
@@ -1899,21 +1681,13 @@
         }
     });
 
-    const founderBox = document.querySelector(".founder-photo");
-    if (founderBox) {
-        const fImg = new Image();
-        fImg.src = "https://lh3.googleusercontent.com/d/1XCVRVaa9RkMXH04tVXUSDGJZN92wRSL9";
-        fImg.onload = () => founderBox.classList.add("loaded");
-        fImg.onerror = () => founderBox.classList.add("loaded");
-    }
-
     /* BUTTON RIPPLE EFFECT */
-    document.querySelectorAll(".btn-pill, .filter-chip, .pkg-btn, .social-pill, .menu-btn, .modal-btn").forEach(btn => {
+    document.querySelectorAll(".btn-pill, .filter-chip, .pkg-btn, .social-circle, .menu-toggle, .modal-action").forEach(btn => {
         btn.addEventListener("click", function (e) {
             const rect = this.getBoundingClientRect();
             const size = Math.max(rect.width, rect.height);
             const circle = document.createElement("span");
-            circle.className = "ripple-wave";
+            circle.className = "ripple-effect";
             circle.style.width = circle.style.height = `${size}px`;
             circle.style.left = `${e.clientX - rect.left - size / 2}px`;
             circle.style.top = `${e.clientY - rect.top - size / 2}px`;
@@ -1922,14 +1696,14 @@
         });
     });
 
-    /* MOBILE MENU */
+    /* MOBILE MENU TOGGLE */
     const menuToggle = document.getElementById("menuToggle");
     const navMenu = document.getElementById("navMenu");
     menuToggle.addEventListener("click", () => {
         const isOpen = navMenu.classList.toggle("show");
         menuToggle.setAttribute("aria-expanded", isOpen);
     });
-    document.querySelectorAll(".nav-links a").forEach(link => {
+    document.querySelectorAll(".nav-list a").forEach(link => {
         link.addEventListener("click", () => {
             navMenu.classList.remove("show");
             menuToggle.setAttribute("aria-expanded", "false");
@@ -1938,12 +1712,12 @@
 
     /* SCROLLSPY NAVIGATION */
     const sections = document.querySelectorAll("main section");
-    const navLinks = document.querySelectorAll(".nav-links a");
+    const navLinks = document.querySelectorAll(".nav-list a");
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 navLinks.forEach(link => link.classList.remove("active"));
-                const activeLink = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+                const activeLink = document.querySelector(`.nav-list a[href="#${entry.target.id}"]`);
                 if (activeLink) activeLink.classList.add("active");
             }
         });
@@ -1952,7 +1726,7 @@
 
     /* PORTFOLIO FILTER */
     const filterButtons = document.querySelectorAll(".filter-chip");
-    const portfolioItems = document.querySelectorAll(".work-card");
+    const portfolioItems = document.querySelectorAll(".portfolio-card");
     filterButtons.forEach(button => {
         button.addEventListener("click", () => {
             const filter = button.dataset.filter;
@@ -1976,7 +1750,7 @@
         });
     });
 
-    /* SLIDER MODAL + INSTANT PRELOAD */
+    /* LIGHTBOX MODAL + INSTANT PRELOAD (ALL 95+ PHOTOS FULLY UNLOCKED) */
     const sliderModal = document.getElementById("sliderModal");
     const sliderWrapper = document.getElementById("sliderWrapper");
     const sliderImage = document.getElementById("sliderImage");
@@ -2056,7 +1830,7 @@
     }, { passive: true });
 
     document.addEventListener("contextmenu", e => {
-        if (e.target.tagName === "IMG" || e.target.classList.contains("founder-photo")) e.preventDefault();
+        if (e.target.tagName === "IMG") e.preventDefault();
     });
     document.addEventListener("dragstart", e => { if (e.target.tagName === "IMG") e.preventDefault(); });
 </script>

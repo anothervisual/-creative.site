@@ -2021,17 +2021,10 @@
 
     sliderImage.addEventListener("load", () => sliderWrapper.classList.add("loaded"));
     sliderImage.addEventListener("error", () => sliderWrapper.classList.add("loaded"));
-    sliderVideo.addEventListener("load", () => sliderWrapper.classList.add("loaded"));
-    sliderNativeVideo.addEventListener("loadeddata", () => {
+    
+    // Iframe load listener to instantly remove loading skeleton when Google Drive video is ready
+    sliderVideo.addEventListener("load", () => {
         sliderWrapper.classList.add("loaded");
-        sliderNativeVideo.play().catch(() => {});
-    });
-    sliderNativeVideo.addEventListener("error", () => {
-        if (currentVideoIndex !== -1 && videoCardsList[currentVideoIndex]) {
-            sliderNativeVideo.style.display = "none";
-            sliderVideo.style.display = "block";
-            sliderVideo.src = videoCardsList[currentVideoIndex].dataset.video;
-        }
     });
 
     function openVideoSlider(index) {
@@ -2040,14 +2033,23 @@
         currentVideoIndex = index;
         const card = videoCardsList[index];
         const vid = card.dataset.vid;
+        
         sliderWrapper.classList.remove("loaded");
         sliderImage.style.display = "none";
-        sliderVideo.style.display = "none";
-        sliderVideo.src = "";
-        sliderNativeVideo.style.display = "block";
-        sliderNativeVideo.src = `https://drive.google.com/uc?export=download&id=${vid}`;
-        sliderNativeVideo.load();
-        sliderNativeVideo.play().catch(() => {});
+        if (sliderNativeVideo) {
+            sliderNativeVideo.pause();
+            sliderNativeVideo.style.display = "none";
+        }
+        
+        sliderVideo.style.display = "block";
+        // Use Google Drive preview embed with autoplay
+        sliderVideo.src = `https://drive.google.com/file/d/${vid}/preview?autoplay=1`;
+        
+        // Fallback timer to ensure skeleton shimmer disappears smoothly even if load event is delayed by browser
+        setTimeout(() => {
+            sliderWrapper.classList.add("loaded");
+        }, 800);
+
         sliderPrevBtn.style.display = "flex";
         sliderNextBtn.style.display = "flex";
         sliderTitle.textContent = card.dataset.title || "";
@@ -2112,15 +2114,16 @@
         sliderModal.setAttribute("aria-hidden", "true");
         document.body.classList.remove("no-scroll");
         sliderImage.src = "";
-        sliderNativeVideo.pause();
-        sliderNativeVideo.removeAttribute("src");
-        sliderNativeVideo.load();
-        sliderNativeVideo.style.display = "none";
+        if (sliderNativeVideo) {
+            sliderNativeVideo.pause();
+            sliderNativeVideo.removeAttribute("src");
+            sliderNativeVideo.style.display = "none";
+        }
         sliderVideo.src = "";
         sliderVideo.style.display = "none";
         sliderImage.style.display = "block";
         currentImages = [];
-        currentVideoIndex = -1;
+        currentVideoIndex -1;
     }
 
     sliderNextBtn.addEventListener("click", nextSlide);

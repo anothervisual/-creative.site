@@ -8,6 +8,8 @@
     <title>Another Visual — Photography & Videography Studio</title>
 
     <!-- Preconnect Fonts: Plus Jakarta Sans & Space Grotesk -->
+    <link rel="preconnect" href="https://drive.google.com">
+    <link rel="preconnect" href="https://lh3.googleusercontent.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -541,6 +543,39 @@
         .portfolio-info span {
             font-size: 12.5px;
             color: var(--text-muted);
+        }
+
+        .video-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: rgba(17, 17, 16, 0.78);
+            backdrop-filter: blur(6px);
+            color: #FFFFFF;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 3px;
+            transition: transform 0.25s var(--ease-spring), background-color 0.2s ease;
+        }
+
+        .portfolio-card:hover .video-play-btn {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: var(--accent);
+        }
+
+        .slider-video {
+            width: min(960px, calc(100vw - 120px));
+            height: min(540px, 75vh);
+            border: none;
+            border-radius: var(--radius-md);
+            background: #000000;
+            display: none;
         }
 
         .portfolio-card.hidden {
@@ -1155,36 +1190,7 @@
             <button class="filter-chip" data-filter="wisuda">Wisuda</button>
             <button class="filter-chip" data-filter="event">Event</button>
             <button class="filter-chip" data-filter="drone">Drone</button>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 24px;">
-            <div style="border-radius: 16px; overflow: hidden;">
-                <iframe src="https://drive.google.com/file/d/1kwiSijqO5K8HBjKHJPu-qROTJdcwcL2q/preview" width="100%" height="320" style="border: none; display: block;" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            </div>
-            <div style="border-radius: 16px; overflow: hidden;">
-                <iframe src="https://drive.google.com/file/d/1nuAFKVR7qFmzkukGrTDG4AWCcifsumF8/preview" width="100%" height="320" style="border: none; display: block;" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            </div>
-            <div style="border-radius: 16px; overflow: hidden;">
-                <iframe src="https://drive.google.com/file/d/1ML131FX-zXkWs4_60VoInSVrq11PFkBb/preview" width="100%" height="320" style="border: none; display: block;" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            </div>
-            <div style="border-radius: 16px; overflow: hidden;">
-                <iframe src="https://drive.google.com/file/d/1GYEyuX69_OlUg0IU1AOmnVLhOkkI8ybp/preview" width="100%" height="320" style="border: none; display: block;" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            </div>
-            <div style="border-radius: 16px; overflow: hidden;">
-                <iframe src="https://drive.google.com/file/d/14nlG_3gxbuMmwmj15_T9b3ClComDKrkk/preview" width="100%" height="320" style="border: none; display: block;" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            </div>
-            <div style="border-radius: 16px; overflow: hidden;">
-                <iframe src="https://drive.google.com/file/d/1qjAc-_FRpJK8XsT4txjFOxEczpXHeEFu/preview" width="100%" height="320" style="border: none; display: block;" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            </div>
-            <div style="border-radius: 16px; overflow: hidden;">
-                <iframe src="https://drive.google.com/file/d/1uwqgzK4QSO40bZTGo1rq4qf9L0iwo6vO/preview" width="100%" height="320" style="border: none; display: block;" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            </div>
-            <div style="border-radius: 16px; overflow: hidden;">
-                <iframe src="https://drive.google.com/file/d/1h1zzL3oUJZyYLYRyAkCirnsmS6Ft4cN8/preview" width="100%" height="320" style="border: none; display: block;" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            </div>
-            <div style="border-radius: 16px; overflow: hidden;">
-                <iframe src="https://drive.google.com/file/d/1t2kdLL84d782PrEWMM5T0b19kHk-y_Q2/preview" width="100%" height="320" style="border: none; display: block;" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            </div>
+            <button class="filter-chip" data-filter="videography">Videography</button>
         </div>
 
         <div class="portfolio-grid">
@@ -1338,6 +1344,168 @@
                     <div>
                         <h3>Drone Portfolio</h3>
                         <span>Aerial</span>
+                    </div>
+                    <span>↗</span>
+                </div>
+            </div>
+
+            <!-- VIDEOGRAPHY 1 -->
+            <div class="portfolio-card videography"
+                data-title="Videography #01"
+                data-video="https://drive.google.com/file/d/1kwiSijqO5K8HBjKHJPu-qROTJdcwcL2q/preview">
+                <div class="portfolio-thumb skeleton-box">
+                    <img src="https://lh3.googleusercontent.com/d/1kwiSijqO5K8HBjKHJPu-qROTJdcwcL2q=w600" alt="Videography #01" loading="lazy" decoding="async">
+                    <span class="portfolio-badge">Video</span>
+                    <span class="video-play-btn">▶</span>
+                </div>
+                <div class="portfolio-info">
+                    <div>
+                        <h3>Videography #01</h3>
+                        <span>Videography</span>
+                    </div>
+                    <span>↗</span>
+                </div>
+            </div>
+
+            <!-- VIDEOGRAPHY 2 -->
+            <div class="portfolio-card videography"
+                data-title="Videography #02"
+                data-video="https://drive.google.com/file/d/1nuAFKVR7qFmzkukGrTDG4AWCcifsumF8/preview">
+                <div class="portfolio-thumb skeleton-box">
+                    <img src="https://lh3.googleusercontent.com/d/1nuAFKVR7qFmzkukGrTDG4AWCcifsumF8=w600" alt="Videography #02" loading="lazy" decoding="async">
+                    <span class="portfolio-badge">Video</span>
+                    <span class="video-play-btn">▶</span>
+                </div>
+                <div class="portfolio-info">
+                    <div>
+                        <h3>Videography #02</h3>
+                        <span>Videography</span>
+                    </div>
+                    <span>↗</span>
+                </div>
+            </div>
+
+            <!-- VIDEOGRAPHY 3 -->
+            <div class="portfolio-card videography"
+                data-title="Videography #03"
+                data-video="https://drive.google.com/file/d/1ML131FX-zXkWs4_60VoInSVrq11PFkBb/preview">
+                <div class="portfolio-thumb skeleton-box">
+                    <img src="https://lh3.googleusercontent.com/d/1ML131FX-zXkWs4_60VoInSVrq11PFkBb=w600" alt="Videography #03" loading="lazy" decoding="async">
+                    <span class="portfolio-badge">Video</span>
+                    <span class="video-play-btn">▶</span>
+                </div>
+                <div class="portfolio-info">
+                    <div>
+                        <h3>Videography #03</h3>
+                        <span>Videography</span>
+                    </div>
+                    <span>↗</span>
+                </div>
+            </div>
+
+            <!-- VIDEOGRAPHY 4 -->
+            <div class="portfolio-card videography"
+                data-title="Videography #04"
+                data-video="https://drive.google.com/file/d/1GYEyuX69_OlUg0IU1AOmnVLhOkkI8ybp/preview">
+                <div class="portfolio-thumb skeleton-box">
+                    <img src="https://lh3.googleusercontent.com/d/1GYEyuX69_OlUg0IU1AOmnVLhOkkI8ybp=w600" alt="Videography #04" loading="lazy" decoding="async">
+                    <span class="portfolio-badge">Video</span>
+                    <span class="video-play-btn">▶</span>
+                </div>
+                <div class="portfolio-info">
+                    <div>
+                        <h3>Videography #04</h3>
+                        <span>Videography</span>
+                    </div>
+                    <span>↗</span>
+                </div>
+            </div>
+
+            <!-- VIDEOGRAPHY 5 -->
+            <div class="portfolio-card videography"
+                data-title="Videography #05"
+                data-video="https://drive.google.com/file/d/14nlG_3gxbuMmwmj15_T9b3ClComDKrkk/preview">
+                <div class="portfolio-thumb skeleton-box">
+                    <img src="https://lh3.googleusercontent.com/d/14nlG_3gxbuMmwmj15_T9b3ClComDKrkk=w600" alt="Videography #05" loading="lazy" decoding="async">
+                    <span class="portfolio-badge">Video</span>
+                    <span class="video-play-btn">▶</span>
+                </div>
+                <div class="portfolio-info">
+                    <div>
+                        <h3>Videography #05</h3>
+                        <span>Videography</span>
+                    </div>
+                    <span>↗</span>
+                </div>
+            </div>
+
+            <!-- VIDEOGRAPHY 6 -->
+            <div class="portfolio-card videography"
+                data-title="Videography #06"
+                data-video="https://drive.google.com/file/d/1qjAc-_FRpJK8XsT4txjFOxEczpXHeEFu/preview">
+                <div class="portfolio-thumb skeleton-box">
+                    <img src="https://lh3.googleusercontent.com/d/1qjAc-_FRpJK8XsT4txjFOxEczpXHeEFu=w600" alt="Videography #06" loading="lazy" decoding="async">
+                    <span class="portfolio-badge">Video</span>
+                    <span class="video-play-btn">▶</span>
+                </div>
+                <div class="portfolio-info">
+                    <div>
+                        <h3>Videography #06</h3>
+                        <span>Videography</span>
+                    </div>
+                    <span>↗</span>
+                </div>
+            </div>
+
+            <!-- VIDEOGRAPHY 7 -->
+            <div class="portfolio-card videography"
+                data-title="Videography #07"
+                data-video="https://drive.google.com/file/d/1uwqgzK4QSO40bZTGo1rq4qf9L0iwo6vO/preview">
+                <div class="portfolio-thumb skeleton-box">
+                    <img src="https://lh3.googleusercontent.com/d/1uwqgzK4QSO40bZTGo1rq4qf9L0iwo6vO=w600" alt="Videography #07" loading="lazy" decoding="async">
+                    <span class="portfolio-badge">Video</span>
+                    <span class="video-play-btn">▶</span>
+                </div>
+                <div class="portfolio-info">
+                    <div>
+                        <h3>Videography #07</h3>
+                        <span>Videography</span>
+                    </div>
+                    <span>↗</span>
+                </div>
+            </div>
+
+            <!-- VIDEOGRAPHY 8 -->
+            <div class="portfolio-card videography"
+                data-title="Videography #08"
+                data-video="https://drive.google.com/file/d/1h1zzL3oUJZyYLYRyAkCirnsmS6Ft4cN8/preview">
+                <div class="portfolio-thumb skeleton-box">
+                    <img src="https://lh3.googleusercontent.com/d/1h1zzL3oUJZyYLYRyAkCirnsmS6Ft4cN8=w600" alt="Videography #08" loading="lazy" decoding="async">
+                    <span class="portfolio-badge">Video</span>
+                    <span class="video-play-btn">▶</span>
+                </div>
+                <div class="portfolio-info">
+                    <div>
+                        <h3>Videography #08</h3>
+                        <span>Videography</span>
+                    </div>
+                    <span>↗</span>
+                </div>
+            </div>
+
+            <!-- VIDEOGRAPHY 9 -->
+            <div class="portfolio-card videography"
+                data-title="Videography #09"
+                data-video="https://drive.google.com/file/d/1t2kdLL84d782PrEWMM5T0b19kHk-y_Q2/preview">
+                <div class="portfolio-thumb skeleton-box">
+                    <img src="https://lh3.googleusercontent.com/d/1t2kdLL84d782PrEWMM5T0b19kHk-y_Q2=w600" alt="Videography #09" loading="lazy" decoding="async">
+                    <span class="portfolio-badge">Video</span>
+                    <span class="video-play-btn">▶</span>
+                </div>
+                <div class="portfolio-info">
+                    <div>
+                        <h3>Videography #09</h3>
+                        <span>Videography</span>
                     </div>
                     <span>↗</span>
                 </div>
@@ -1724,6 +1892,7 @@
 
         <div class="slider-img-wrap skeleton-box" id="sliderWrapper">
             <img id="sliderImage" class="slider-img" src="" alt="Portfolio">
+            <iframe id="sliderVideo" class="slider-video" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </div>
 
         <button class="modal-action slider-next" id="sliderNext" aria-label="Berikutnya">›</button>
@@ -1825,20 +1994,50 @@
         });
     });
 
-    /* LIGHTBOX MODAL + INSTANT PRELOAD (ALL 95+ PHOTOS FULLY UNLOCKED) */
+    /* LIGHTBOX MODAL + INSTANT PRELOAD (ALL 95+ PHOTOS & VIDEOS FULLY UNLOCKED) */
     const sliderModal = document.getElementById("sliderModal");
     const sliderWrapper = document.getElementById("sliderWrapper");
     const sliderImage = document.getElementById("sliderImage");
+    const sliderVideo = document.getElementById("sliderVideo");
     const sliderTitle = document.getElementById("sliderTitle");
     const sliderCounter = document.getElementById("sliderCounter");
+    const sliderPrevBtn = document.getElementById("sliderPrev");
+    const sliderNextBtn = document.getElementById("sliderNext");
+    const videoCardsList = Array.from(document.querySelectorAll(".portfolio-card.videography"));
     let currentImages = [];
     let currentIndex = 0;
+    let currentVideoIndex = -1;
 
     sliderImage.addEventListener("load", () => sliderWrapper.classList.add("loaded"));
     sliderImage.addEventListener("error", () => sliderWrapper.classList.add("loaded"));
+    sliderVideo.addEventListener("load", () => sliderWrapper.classList.add("loaded"));
+
+    function openVideoSlider(index) {
+        if (index < 0 || index >= videoCardsList.length) return;
+        currentImages = [];
+        currentVideoIndex = index;
+        const card = videoCardsList[index];
+        sliderWrapper.classList.remove("loaded");
+        sliderImage.style.display = "none";
+        sliderVideo.style.display = "block";
+        sliderVideo.src = card.dataset.video;
+        sliderPrevBtn.style.display = "flex";
+        sliderNextBtn.style.display = "flex";
+        sliderTitle.textContent = card.dataset.title || "";
+        sliderCounter.textContent = `${index + 1} / ${videoCardsList.length}`;
+        sliderModal.classList.add("active");
+        sliderModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("no-scroll");
+    }
 
     function openSlider(images, title) {
         if (!Array.isArray(images) || !images.length) return;
+        currentVideoIndex = -1;
+        sliderVideo.style.display = "none";
+        sliderVideo.src = "";
+        sliderImage.style.display = "block";
+        sliderPrevBtn.style.display = "flex";
+        sliderNextBtn.style.display = "flex";
         currentImages = images;
         currentIndex = 0;
         sliderTitle.textContent = title || "";
@@ -1860,11 +2059,19 @@
     }
 
     function nextSlide() {
+        if (currentVideoIndex !== -1) {
+            openVideoSlider((currentVideoIndex + 1) % videoCardsList.length);
+            return;
+        }
         currentIndex = (currentIndex + 1) % currentImages.length;
         updateSlider();
     }
 
     function prevSlide() {
+        if (currentVideoIndex !== -1) {
+            openVideoSlider((currentVideoIndex - 1 + videoCardsList.length) % videoCardsList.length);
+            return;
+        }
         currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
         updateSlider();
     }
@@ -1873,19 +2080,27 @@
         sliderModal.classList.remove("active");
         sliderModal.setAttribute("aria-hidden", "true");
         document.body.classList.remove("no-scroll");
-        sliderImage.src = "",
+        sliderImage.src = "";
+        sliderVideo.src = "";
+        sliderVideo.style.display = "none";
+        sliderImage.style.display = "block";
         currentImages = [];
+        currentVideoIndex = -1;
     }
 
-    document.getElementById("sliderNext").addEventListener("click", nextSlide);
-    document.getElementById("sliderPrev").addEventListener("click", prevSlide);
+    sliderNextBtn.addEventListener("click", nextSlide);
+    sliderPrevBtn.addEventListener("click", prevSlide);
     document.getElementById("sliderClose").addEventListener("click", closeSlider);
     sliderModal.addEventListener("click", e => { if (e.target === sliderModal) closeSlider(); });
 
     portfolioItems.forEach(item => {
         item.addEventListener("click", () => {
             try {
-                openSlider(JSON.parse(item.dataset.images), item.dataset.title);
+                if (item.dataset.video) {
+                    openVideoSlider(videoCardsList.indexOf(item));
+                } else {
+                    openSlider(JSON.parse(item.dataset.images), item.dataset.title);
+                }
             } catch (err) { console.error(err); }
         });
     });

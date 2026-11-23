@@ -127,6 +127,16 @@
         .pkg-btn,
         .social-circle,
         .menu-toggle,
+
+        .slider-video {
+            width: min(960px, calc(100vw - 120px));
+            height: min(540px, 75vh);
+            border: none;
+            border-radius: var(--radius-md);
+            background: #000000;
+            display: none;
+        }
+
         .modal-action {
             position: relative;
             overflow: hidden;
@@ -1155,6 +1165,7 @@
             <button class="filter-chip" data-filter="wisuda">Wisuda</button>
             <button class="filter-chip" data-filter="event">Event</button>
             <button class="filter-chip" data-filter="drone">Drone</button>
+            <button class="filter-chip" data-filter="video">Video</button>
         </div>
 
         <div class="portfolio-grid">
@@ -1308,6 +1319,23 @@
                     <div>
                         <h3>Drone Portfolio</h3>
                         <span>Aerial</span>
+                    </div>
+                    <span>↗</span>
+                </div>
+            </div>
+
+            <!-- VIDEO -->
+            <div class="portfolio-card video"
+                data-title="Video Portfolio"
+                data-video="https://drive.google.com/file/d/1kwiSijqO5K8HBjKHJPu-qROTJdcwcL2q/preview">
+                <div class="portfolio-thumb skeleton-box">
+                    <img src="https://lh3.googleusercontent.com/d/1kwiSijqO5K8HBjKHJPu-qROTJdcwcL2q" alt="Video Portfolio" loading="lazy" decoding="async">
+                    <span class="portfolio-badge">▶ Video</span>
+                </div>
+                <div class="portfolio-info">
+                    <div>
+                        <h3>Video Portfolio</h3>
+                        <span>Videography</span>
                     </div>
                     <span>↗</span>
                 </div>
@@ -1694,6 +1722,7 @@
 
         <div class="slider-img-wrap skeleton-box" id="sliderWrapper">
             <img id="sliderImage" class="slider-img" src="" alt="Portfolio">
+            <iframe id="sliderVideo" class="slider-video" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </div>
 
         <button class="modal-action slider-next" id="sliderNext" aria-label="Berikutnya">›</button>
@@ -1799,16 +1828,40 @@
     const sliderModal = document.getElementById("sliderModal");
     const sliderWrapper = document.getElementById("sliderWrapper");
     const sliderImage = document.getElementById("sliderImage");
+    const sliderVideo = document.getElementById("sliderVideo");
     const sliderTitle = document.getElementById("sliderTitle");
     const sliderCounter = document.getElementById("sliderCounter");
+    const sliderPrevBtn = document.getElementById("sliderPrev");
+    const sliderNextBtn = document.getElementById("sliderNext");
     let currentImages = [];
     let currentIndex = 0;
 
     sliderImage.addEventListener("load", () => sliderWrapper.classList.add("loaded"));
     sliderImage.addEventListener("error", () => sliderWrapper.classList.add("loaded"));
 
+    function openVideoSlider(videoUrl, title) {
+        if (!videoUrl) return;
+        currentImages = [];
+        sliderImage.style.display = "none";
+        sliderVideo.style.display = "block";
+        sliderVideo.src = videoUrl;
+        sliderPrevBtn.style.display = "none";
+        sliderNextBtn.style.display = "none";
+        sliderCounter.textContent = "Video";
+        sliderTitle.textContent = title || "";
+        sliderWrapper.classList.add("loaded");
+        sliderModal.classList.add("active");
+        sliderModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("no-scroll");
+    }
+
     function openSlider(images, title) {
         if (!Array.isArray(images) || !images.length) return;
+        sliderVideo.style.display = "none";
+        sliderVideo.src = "";
+        sliderImage.style.display = "block";
+        sliderPrevBtn.style.display = "flex";
+        sliderNextBtn.style.display = "flex";
         currentImages = images;
         currentIndex = 0;
         sliderTitle.textContent = title || "";
@@ -1830,11 +1883,13 @@
     }
 
     function nextSlide() {
+        if (!currentImages.length) return;
         currentIndex = (currentIndex + 1) % currentImages.length;
         updateSlider();
     }
 
     function prevSlide() {
+        if (!currentImages.length) return;
         currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
         updateSlider();
     }
@@ -1843,19 +1898,26 @@
         sliderModal.classList.remove("active");
         sliderModal.setAttribute("aria-hidden", "true");
         document.body.classList.remove("no-scroll");
-        sliderImage.src = "",
+        sliderImage.src = "";
+        sliderVideo.src = "";
+        sliderVideo.style.display = "none";
+        sliderImage.style.display = "block";
         currentImages = [];
     }
 
-    document.getElementById("sliderNext").addEventListener("click", nextSlide);
-    document.getElementById("sliderPrev").addEventListener("click", prevSlide);
+    sliderNextBtn.addEventListener("click", nextSlide);
+    sliderPrevBtn.addEventListener("click", prevSlide);
     document.getElementById("sliderClose").addEventListener("click", closeSlider);
     sliderModal.addEventListener("click", e => { if (e.target === sliderModal) closeSlider(); });
 
     portfolioItems.forEach(item => {
         item.addEventListener("click", () => {
             try {
-                openSlider(JSON.parse(item.dataset.images), item.dataset.title);
+                if (item.dataset.video) {
+                    openVideoSlider(item.dataset.video, item.dataset.title);
+                } else {
+                    openSlider(JSON.parse(item.dataset.images), item.dataset.title);
+                }
             } catch (err) { console.error(err); }
         });
     });
